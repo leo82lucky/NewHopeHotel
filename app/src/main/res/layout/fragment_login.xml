@@ -16,6 +16,25 @@
         android:layout_height="match_parent"
         android:background="@android:color/background_light">
 
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/app_name">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -90,7 +109,7 @@
             android:ems="10"
             android:hint="@string/PasswordTextFiels"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:text="@={myLoginViewModel.inputPassword}"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
