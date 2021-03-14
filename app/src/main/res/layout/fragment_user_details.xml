@@ -44,14 +44,6 @@
             android:onClick="@{()->userDetailsLayout.backButtonclicked()}"
             android:text="@string/backButton" />
 
-        <Button
-            android:id="@+id/goToHomeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/mantis_green"
-            android:text="@string/home"
-            android:textColor="@color/white" />
 
         <LinearLayout
             android:id="@+id/linearLayout"

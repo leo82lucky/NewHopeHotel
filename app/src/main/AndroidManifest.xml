@@ -9,10 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewHopeHotel">
-        <activity android:name=".roomService.RoomService"></activity>
+        <activity android:name=".roomService.RoomService" />
         <activity android:name=".housekeeping.Housekeeping" />
-        <activity android:name=".checkInCheckOut.CheckIn_CheckOut" />
-        <activity android:name=".homePage.HomePage" />
+        <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />
         <activity android:name=".data.MainActivity">
             <intent-filter>
