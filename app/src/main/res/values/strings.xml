@@ -25,5 +25,7 @@
     <string name="housekeeping">Housekeeping</string>
     <string name="room_service">Room Service</string>
     <string name="customer_feedback">Customer Feedback</string>
+    <string name="View_Room_Service_List">View Room Service List</string>
+    <string name="View_Morning_Call_List">View Morning Call List</string>
     <string name="home">Home</string>
 </resources>
