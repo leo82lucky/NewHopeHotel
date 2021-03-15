@@ -18,4 +18,14 @@
     <string name="Login_text">Login</string>
     <string name="Login_button">Login</string>
     <string name="signupText">Sign Up!</string>
+    <string name="register">Register</string>
+    <string name="userDetails">User Details</string>
+    <string name="welcome">Welcome</string>
+    <string name="check_in_check_out"><![CDATA[Check-In & Check Out]]></string>
+    <string name="housekeeping">Housekeeping</string>
+    <string name="room_service">Room Service</string>
+    <string name="customer_feedback">Customer Feedback</string>
+    <string name="View_Room_Service_List">View Room Service List</string>
+    <string name="View_Morning_Call_List">View Morning Call List</string>
+    <string name="home">Home</string>
 </resources>

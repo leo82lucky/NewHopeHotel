@@ -52,9 +52,16 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
     val errorToastInvalidPassword: LiveData<Boolean>
         get() = _errorToastInvalidPassword
 
+    private val _navigatetoHomePage = MutableLiveData<Boolean>()
+    val navigateToHomePage: LiveData<Boolean>
+        get() = _navigatetoHomePage
 
     fun signUP() {
         _navigatetoRegister.value = true
+    }
+
+    fun userDetailsButton() {
+        _navigatetoUserDetails.value = true
     }
 
     fun loginButton() {
@@ -67,7 +74,7 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
                     if (usersNames.passwrd == inputPassword.value) {
                         inputUsername.value = null
                         inputPassword.value = null
-                        _navigatetoUserDetails.value = true
+                        _navigatetoHomePage.value = true
                     } else {
                         _errorToastInvalidPassword.value = true
                     }
@@ -79,7 +86,7 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
     }
 
 
-    fun doneNavigatingRegiter() {
+    fun doneNavigatingRegister() {
         _navigatetoRegister.value = false
     }
 
@@ -87,21 +94,24 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
         _navigatetoUserDetails.value = false
     }
 
+    fun doneNavigatingHomePage() {
+        _navigatetoHomePage.value = false
+    }
 
     fun donetoast() {
         _errorToast.value = false
-        Log.i("MYTAG", "Done taoasting ")
+        Log.i("MYTAG", "login button ")
     }
 
 
     fun donetoastErrorUsername() {
         _errorToastUsername.value = false
-        Log.i("MYTAG", "Done taoasting ")
+        Log.i("MYTAG", "error Username ")
     }
 
     fun donetoastInvalidPassword() {
         _errorToastInvalidPassword.value = false
-        Log.i("MYTAG", "Done taoasting ")
+        Log.i("MYTAG", "error password ")
     }
 
 

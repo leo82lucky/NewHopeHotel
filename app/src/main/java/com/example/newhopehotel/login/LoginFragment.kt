@@ -2,12 +2,12 @@ package com.example.newhopehotel.login
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -20,6 +20,7 @@ import com.example.newhopehotel.databinding.FragmentLoginBinding
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +45,12 @@ class LoginFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
+
         loginViewModel.navigatetoRegister.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished == true) {
                 Log.i("MYTAG", "insidi observe")
                 displayUsersList()
-                loginViewModel.doneNavigatingRegiter()
+                loginViewModel.doneNavigatingRegister()
             }
         })
 
@@ -81,12 +83,21 @@ class LoginFragment : Fragment() {
 
         loginViewModel.navigatetoUserDetails.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished == true) {
-                Log.i("MYTAG", "insidi observe")
+                Log.i("MYTAG", "navigate user details")
+                Toast.makeText(requireContext(), "To The User Details", Toast.LENGTH_SHORT).show()
                 navigateUserDetails()
                 loginViewModel.doneNavigatingUserDetails()
             }
         })
 
+        loginViewModel.navigateToHomePage.observe(viewLifecycleOwner, Observer { hasFinished ->
+            if (hasFinished == true) {
+                Log.i("MYTAG", "navigate to home page")
+                Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
+                navigateHomePage()
+                loginViewModel.doneNavigatingHomePage()
+            }
+        })
 
         return binding.root
     }
@@ -100,9 +111,17 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateUserDetails() {
-        Log.i("MYTAG", "insidisplayUsersList")
+        Log.i("MYTAG", "insidisplayUsersDetails")
         val action = LoginFragmentDirections.actionLoginFragmentToUserDetailsFragment()
         NavHostFragment.findNavController(this).navigate(action)
     }
+
+    private fun navigateHomePage() {
+        Log.i("MYTAG", "insidisplayHomePage")
+        val action = LoginFragmentDirections.actionLoginFragmentToHomePageFragment()
+        NavHostFragment.findNavController(this).navigate(action)
+    }
 }
+
+
 
