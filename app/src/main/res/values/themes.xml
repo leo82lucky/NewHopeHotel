@@ -17,15 +17,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.NewHopeHotel.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.NewHopeHotel.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.NewHopeHotel.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">@color/mantis_green</item>
     </style>
