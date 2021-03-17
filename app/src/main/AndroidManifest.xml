@@ -11,6 +11,12 @@
         android:theme="@style/Theme.NewHopeHotel">
         <activity android:name=".roomService.RoomService" />
         <activity android:name=".housekeeping.Housekeeping" />
+        <activity android:name=".housekeeping.AssignWork" />
+        <activity android:name=".housekeeping.RoomCleaningTime" />
+        <activity android:name=".housekeeping._8amRoomList" />
+        <activity android:name=".housekeeping._12pmRoomList" />
+        <activity android:name=".housekeeping._4pmRoomList" />
+        <activity android:name=".housekeeping._8pmRoomList" />
         <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />
         <activity android:name=".data.MainActivity">
