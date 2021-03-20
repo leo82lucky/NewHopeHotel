@@ -11,24 +11,24 @@ class RoomCleaningTime : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_cleaning_time)
 
-        _8amButton.setOnClickListener {
-            val intent = Intent(_8amButton.context, _8amRoomList::class.java)
-            _8amButton.context.startActivity(intent)
+        button8am.setOnClickListener {
+            val intent = Intent(button8am.context, Rooms8am::class.java)
+            button8am.context.startActivity(intent)
         }
 
-        _12pmButton.setOnClickListener {
-            val intent = Intent(_12pmButton.context, _12pmRoomList::class.java)
-            _12pmButton.context.startActivity(intent)
+        button12pm.setOnClickListener {
+            val intent = Intent(button12pm.context, Rooms12pm::class.java)
+            button12pm.context.startActivity(intent)
         }
 
-        _4pmButton.setOnClickListener {
-            val intent = Intent(_4pmButton.context, _4pmRoomList::class.java)
-            _4pmButton.context.startActivity(intent)
+        button4pm.setOnClickListener {
+            val intent = Intent(button4pm.context, Rooms4pm::class.java)
+            button4pm.context.startActivity(intent)
         }
 
-        _8pmButton.setOnClickListener {
-            val intent = Intent(_8pmButton.context, _8pmRoomList::class.java)
-            _8pmButton.context.startActivity(intent)
+        button8pm.setOnClickListener {
+            val intent = Intent(button8pm.context, Rooms8pm::class.java)
+            button8pm.context.startActivity(intent)
         }
     }
 

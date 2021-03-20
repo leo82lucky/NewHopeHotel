@@ -13,10 +13,10 @@
         <activity android:name=".housekeeping.Housekeeping" />
         <activity android:name=".housekeeping.AssignWork" />
         <activity android:name=".housekeeping.RoomCleaningTime" />
-        <activity android:name=".housekeeping._8amRoomList" />
-        <activity android:name=".housekeeping._12pmRoomList" />
-        <activity android:name=".housekeeping._4pmRoomList" />
-        <activity android:name=".housekeeping._8pmRoomList" />
+        <activity android:name=".housekeeping.Rooms8am" />
+        <activity android:name=".housekeeping.Rooms12pm" />
+        <activity android:name=".housekeeping.Rooms4pm" />
+        <activity android:name=".housekeeping.Rooms8pm" />
         <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />
         <activity android:name=".data.MainActivity">
