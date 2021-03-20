@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".checkInCheckOut.CheckInCheckOut">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <fragment
+            android:id="@+id/cicoFragmentNavHost"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/check_in_check_out"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/checkin_checkout_navigation" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 
 </layout>
