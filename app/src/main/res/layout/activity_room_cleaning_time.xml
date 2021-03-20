@@ -31,7 +31,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/_8amButton"
+                android:id="@+id/button8am"
                 android:layout_width="180dp"
                 android:layout_height="90dp"
                 android:layout_rowWeight="1"
@@ -67,7 +67,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/_12pmButton"
+                android:id="@+id/button12pm"
                 android:layout_width="180dp"
                 android:layout_height="90dp"
                 android:layout_rowWeight="1"
@@ -80,7 +80,7 @@
                 app:cardElevation="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/_8amButton">
+                app:layout_constraintTop_toBottomOf="@+id/button8am">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/_4pmButton"
+                android:id="@+id/button4pm"
                 android:layout_width="180dp"
                 android:layout_height="90dp"
                 android:layout_rowWeight="1"
@@ -117,7 +117,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/_12pmButton">
+                app:layout_constraintTop_toBottomOf="@+id/button12pm">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -140,7 +140,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/_8pmButton"
+                android:id="@+id/button8pm"
                 android:layout_width="180dp"
                 android:layout_height="90dp"
                 android:layout_rowWeight="1"
@@ -154,7 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/_4pmButton">
+                app:layout_constraintTop_toBottomOf="@+id/button4pm">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
