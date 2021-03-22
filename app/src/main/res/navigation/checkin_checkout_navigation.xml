@@ -20,10 +20,18 @@
         android:id="@+id/checkInFragment"
         android:name="com.example.newhopehotel.checkInCheckOut.CheckInFragment"
         android:label="fragment_check_in"
-        tools:layout="@layout/fragment_check_in" />
+        tools:layout="@layout/fragment_check_in">
+        <action
+            android:id="@+id/action_checkInFragment_to_checkInCheckOutList"
+            app:destination="@id/checkInCheckOutList" />
+    </fragment>
     <fragment
         android:id="@+id/checkOutFragment"
         android:name="com.example.newhopehotel.checkInCheckOut.CheckOutFragment"
         android:label="fragment_check_out"
-        tools:layout="@layout/fragment_check_out" />
+        tools:layout="@layout/fragment_check_out">
+        <action
+            android:id="@+id/action_checkOutFragment_to_checkInCheckOutList"
+            app:destination="@id/checkInCheckOutList" />
+    </fragment>
 </navigation>

@@ -1,12 +1,14 @@
 package com.example.newhopehotel.checkInCheckOut
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
 import com.example.newhopehotel.database.RegisterDatabase
 import com.example.newhopehotel.database.RegisterRepository
@@ -39,6 +41,20 @@ class CheckOutFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
+        checkOutViewModel.navigatetoCICOList.observe(viewLifecycleOwner, { hasFinished ->
+            if (hasFinished == true) {
+                navigateCICOList()
+                checkOutViewModel.doneNavigatingCICOList()
+            }
+        })
+
         return binding.root
+    }
+
+    private fun navigateCICOList() {
+        Log.i("MYTAG", "insidisplayCheckOut")
+        val action =
+            CheckOutFragmentDirections.actionCheckOutFragmentToCheckInCheckOutList()
+        NavHostFragment.findNavController(this).navigate(action)
     }
 }

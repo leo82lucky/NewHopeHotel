@@ -1,6 +1,7 @@
 package com.example.newhopehotel.checkInCheckOut
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
+import com.example.newhopehotel.data.DatePickerHelper
 import com.example.newhopehotel.data.TimePickerHelper
 import com.example.newhopehotel.database.RegisterDatabase
 import com.example.newhopehotel.database.RegisterRepository
@@ -23,6 +26,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var checkInViewModel: CheckInViewModel
     lateinit var timePicker: TimePickerHelper
+    lateinit var datePicker: DatePickerHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,6 +92,18 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
             showTimePickerDialog()
         }
 
+        datePicker = DatePickerHelper(requireContext())
+        binding.selectDateButton.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        checkInViewModel.navigatetoCICOList.observe(viewLifecycleOwner, { hasFinished ->
+            if (hasFinished == true) {
+                navigateCICOList()
+                checkInViewModel.doneNavigatingCICOList()
+            }
+        })
+
         return binding.root
     }
 
@@ -111,6 +127,28 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 timeTextView.text = "${hourStr}:${minuteStr}"
             }
         })
+    }
+
+    private fun showDatePickerDialog() {
+        val cal = Calendar.getInstance()
+        val d = cal.get(Calendar.DAY_OF_MONTH)
+        val m = cal.get(Calendar.MONTH)
+        val y = cal.get(Calendar.YEAR)
+        datePicker.showDialog(d, m, y, object : DatePickerHelper.Callback {
+            override fun onDateSelected(dayofMonth: Int, month: Int, year: Int) {
+                val dayStr = if (dayofMonth < 10) "0${dayofMonth}" else "$dayofMonth"
+                val mon = month + 1
+                val monthStr = if (mon < 10) "0${mon}" else "$mon"
+                dateTextView.text = "${dayStr}/${monthStr}/${year}"
+            }
+        })
+    }
+
+    private fun navigateCICOList() {
+        Log.i("MYTAG", "insidisplayCheckOut")
+        val action =
+            CheckInFragmentDirections.actionCheckInFragmentToCheckInCheckOutList()
+        NavHostFragment.findNavController(this).navigate(action)
     }
 }
 
