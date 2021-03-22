@@ -60,7 +60,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/room_service" />
+                        android:src="@drawable/room_service"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -103,7 +104,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/morning_call"
-                        app:srcCompat="@drawable/morning_call" />
+                        app:srcCompat="@drawable/morning_call"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"

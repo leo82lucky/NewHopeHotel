@@ -1,6 +1,6 @@
 package com.example.newhopehotel.homePage
 
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelRepository
 import androidx.databinding.Observable
 import android.app.Application
 import androidx.lifecycle.*
@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class HomePageViewModel(private val repository: RegisterRepository, application: Application) :
+class HomePageViewModel(repository: HotelRepository, application: Application) :
     AndroidViewModel(application), Observable {
 
     val users = repository.users

@@ -7,13 +7,13 @@ import androidx.databinding.Observable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: RegisterRepository, application: Application) :
+class LoginViewModel(private val repository: HotelRepository, application: Application) :
     AndroidViewModel(application), Observable {
 
     val users = repository.users

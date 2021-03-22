@@ -2,10 +2,8 @@ package com.example.newhopehotel.housekeeping
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import com.example.newhopehotel.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_assign_work_worker_list.*
 
 class AssignWork : AppCompatActivity() {

@@ -2,7 +2,6 @@ package com.example.newhopehotel.data
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.ActionBar
 import androidx.databinding.DataBindingUtil
 import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityMainBinding

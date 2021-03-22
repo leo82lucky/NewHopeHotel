@@ -10,10 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentCheckOutBinding
-import com.example.newhopehotel.login.LoginViewModelFactory
 
 
 class CheckOutFragment : Fragment() {
@@ -29,9 +28,10 @@ class CheckOutFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = CheckOutViewModelFactory(repository, application)
 

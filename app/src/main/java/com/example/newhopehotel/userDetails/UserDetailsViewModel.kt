@@ -5,11 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelRepository
 
 class UserDetailsViewModel(
-    private val repository: RegisterRepository,
+    repository: HotelRepository,
     application: Application
 ) : AndroidViewModel(application) {
 

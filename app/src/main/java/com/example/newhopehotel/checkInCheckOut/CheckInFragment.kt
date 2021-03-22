@@ -16,8 +16,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.DatePickerHelper
 import com.example.newhopehotel.data.TimePickerHelper
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentCheckInBinding
 import kotlinx.android.synthetic.main.fragment_check_in.*
 import java.util.*
@@ -25,8 +25,8 @@ import java.util.*
 class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var checkInViewModel: CheckInViewModel
-    lateinit var timePicker: TimePickerHelper
-    lateinit var datePicker: DatePickerHelper
+    private lateinit var timePicker: TimePickerHelper
+    private lateinit var datePicker: DatePickerHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +39,10 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = CheckInViewModelFactory(repository, application)
 
@@ -104,6 +105,14 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         })
 
+        checkInViewModel.errotoast.observe(viewLifecycleOwner, { hasError ->
+            if (hasError == true) {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+                    .show()
+                checkInViewModel.donetoast()
+            }
+        })
+
         return binding.root
     }
 
@@ -150,5 +159,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
             CheckInFragmentDirections.actionCheckInFragmentToCheckInCheckOutList()
         NavHostFragment.findNavController(this).navigate(action)
     }
+
+
 }
 

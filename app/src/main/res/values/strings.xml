@@ -44,6 +44,8 @@
     <string name="morning_call">Morning Call</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="cleaning_list">Cleaning List</string>
+    <string name="assign_work">Assign Work</string>
 
     //RoomID String Array
     <string-array name="roomid_array">

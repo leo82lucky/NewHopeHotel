@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentUserDetailsBinding
 
 class UserDetailsFragment : Fragment() {
@@ -32,9 +31,10 @@ class UserDetailsFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = UserDetailsFactory(repository, application)
 
@@ -45,7 +45,7 @@ class UserDetailsFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        userDetailsViewModel.navigateto.observe(viewLifecycleOwner, Observer { hasFinished ->
+        userDetailsViewModel.navigateto.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
                 val action =
                     UserDetailsFragmentDirections.actionUserDetailsFragmentToLoginFragment()
@@ -69,7 +69,7 @@ class UserDetailsFragment : Fragment() {
 
     private fun displayUsersList() {
         Log.i("MYTAG", "Inside ...UserDetails..Fragment")
-        userDetailsViewModel.users.observe(viewLifecycleOwner, Observer {
+        userDetailsViewModel.users.observe(viewLifecycleOwner, {
             binding.usersRecyclerView.adapter = MyRecycleViewAdapter(it)
         })
 

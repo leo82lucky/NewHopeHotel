@@ -21,7 +21,7 @@
             app:cardElevation="10dp">
 
             <LinearLayout
-                android:id="@+id/list_item_view"
+                android:id="@+id/cico_list_item_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -32,34 +32,34 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/First_name_text_View"
+                        android:id="@+id/CustomerName_TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="TextView"
-                        android:textColor="@color/cardview_light_background"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/second_name_text_View"
+                        android:id="@+id/RoomID_TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="TextView"
-                        android:textColor="@color/cardview_light_background"
+                        android:textColor="@color/white"
                         android:textSize="30sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/user_TextField"
+                    android:id="@+id/RoomType_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="TextView"
-                    android:textColor="@color/cardview_light_background"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

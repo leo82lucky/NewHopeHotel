@@ -6,11 +6,11 @@ import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.*
 import com.example.newhopehotel.database.RegisterEntity
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelRepository
 import kotlinx.coroutines.*
 
 
-class RegisterViewModel(private val repository: RegisterRepository, application: Application) :
+class RegisterViewModel(private val repository: HotelRepository, application: Application) :
     AndroidViewModel(application), Observable {
 
     init {

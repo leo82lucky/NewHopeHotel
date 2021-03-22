@@ -31,7 +31,8 @@
             android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/worker_image_sample" />
+            tools:srcCompat="@drawable/worker_image_sample"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/worker_name"

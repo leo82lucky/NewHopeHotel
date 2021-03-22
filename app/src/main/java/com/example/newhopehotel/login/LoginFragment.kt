@@ -12,8 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentLoginBinding
 
 
@@ -33,9 +33,10 @@ class LoginFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = LoginViewModelFactory(repository, application)
 
@@ -46,7 +47,7 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        loginViewModel.navigatetoRegister.observe(viewLifecycleOwner, Observer { hasFinished ->
+        loginViewModel.navigatetoRegister.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
                 Log.i("MYTAG", "insidi observe")
                 displayUsersList()
@@ -54,7 +55,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.errotoast.observe(viewLifecycleOwner, Observer { hasError ->
+        loginViewModel.errotoast.observe(viewLifecycleOwner, { hasError ->
             if (hasError == true) {
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
                     .show()
@@ -62,7 +63,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.errotoastUsername.observe(viewLifecycleOwner, Observer { hasError ->
+        loginViewModel.errotoastUsername.observe(viewLifecycleOwner, { hasError ->
             if (hasError == true) {
                 Toast.makeText(
                     requireContext(),
@@ -73,7 +74,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.errorToastInvalidPassword.observe(viewLifecycleOwner, Observer { hasError ->
+        loginViewModel.errorToastInvalidPassword.observe(viewLifecycleOwner, { hasError ->
             if (hasError == true) {
                 Toast.makeText(requireContext(), "Please check your Password", Toast.LENGTH_SHORT)
                     .show()
@@ -81,7 +82,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.navigatetoUserDetails.observe(viewLifecycleOwner, Observer { hasFinished ->
+        loginViewModel.navigatetoUserDetails.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
                 Log.i("MYTAG", "navigate user details")
                 Toast.makeText(requireContext(), "To The User Details", Toast.LENGTH_SHORT).show()
@@ -90,7 +91,7 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.navigateToHomePage.observe(viewLifecycleOwner, Observer { hasFinished ->
+        loginViewModel.navigateToHomePage.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
                 Log.i("MYTAG", "navigate to home page")
                 Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
