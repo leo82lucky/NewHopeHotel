@@ -8,9 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NewHopeHotel">
+        android:theme="@style/AppTheme">
         <activity android:name=".roomService.RoomService" />
         <activity android:name=".housekeeping.Housekeeping" />
+        <activity android:name=".housekeeping.AssignWork" />
+        <activity android:name=".housekeeping.RoomCleaningTime" />
+        <activity android:name=".housekeeping.Rooms8am" />
+        <activity android:name=".housekeeping.Rooms12pm" />
+        <activity android:name=".housekeeping.Rooms4pm" />
+        <activity android:name=".housekeeping.Rooms8pm" />
         <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />
         <activity android:name=".data.MainActivity">

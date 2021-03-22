@@ -4,12 +4,8 @@
     <string name="FirstNameTextField">Enter First Name</string>
     <string name="SecondNameTextField">Enter Second Name</string>
     <string name="LastNameText">Last Name :</string>
-    <string name="EmailText">Email :</string>
-    <string name="UserMailId">Enter Email</string>
     <string name="submitButton">Register</string>
     <string name="List_of_Users_text">List Of Registered Users</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="PasswordText">Password:</string>
     <string name="PasswordTextFiels">Enter Password</string>
     <string name="UserNameTextView">User Name:</string>
@@ -27,5 +23,68 @@
     <string name="customer_feedback">Customer Feedback</string>
     <string name="View_Room_Service_List">View Room Service List</string>
     <string name="View_Morning_Call_List">View Morning Call List</string>
-    <string name="home">Home</string>
+    <string name="room_cleaning_time">Room Cleaning Time</string>
+    <string name="_8am">8am</string>
+    <string name="_12pm">12pm</string>
+    <string name="_8pm">8pm</string>
+    <string name="_4pm">4pm</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="name">Name</string>
+    <string name="i_c">I/C</string>
+    <string name="contact_no">Contact No.</string>
+    <string name="room_id">Room ID</string>
+    <string name="room_type">Room Type</string>
+    <string name="status">Status</string>
+    <string name="card_no">Card No.</string>
+    <string name="time">Time</string>
+    <string name="select_time">Select Time</string>
+    <string name="date">Date</string>
+    <string name="select_date">Select Date</string>
+    <string name="morning_call">Morning Call</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    //RoomID String Array
+    <string-array name="roomid_array">
+        <item>[--Choose a Room ID--]</item>
+        <item>R001</item>
+        <item>R002</item>
+        <item>R003</item>
+        <item>R004</item>
+        <item>R005</item>
+        <item>R006</item>
+        <item>R007</item>
+        <item>R008</item>
+        <item>R009</item>
+        <item>R010</item>
+    </string-array>
+    //RoomType String Array
+    <string-array name="roomtype_array">
+        <item>[--Choose a Room Type--]</item>
+        <item>Standard</item>
+        <item>Deluxe</item>
+        <item>Luxury</item>
+    </string-array>
+    //RoomStatus String Array
+    <string-array name="roomstatus_array">
+        <item>[--Room Status--]</item>
+        <item>Reserved</item>
+        <item>Available</item>
+        <item>Unavailable</item>
+    </string-array>
+    //RoomCardNo String Array
+    <string-array name="cardno_array">
+        <item>[--Room Card No--]</item>
+        <item>CD001</item>
+        <item>CD002</item>
+        <item>CD003</item>
+        <item>CD004</item>
+        <item>CD005</item>
+        <item>CD006</item>
+        <item>CD007</item>
+        <item>CD008</item>
+        <item>CD009</item>
+        <item>CD010</item>
+    </string-array>
 </resources>
