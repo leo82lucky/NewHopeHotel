@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.database.HotelDatabase
 import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentCheckInCheckOutListBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class CheckInCheckOutListFragment : Fragment() {
@@ -41,8 +43,16 @@ class CheckInCheckOutListFragment : Fragment() {
 
         binding.myCheckInCheckOutListViewModel = checkInCheckOutListViewModel
 
-        binding.lifecycleOwner = this
+        val adapter = CICORecycleViewAdapter()
+        binding.customersRecyclerView.adapter = adapter
 
+        checkInCheckOutListViewModel.customers.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+
+        binding.lifecycleOwner = this
 
         checkInCheckOutListViewModel.navigatetoCheckIn.observe(
             viewLifecycleOwner,
@@ -62,23 +72,12 @@ class CheckInCheckOutListFragment : Fragment() {
                 }
             })
 
-        initRecyclerView()
+//        initRecyclerView()
 
         return binding.root
     }
 
-    private fun initRecyclerView() {
-        binding.customersRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        displayCustomersList()
-    }
 
-    private fun displayCustomersList() {
-        Log.i("MYTAG", "Inside ...customer..Fragment")
-        checkInCheckOutListViewModel.customers.observe(viewLifecycleOwner, {
-            binding.customersRecyclerView.adapter = CICORecycleViewAdapter(it)
-        })
-
-    }
 
     private fun navigateCheckIn() {
         Log.i("MYTAG", "insidisplayCheckIn")
@@ -93,6 +92,19 @@ class CheckInCheckOutListFragment : Fragment() {
             CheckInCheckOutListFragmentDirections.actionCheckInCheckOutListToCheckOutFragment()
         NavHostFragment.findNavController(this).navigate(action)
     }
+
+//    private fun initRecyclerView() {
+//        binding.customersRecyclerView.layoutManager = LinearLayoutManager(this.context)
+//        displayCustomersList()
+//    }
+//
+//    private fun displayCustomersList() {
+//        Log.i("MYTAG", "Inside ...CICO_LIST..Fragment")
+//        checkInCheckOutListViewModel.customers.observe(viewLifecycleOwner, {
+//            binding.customersRecyclerView.adapter = CICORecycleViewAdapter(it)
+//        })
+//
+//    }
 }
 
 

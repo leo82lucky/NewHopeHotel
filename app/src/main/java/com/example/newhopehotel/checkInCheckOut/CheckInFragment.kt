@@ -52,8 +52,13 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.lifecycleOwner = this
 
+        checkInViewModel.customersLiveData.observe(viewLifecycleOwner, {
+            Log.i("MYTAG", it.toString() + "000000000000000000000000")
+        })
+
         //Spinner for Room ID dropdown Item
         val roomIDSpinner: Spinner = binding.roomIDSpinner
+        roomIDSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.roomid_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -63,6 +68,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         //Spinner for Room Type dropdown Item
         val roomTypeSpinner: Spinner = binding.roomTypeSpinner
+        roomTypeSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.roomtype_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -72,6 +78,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         //Spinner for Room Type dropdown Item
         val roomStatusSpinner: Spinner = binding.roomStatusSpinner
+        roomStatusSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.roomstatus_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -81,6 +88,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         //Spinner for Room Type dropdown Item
         val roomCardNoSpinner: Spinner = binding.roomCardNoSpinner
+        roomCardNoSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.cardno_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -118,7 +126,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         val item = parent.getItemAtPosition(pos).toString()
-        Toast.makeText(requireContext(), "Selected$item", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Selected $item", Toast.LENGTH_SHORT).show()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
