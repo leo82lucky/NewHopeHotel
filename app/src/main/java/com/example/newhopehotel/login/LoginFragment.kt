@@ -1,3 +1,4 @@
+
 package com.example.newhopehotel.login
 
 import android.os.Bundle
@@ -123,6 +124,7 @@ class LoginFragment : Fragment() {
         NavHostFragment.findNavController(this).navigate(action)
     }
 }
+
 
 
 

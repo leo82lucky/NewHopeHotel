@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".roomService.RoomService" />
+        <activity android:name=".roomService.ViewRoomServiceList" />
         <activity android:name=".housekeeping.Housekeeping" />
         <activity android:name=".housekeeping.AssignWork" />
         <activity android:name=".housekeeping.RoomCleaningTime" />
@@ -20,6 +21,7 @@
         <activity android:name=".housekeeping.Rooms8pm" />
         <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />
+
         <activity android:name=".data.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

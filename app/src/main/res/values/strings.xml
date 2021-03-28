@@ -23,6 +23,8 @@
     <string name="customer_feedback">Customer Feedback</string>
     <string name="View_Room_Service_List">View Room Service List</string>
     <string name="View_Morning_Call_List">View Morning Call List</string>
+    <string name="Room_Service_List">Room Service List</string>
+    <string name="Morning_Call_List">Morning Call List</string>
     <string name="room_cleaning_time">Room Cleaning Time</string>
     <string name="_8am">8am</string>
     <string name="_12pm">12pm</string>
@@ -89,4 +91,6 @@
         <item>CD009</item>
         <item>CD010</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
