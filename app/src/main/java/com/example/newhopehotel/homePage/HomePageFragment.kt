@@ -24,6 +24,7 @@ class HomePageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         val binding: FragmentHomePageBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home_page, container, false
@@ -70,6 +71,7 @@ class HomePageFragment : Fragment() {
                 val intent = Intent(requireActivity(), CustomerFeedback1::class.java)
                 startActivity(intent)
             }
+
         }
 
         return binding.root

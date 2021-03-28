@@ -10,11 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".roomService.RoomService" />
-        <activity android:name=".roomService.ViewRoomServiceList" />
+        <activity android:name=".roomService.RoomService"
+            android:parentActivityName=".homePage.HomePageFragment"/>
+        <activity android:name=".roomService.ViewRoomServiceList"
+            android:parentActivityName=".roomService.RoomService"/>
+
+
         <activity android:name=".housekeeping.Housekeeping" />
-        <activity android:name=".housekeeping.AssignWork" />
-        <activity android:name=".housekeeping.RoomCleaningTime" />
+        <activity android:name=".housekeeping.AssignWork"
+            android:parentActivityName=".housekeeping.Housekeeping"/>
+        <activity android:name=".housekeeping.RoomCleaningTime"
+            android:parentActivityName=".housekeeping.AssignWork"/>
         <activity android:name=".housekeeping.Rooms8am" />
         <activity android:name=".housekeeping.Rooms12pm" />
         <activity android:name=".housekeeping.Rooms4pm" />

@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newhopehotel.R
+import kotlinx.android.synthetic.main.activity_assign_work_worker_list.*
 import kotlinx.android.synthetic.main.activity_room_cleaning_time.*
+import kotlinx.android.synthetic.main.activity_room_service.*
+import kotlinx.android.synthetic.main.activity_room_service.toolbar
 
 class RoomCleaningTime : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +32,17 @@ class RoomCleaningTime : AppCompatActivity() {
         button8pm.setOnClickListener {
             val intent = Intent(button8pm.context, Rooms8pm::class.java)
             button8pm.context.startActivity(intent)
+        }
+
+        // set toolbar as support action bar
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.apply {
+
+            // show back button on toolbar
+            // on back button press, it will navigate to parent activity
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
     }
 
