@@ -13,9 +13,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/yellow_green_crayola">
+        android:layout_height="wrap_content"
+        android:background="@color/yellow_green_crayola"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -36,63 +36,77 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <Button
-            android:id="@+id/checkInBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/check_in"
-            android:onClick="@{()->myCheckInCheckOutListViewModel.checkInButton()}" />
-
-        <Button
-            android:id="@+id/checkOutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/check_out"
-            android:onClick="@{()->myCheckInCheckOutListViewModel.checkOutButton()}" />
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="721dp"
-            android:background="@color/yellow_green_crayola"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/checkInBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:onClick="@{()->myCheckInCheckOutListViewModel.checkInButton()}"
+                android:text="@string/check_in"
+                app:layout_constraintEnd_toStartOf="@+id/checkOutBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <Button
+                android:id="@+id/checkOutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:onClick="@{()->myCheckInCheckOutListViewModel.checkOutButton()}"
+                android:text="@string/check_out"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/checkInBtn"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView_customer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="16dp"
                 android:paddingTop="@dimen/small_padding"
                 android:text="List of CICO Details"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkInBtn"
                 tools:layout_conversion_absoluteHeight="32dp"
-                tools:layout_conversion_absoluteWidth="379dp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
+                tools:layout_conversion_absoluteWidth="379dp" />
+
+            <Button
+                android:id="@+id/ClearBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/customersRecyclerView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:layout_conversion_absoluteHeight="537dp"
-                tools:layout_conversion_absoluteWidth="402dp"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="53dp">
+                android:layout_marginBottom="305dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@+id/ClearBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_customer">
 
             </androidx.recyclerview.widget.RecyclerView>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </layout>

@@ -1,6 +1,7 @@
 package com.example.newhopehotel.database
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 
 class HotelRepository(
     private val registerDatabaseDao: RegisterDatabaseDao,
@@ -22,7 +23,7 @@ class HotelRepository(
     //    return dao.deleteAll()
     //}
 
-    suspend fun insert(customer: CheckInCheckOutEntity) {
+    suspend fun insertCustomer(customer: CheckInCheckOutEntity) {
         return checkInCheckOutDatabaseDao.insert(customer)
     }
 
@@ -30,4 +31,19 @@ class HotelRepository(
         Log.i("MYTAG", "hotel repo-getCustomerName() ")
         return checkInCheckOutDatabaseDao.getCustomerName(customerName)
     }
+
+    suspend fun getCustomer(): CheckInCheckOutEntity? {
+        Log.i("MYTAG", "hotel repo-getCustomer() ")
+        return checkInCheckOutDatabaseDao.getCustomer()
+    }
+
+//    suspend fun deleteCustomer(customer: CheckInCheckOutEntity) {
+//        Log.i("MYTAG", "hotel repo-deleteCustomer() ")
+//        return checkInCheckOutDatabaseDao.deleteCustomer(customer)
+//    }
+//
+//    suspend fun deleteAllCustomer(): Int {
+//        return checkInCheckOutDatabaseDao.deleteAll()
+//    }
+
 }

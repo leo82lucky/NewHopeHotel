@@ -12,23 +12,23 @@ data class CheckInCheckOutEntity(
 
     @ColumnInfo(name = "cust_name") var customerName: String,
 
-    @ColumnInfo(name = "ic") var icNo: Int,
+    @ColumnInfo(name = "ic") var icNo: String,
 
-    @ColumnInfo(name = "contact_no") var contactNo: Int,
+    @ColumnInfo(name = "contact_no") var contactNo: String
 
-    @ColumnInfo(name = "room_id") var roomID: String,
-
-    @ColumnInfo(name = "room_type") var roomType: String,
-
-    @ColumnInfo(name = "room_status") var roomStatus: String,
-
-    @ColumnInfo(name = "room_cardno") var roomCardNo: String,
+//    @ColumnInfo(name = "room_id") var roomID: String,
+//
+//    @ColumnInfo(name = "room_type") var roomType: String,
+//
+//    @ColumnInfo(name = "room_status") var roomStatus: String,
+//
+//    @ColumnInfo(name = "room_cardno") var roomCardNo: String
 
 //    @ColumnInfo(name = "checkin_time") var checkInTime: Time,
 //
 //    @ColumnInfo(name = "checkin_date") var checkInDate: Date,
 
-    @ColumnInfo(name = "morning_call") var morningCall: Boolean
+//    @ColumnInfo(name = "morning_call") var morningCall: Boolean
 
 //    //Check Out
 //    @ColumnInfo(name = "checkout_time") var checkoutTime: Time,
