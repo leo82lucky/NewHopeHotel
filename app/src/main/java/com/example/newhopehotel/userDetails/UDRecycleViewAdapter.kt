@@ -6,10 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
 import com.example.newhopehotel.database.RegisterEntity
-import com.example.newhopehotel.database.RegisterRepository
 import com.example.newhopehotel.databinding.ListItemBinding
-
-//import com.example.newhopehotel.databinding.RegisterHomeFragmentBinding
 
 class MyRecycleViewAdapter(private val usersList: List<RegisterEntity>) :
     RecyclerView.Adapter<MyviewHolder>() {

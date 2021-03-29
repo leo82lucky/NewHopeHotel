@@ -12,16 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentRegisterBinding
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegisterFragment : Fragment() {
 
     private lateinit var registerViewModel: RegisterViewModel
@@ -37,9 +31,10 @@ class RegisterFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = RegisterViewModelFactory(repository, application)
 
@@ -49,7 +44,7 @@ class RegisterFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        registerViewModel.navigateto.observe(viewLifecycleOwner, Observer { hasFinished ->
+        registerViewModel.navigateto.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
                 Log.i("MYTAG", "insidi observe")
                 displayUsersList()
@@ -57,12 +52,12 @@ class RegisterFragment : Fragment() {
             }
         })
 
-        registerViewModel.userDetailsLiveData.observe(viewLifecycleOwner, Observer {
+        registerViewModel.userDetailsLiveData.observe(viewLifecycleOwner, {
             Log.i("MYTAG", it.toString() + "000000000000000000000000")
         })
 
 
-        registerViewModel.errotoast.observe(viewLifecycleOwner, Observer { hasError ->
+        registerViewModel.errotoast.observe(viewLifecycleOwner, { hasError ->
             if (hasError == true) {
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
                     .show()
@@ -70,7 +65,7 @@ class RegisterFragment : Fragment() {
             }
         })
 
-        registerViewModel.errotoastUsername.observe(viewLifecycleOwner, Observer { hasError ->
+        registerViewModel.errotoastUsername.observe(viewLifecycleOwner, { hasError ->
             if (hasError == true) {
                 Toast.makeText(requireContext(), "UserName Already taken", Toast.LENGTH_SHORT)
                     .show()

@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/assign_work"
+                android:text="@string/Room_Service_List"
                 android:textAlignment="center"
                 android:layout_marginEnd="?android:attr/actionBarSize"
                 android:textColor="@color/white"

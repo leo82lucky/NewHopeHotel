@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Housekeeping"
+                android:text="@string/housekeeping"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -57,12 +57,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/cleaning_list" />
+                        android:src="@drawable/cleaning_list"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cleaning List"
+                        android:text="@string/cleaning_list"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"
@@ -99,12 +100,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/assign_work"/>
+                        android:src="@drawable/assign_work"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Assign Work"
+                        android:text="@string/assign_work"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"

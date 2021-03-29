@@ -1,13 +1,14 @@
+
 package com.example.newhopehotel.login
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelRepository
 import java.lang.IllegalArgumentException
 
 class LoginViewModelFactory(
-    private val repository: RegisterRepository,
+    private val repository: HotelRepository,
     private val application: Application
 ) : ViewModelProvider.Factory {
     @Suppress("Unchecked_cast")

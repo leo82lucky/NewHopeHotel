@@ -23,25 +23,26 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/worker_image" />
+            app:layout_constraintStart_toEndOf="@+id/client_image" />
 
         <ImageView
-            android:id="@+id/worker_image"
+            android:id="@+id/client_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/worker_image_sample" />
+            tools:srcCompat="@drawable/worker_image_sample"
+            android:contentDescription="TODO" />
 
         <TextView
-            android:id="@+id/worker_name"
+            android:id="@+id/client_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:text="Worker Name"
             android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/worker_image"
+            app:layout_constraintStart_toEndOf="@+id/client_image"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

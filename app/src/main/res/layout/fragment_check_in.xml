@@ -48,10 +48,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="22dp"
                 android:text="@string/name"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/nameInput"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,21 +68,26 @@
                 android:fontFamily="@font/roboto"
                 android:inputType="textPersonName"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:text="@={myCheckInViewModel.inputCustomerName}"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/nameCust"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="34dp"
                 android:text="@string/i_c"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/icInput"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameCust" />
 
@@ -92,11 +99,14 @@
                 android:layout_marginEnd="10dp"
                 android:background="@color/white"
                 android:fontFamily="@font/roboto"
-                android:inputType="textPersonName"
+                android:inputType="text|number"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:text="@={myCheckInViewModel.inputIC}"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic"
                 app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
             <TextView
@@ -105,10 +115,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="9dp"
                 android:text="Contact\nNo."
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/contactNoInput"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ic" />
 
@@ -120,11 +132,14 @@
                 android:layout_marginEnd="10dp"
                 android:background="@color/white"
                 android:fontFamily="@font/roboto"
-                android:inputType="textPersonName"
+                android:inputType="text|number"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:text="@={myCheckInViewModel.inputContactNo}"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/contactNo"
                 app:layout_constraintTop_toBottomOf="@+id/icInput" />
 
             <TextView
@@ -133,10 +148,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="5dp"
                 android:text="@string/room_id"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/roomIDSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/contactNo" />
 
@@ -149,6 +166,7 @@
                 android:layout_marginEnd="10dp"
                 android:dropDownWidth="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/roomIDText"
                 app:layout_constraintTop_toBottomOf="@+id/contactNoInput" />
 
             <TextView
@@ -157,10 +175,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="17dp"
                 android:text="Room\nType"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/roomTypeSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roomIDText" />
 
@@ -173,6 +193,7 @@
                 android:layout_marginEnd="10dp"
                 android:dropDownWidth="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/roomTypeText"
                 app:layout_constraintTop_toBottomOf="@+id/roomIDSpinner" />
 
             <TextView
@@ -181,10 +202,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="14dp"
                 android:text="@string/status"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/roomStatusSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roomTypeText" />
 
@@ -197,6 +220,7 @@
                 android:layout_marginEnd="10dp"
                 android:dropDownWidth="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/roomStatusText"
                 app:layout_constraintTop_toBottomOf="@+id/roomTypeSpinner" />
 
             <TextView
@@ -205,10 +229,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/card_no"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/roomCardNoSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roomStatusText" />
 
@@ -221,6 +247,7 @@
                 android:layout_marginEnd="10dp"
                 android:dropDownWidth="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/roomCardNoText"
                 app:layout_constraintTop_toBottomOf="@+id/roomStatusSpinner" />
 
             <TextView
@@ -320,7 +347,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
                 android:buttonTint="@color/mantis_green"
-                android:checked="true"
+                android:checked="@={myCheckInViewModel.inputMorningCall}"
                 android:fontFamily="@font/roboto"
                 android:text="(Optional)"
                 android:textColor="@color/spanish_grey"
@@ -333,6 +360,7 @@
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="75dp"
+                android:layout_marginEnd="21dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/custom_confirm_button"
                 android:letterSpacing=".1"
@@ -341,12 +369,14 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cancelButton"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/cancelButton"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="75dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/custom_cancel_button"
@@ -355,7 +385,8 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/confirmButton" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

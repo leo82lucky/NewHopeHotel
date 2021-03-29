@@ -16,8 +16,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.DatePickerHelper
 import com.example.newhopehotel.data.TimePickerHelper
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentCheckInBinding
 import kotlinx.android.synthetic.main.fragment_check_in.*
 import java.util.*
@@ -25,8 +25,8 @@ import java.util.*
 class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var checkInViewModel: CheckInViewModel
-    lateinit var timePicker: TimePickerHelper
-    lateinit var datePicker: DatePickerHelper
+    private lateinit var timePicker: TimePickerHelper
+    private lateinit var datePicker: DatePickerHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +39,10 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = CheckInViewModelFactory(repository, application)
 
@@ -51,8 +52,13 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.lifecycleOwner = this
 
+        checkInViewModel.customersLiveData.observe(viewLifecycleOwner, {
+            Log.i("MYTAG", it.toString() + "000000000000000000000000")
+        })
+
         //Spinner for Room ID dropdown Item
         val roomIDSpinner: Spinner = binding.roomIDSpinner
+        roomIDSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.roomid_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -62,6 +68,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         //Spinner for Room Type dropdown Item
         val roomTypeSpinner: Spinner = binding.roomTypeSpinner
+        roomTypeSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.roomtype_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -71,6 +78,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         //Spinner for Room Type dropdown Item
         val roomStatusSpinner: Spinner = binding.roomStatusSpinner
+        roomStatusSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.roomstatus_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -80,6 +88,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         //Spinner for Room Type dropdown Item
         val roomCardNoSpinner: Spinner = binding.roomCardNoSpinner
+        roomCardNoSpinner.onItemSelectedListener = this
         ArrayAdapter.createFromResource(
             requireContext(), R.array.cardno_array, android.R.layout.simple_spinner_item
         ).also { adapter ->
@@ -104,12 +113,20 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         })
 
+        checkInViewModel.errotoast.observe(viewLifecycleOwner, { hasError ->
+            if (hasError == true) {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+                    .show()
+                checkInViewModel.donetoast()
+            }
+        })
+
         return binding.root
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         val item = parent.getItemAtPosition(pos).toString()
-        Toast.makeText(requireContext(), "Selected$item", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Selected $item", Toast.LENGTH_SHORT).show()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
@@ -150,5 +167,7 @@ class CheckInFragment : Fragment(), AdapterView.OnItemSelectedListener {
             CheckInFragmentDirections.actionCheckInFragmentToCheckInCheckOutList()
         NavHostFragment.findNavController(this).navigate(action)
     }
+
+
 }
 

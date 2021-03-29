@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.checkInCheckOut.CheckInCheckOut
 import com.example.newhopehotel.customerFeedback.CustomerFeedback1
-import com.example.newhopehotel.database.RegisterDatabase
-import com.example.newhopehotel.database.RegisterRepository
+import com.example.newhopehotel.database.HotelDatabase
+import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentHomePageBinding
 import com.example.newhopehotel.housekeeping.Housekeeping
 import com.example.newhopehotel.roomService.RoomService
@@ -24,6 +24,7 @@ class HomePageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         val binding: FragmentHomePageBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home_page, container, false
@@ -31,9 +32,10 @@ class HomePageFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dao = RegisterDatabase.getInstance(application).registerDatabaseDao
+        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
 
-        val repository = RegisterRepository(dao)
+        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
         val factory = HomePageViewModelFactory(repository, application)
 
@@ -45,30 +47,31 @@ class HomePageFragment : Fragment() {
 
         binding.cicoButton.setOnClickListener {
             run {
-                var intent = Intent(requireActivity(), CheckInCheckOut::class.java)
+                val intent = Intent(requireActivity(), CheckInCheckOut::class.java)
                 startActivity(intent)
             }
         }
 
         binding.housekeepingButton.setOnClickListener {
             run {
-                var intent = Intent(requireActivity(), Housekeeping::class.java)
+                val intent = Intent(requireActivity(), Housekeeping::class.java)
                 startActivity(intent)
             }
         }
 
         binding.roomServiceButton.setOnClickListener {
             run {
-                var intent = Intent(requireActivity(), RoomService::class.java)
+                val intent = Intent(requireActivity(), RoomService::class.java)
                 startActivity(intent)
             }
         }
 
         binding.custFeedbackButton.setOnClickListener {
             run {
-                var intent = Intent(requireActivity(), CustomerFeedback1::class.java)
+                val intent = Intent(requireActivity(), CustomerFeedback1::class.java)
                 startActivity(intent)
             }
+
         }
 
         return binding.root

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.worker_list_layout.view.*
@@ -29,12 +28,12 @@ class WorkerListAdapter : RecyclerView.Adapter<WorkerListAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.worker_name.text = workerNames[position]
+        holder.itemView.client_name.text = workerNames[position]
         if (roomsAssigned[position] > 0)
             holder.itemView.rooms_assigned.text = "" + roomsAssigned[position] + " rooms assigned"
         else
             holder.itemView.rooms_assigned.text = "Tap to assign work"
-        holder.itemView.worker_image.setImageResource(workerImages[position])
+        holder.itemView.client_image.setImageResource(workerImages[position])
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

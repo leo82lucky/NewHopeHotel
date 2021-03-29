@@ -4,10 +4,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
@@ -38,7 +38,7 @@
                         android:layout_margin="10dp"
                         android:text="TextView"
                         android:textColor="@color/cardview_light_background"
-                        android:textSize="30dp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -48,7 +48,7 @@
                         android:layout_margin="10dp"
                         android:text="TextView"
                         android:textColor="@color/cardview_light_background"
-                        android:textSize="30dp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -60,7 +60,7 @@
                     android:layout_margin="10dp"
                     android:text="TextView"
                     android:textColor="@color/cardview_light_background"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
