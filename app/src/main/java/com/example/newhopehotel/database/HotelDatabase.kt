@@ -5,14 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.newhopehotel.data.RoomIDConverter
 import com.example.newhopehotel.data.RoomStatusConverter
 import com.example.newhopehotel.data.RoomTypeConverter
 
 @Database(
     entities = [RegisterEntity::class, CheckInCheckOutEntity::class],
-    version = 2, exportSchema = false
+    version = 3, exportSchema = false
 )
-@TypeConverters(RoomTypeConverter::class, RoomStatusConverter::class)
+@TypeConverters(RoomTypeConverter::class, RoomStatusConverter::class, RoomIDConverter::class)
 abstract class HotelDatabase : RoomDatabase() {
 
     //    abstract val registerDatabaseDao: RegisterDatabaseDao

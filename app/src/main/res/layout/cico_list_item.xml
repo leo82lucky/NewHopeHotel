@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/margin_small"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/black"
             android:text="@{cicoItem.custName}"
             android:textSize="@dimen/text_size_large"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,13 +38,28 @@
             tools:text="@string/name" />
 
         <TextView
+            android:id="@+id/item_contact_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/black"
+            android:text="@{cicoItem.contactNo}"
+            app:layout_constraintStart_toEndOf="@+id/item_cust_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Contact No" />
+
+
+        <TextView
             android:id="@+id/item_room_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@{BindingUtils.setToText(cicoItem.roomStatus)}"
             android:textAllCaps="false"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_cust_name"
@@ -54,12 +70,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@{BindingUtils.setToText(cicoItem.roomType)}"
             android:textAllCaps="false"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_room_status"
+            app:layout_constraintTop_toBottomOf="@+id/item_cust_name"
             tools:text="Type" />
+
+        <TextView
+            android:id="@+id/item_room_ID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{BindingUtils.setToText(cicoItem.roomID)}"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_room_type"
+            app:layout_constraintTop_toBottomOf="@+id/item_cust_name"
+            tools:text="Room ID" />
 
         <!--        <ImageView-->
         <!--            android:id="@+id/item_gender_drawable"-->

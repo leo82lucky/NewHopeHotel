@@ -31,16 +31,3 @@ enum class RoomStatus {
     Available,
     Unavailable
 }
-
-enum class RoomCardNo {
-    CD001,
-    CD002,
-    CD003,
-    CD004,
-    CD005,
-    CD006,
-    CD007,
-    CD008,
-    CD009,
-    CD010
-}

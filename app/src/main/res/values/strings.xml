@@ -60,7 +60,6 @@
 
     //RoomID String Array
     <string-array name="roomid_array">
-        <item>[--Choose a Room ID--]</item>
         <item>R001</item>
         <item>R002</item>
         <item>R003</item>
@@ -84,19 +83,7 @@
         <item>Available</item>
         <item>Unavailable</item>
     </string-array>
-    //RoomCardNo String Array
-    <string-array name="cardno_array">
-        <item>CD001</item>
-        <item>CD002</item>
-        <item>CD003</item>
-        <item>CD004</item>
-        <item>CD005</item>
-        <item>CD006</item>
-        <item>CD007</item>
-        <item>CD008</item>
-        <item>CD009</item>
-        <item>CD010</item>
-    </string-array>
+
     <string name="add_a_new_record">Add a new record</string>
 
 </resources>

@@ -3,21 +3,6 @@ package com.example.newhopehotel.data
 import androidx.room.TypeConverter
 
 
-//class MapConverter {
-//
-//    @TypeConverter
-//    fun convertMapToJson(categories: Map<String, Boolean>): String {
-//        val categoryMap = object : TypeToken<Map<String, Boolean>>() {}.type
-//        return Gson().toJson(categories, categoryMap)
-//    }
-//
-//    @TypeConverter
-//    fun convertJsonToMap(jsonToConvert: String): Map<String, Boolean> {
-//        val categoryMap = object : TypeToken<Map<String, Boolean>>() {}.type
-//        return Gson().fromJson(jsonToConvert, categoryMap)
-//    }
-//}
-//
 class RoomTypeConverter {
 
     @TypeConverter
@@ -41,5 +26,18 @@ class RoomStatusConverter {
     @TypeConverter
     fun convertIntToRoomStatus(enumOrdinal: Int): RoomStatus? {
         return if (enumOrdinal == -1) null else RoomStatus.values()[enumOrdinal]
+    }
+}
+
+class RoomIDConverter {
+
+    @TypeConverter
+    fun convertRoomIDToPosition(roomID: RoomID?): Int {
+        return roomID?.ordinal ?: 0
+    }
+
+    @TypeConverter
+    fun convertPositionToRoomID(position: Int): RoomID {
+        return RoomID.values()[position]
     }
 }

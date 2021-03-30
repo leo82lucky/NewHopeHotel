@@ -4,6 +4,7 @@ package com.example.newhopehotel.utils
 
 import androidx.databinding.InverseMethod
 import com.example.newhopehotel.R
+import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.RoomType
 
@@ -43,4 +44,13 @@ fun roomTypeToPosition(room_type: RoomType?): Int {
 
 fun positionToRoomType(position: Int): RoomType {
     return RoomType.values()[position]
+}
+
+@InverseMethod("positionToRoomID")
+fun roomIDToPosition(room_id: RoomID?): Int {
+    return room_id?.ordinal ?: 0
+}
+
+fun positionToRoomID(position: Int): RoomID {
+    return RoomID.values()[position]
 }
