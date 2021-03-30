@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newhopehotel.R
-import kotlinx.android.synthetic.main.activity_assign_work_worker_list.*
 import kotlinx.android.synthetic.main.activity_room_cleaning_time.*
-import kotlinx.android.synthetic.main.activity_room_service.*
 import kotlinx.android.synthetic.main.activity_room_service.toolbar
 
 class RoomCleaningTime : AppCompatActivity() {

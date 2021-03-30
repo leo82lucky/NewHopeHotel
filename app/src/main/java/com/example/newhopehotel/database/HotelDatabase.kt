@@ -1,22 +1,24 @@
 package com.example.newhopehotel.database
 
 import android.content.Context
-import androidx.databinding.adapters.Converters
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.newhopehotel.data.RoomStatusConverter
+import com.example.newhopehotel.data.RoomTypeConverter
 
 @Database(
     entities = [RegisterEntity::class, CheckInCheckOutEntity::class],
-    version = 1, exportSchema = false
+    version = 2, exportSchema = false
 )
-//@TypeConverters(Converters::class)
+@TypeConverters(RoomTypeConverter::class, RoomStatusConverter::class)
 abstract class HotelDatabase : RoomDatabase() {
 
-    abstract val registerDatabaseDao: RegisterDatabaseDao
-
-    abstract val checkInCheckOutDatabaseDao: CheckInCheckOutDatabaseDao
+    //    abstract val registerDatabaseDao: RegisterDatabaseDao
+//    abstract val checkInCheckOutDatabaseDao: CheckInCheckOutDatabaseDao
+    abstract fun cicoDao(): CheckInCheckOutDatabaseDao
+    abstract fun registerDao(): RegisterDatabaseDao
 
     companion object {
 

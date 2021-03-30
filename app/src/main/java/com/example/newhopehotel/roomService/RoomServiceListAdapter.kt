@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.room_service_list_layout.view.*
-import kotlinx.android.synthetic.main.room_service_list_layout.view.client_image
-import kotlinx.android.synthetic.main.worker_list_layout.view.*
 
 class RoomServiceListAdapter : RecyclerView.Adapter<RoomServiceListAdapter.ViewHolder>()
 {

@@ -48,6 +48,15 @@
     <string name="cancel">Cancel</string>
     <string name="cleaning_list">Cleaning List</string>
     <string name="assign_work">Assign Work</string>
+    <string name="cico_empty_warning">Customer name cannot be empty</string>
+    <string name="unsaved_changes_warning_title">Discard changes?</string>
+    <string name="unsaved_changes_warning_message">Are you sure you want to discard the changes?</string>
+    <string name="yes">Yes</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="reserved">Reserved</string>
+    <string name="undo">UNDO</string>
+    <string name="record_is_deleted">One record is deleted</string>
 
     //RoomID String Array
     <string-array name="roomid_array">
@@ -91,6 +100,6 @@
         <item>CD009</item>
         <item>CD010</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_a_new_record">Add a new record</string>
+
 </resources>

@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.HotelDatabase
-import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentLoginBinding
+import com.example.newhopehotel.utils.provideRepository
 
 
 class LoginFragment : Fragment() {
@@ -26,7 +24,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentLoginBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_login, container, false
@@ -34,12 +32,12 @@ class LoginFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//
+//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
-        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
-        val factory = LoginViewModelFactory(repository, application)
+        val factory = LoginViewModelFactory(provideRepository(requireContext()), application)
 
         loginViewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 

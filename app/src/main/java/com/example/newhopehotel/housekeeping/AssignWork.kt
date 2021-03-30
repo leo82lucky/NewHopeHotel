@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.activity_assign_work_worker_list.*
-import kotlinx.android.synthetic.main.activity_assign_work_worker_list.recyclerView
-import kotlinx.android.synthetic.main.activity_assign_work_worker_list.toolbar
-import kotlinx.android.synthetic.main.activity_recycler_room_service_list.*
 
 class AssignWork : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
