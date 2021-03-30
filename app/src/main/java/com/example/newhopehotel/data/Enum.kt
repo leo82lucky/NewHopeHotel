@@ -8,7 +8,6 @@ enum class UIState {
 }
 
 enum class RoomID {
-    ChooseRoomID,
     R001,
     R002,
     R003,
@@ -22,15 +21,15 @@ enum class RoomID {
 }
 
 enum class RoomType {
-    STANDARD,
-    DELUXE,
-    LUXURY
+    Standard,
+    Deluxe,
+    Luxury
 }
 
 enum class RoomStatus {
-    RESERVED,
-    AVAILABLE,
-    UNAVAILABLE
+    Reserved,
+    Available,
+    Unavailable
 }
 
 enum class RoomCardNo {

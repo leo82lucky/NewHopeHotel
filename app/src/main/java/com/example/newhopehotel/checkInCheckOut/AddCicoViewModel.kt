@@ -61,13 +61,10 @@ class AddCicoViewModel(
         get() = if (mIsEdit) cicoBeingModified != chosenCico
         else cicoBeingModified != emptyCico
 //        private set
-
+//
 //    companion object {
-//        const val WOODEN = "Wooden"
-//        const val ELECTRONIC = "Electronic"
-//        const val PLASTIC = "Plastic"
-//        const val PLUSH = "Plush"
-//        const val MUSICAL = "Musical"
-//        const val EDUCATIVE = "Educative"
+//        const val AVAILABLE = "Available"
+//        const val UNAVAILABLE = "Unavailable"
+//        const val RESERVED = "Reserved"
 //    }
 }

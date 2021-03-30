@@ -7,15 +7,20 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.RoomType
 
+
+fun setToText(anyNotString: Any?): String {
+    return anyNotString.toString()
+}
+
 @InverseMethod("buttonIdToStatus")
 fun statusToButtonId(roomStatus: RoomStatus?): Int {
     var selectedButtonId = -1
 
     roomStatus?.run {
         selectedButtonId = when (this) {
-            RoomStatus.AVAILABLE -> R.id.radioBtn_available
-            RoomStatus.UNAVAILABLE -> R.id.radioBtn_unavailable
-            RoomStatus.RESERVED -> R.id.radioBtn_reserved
+            RoomStatus.Available -> R.id.radioBtn_available
+            RoomStatus.Unavailable -> R.id.radioBtn_unavailable
+            RoomStatus.Reserved -> R.id.radioBtn_reserved
         }
     }
 
@@ -24,9 +29,9 @@ fun statusToButtonId(roomStatus: RoomStatus?): Int {
 
 fun buttonIdToStatus(selectedButtonId: Int): RoomStatus? {
     return when (selectedButtonId) {
-        R.id.radioBtn_available -> RoomStatus.AVAILABLE
-        R.id.radioBtn_unavailable -> RoomStatus.UNAVAILABLE
-        R.id.radioBtn_reserved -> RoomStatus.RESERVED
+        R.id.radioBtn_available -> RoomStatus.Available
+        R.id.radioBtn_unavailable -> RoomStatus.Unavailable
+        R.id.radioBtn_reserved -> RoomStatus.Reserved
         else -> null
     }
 }
