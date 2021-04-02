@@ -48,7 +48,8 @@
     <string name="cancel">Cancel</string>
     <string name="cleaning_list">Cleaning List</string>
     <string name="assign_work">Assign Work</string>
-
+    <string name="add_new_room_service">New Room Service</string>
+    <string name="total_no">Total No:</string>
     //RoomID String Array
     <string-array name="roomid_array">
         <item>[--Choose a Room ID--]</item>

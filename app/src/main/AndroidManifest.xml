@@ -10,10 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".roomService.RoomService"
+        <activity android:name=".roomService.RoomServiceMain"
             android:parentActivityName=".homePage.HomePageFragment"/>
         <activity android:name=".roomService.ViewRoomServiceList"
-            android:parentActivityName=".roomService.RoomService"/>
+            android:parentActivityName=".roomService.RoomServiceMain"/>
+        <activity android:name=".roomService.AddNewRoomService"
+            android:parentActivityName=".roomService.ViewRoomServiceList"/>
 
 
         <activity android:name=".housekeeping.Housekeeping" />

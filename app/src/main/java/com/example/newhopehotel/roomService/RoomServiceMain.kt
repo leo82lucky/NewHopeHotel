@@ -8,7 +8,7 @@ import android.os.Bundle
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.activity_room_service.*
 
-class RoomService : AppCompatActivity() {
+class RoomServiceMain : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_service)

@@ -15,7 +15,7 @@ import com.example.newhopehotel.database.HotelDatabase
 import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentHomePageBinding
 import com.example.newhopehotel.housekeeping.Housekeeping
-import com.example.newhopehotel.roomService.RoomService
+import com.example.newhopehotel.roomService.RoomServiceMain
 
 class HomePageFragment : Fragment() {
 
@@ -61,7 +61,7 @@ class HomePageFragment : Fragment() {
 
         binding.roomServiceButton.setOnClickListener {
             run {
-                val intent = Intent(requireActivity(), RoomService::class.java)
+                val intent = Intent(requireActivity(), RoomServiceMain::class.java)
                 startActivity(intent)
             }
         }
