@@ -18,13 +18,15 @@ data class CheckInCheckOutEntity(
     var roomType: RoomType = RoomType.Standard,
     var roomStatus: RoomStatus? = null,
     var roomID: RoomID = RoomID.R001,
+    var checkinDate: String,
+    var checkinTime: String,
     var morningCall: Boolean,
     @PrimaryKey(autoGenerate = true) val cicoId: Int = 0
 ) : Parcelable {
     fun copy(): CheckInCheckOutEntity {
         return CheckInCheckOutEntity(
             custName, icNo, contactNo, roomType,
-            roomStatus, roomID, morningCall, cicoId
+            roomStatus, roomID, checkinDate, checkinTime, morningCall, cicoId
         )
     }
 }

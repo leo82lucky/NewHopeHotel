@@ -140,6 +140,111 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDate_Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard"
+            app:cardBackgroundColor="@color/green_pigment"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:contentPadding="@dimen/padding_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardEditText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.3" />
+
+                <TextView
+                    style="@style/info_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/date"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/dateTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/guidelineDateTime"
+                    app:layout_constraintTop_toTopOf="@+id/dateTextView" />
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@={myAddCicoViewModel.cicoBeingModified.checkinDate}"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/guidelineDateTime"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/selectDateButton"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/custom_confirm_button"
+                    android:drawableStart="@drawable/ic_baseline_date_range_24"
+                    android:padding="1.5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/dateTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/dateTextView" />
+
+                <TextView
+                    style="@style/info_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/time"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/timeTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/guidelineDateTime"
+                    app:layout_constraintTop_toTopOf="@+id/timeTextView" />
+
+                <TextView
+                    android:id="@+id/timeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@={myAddCicoViewModel.cicoBeingModified.checkinTime}"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/guidelineDateTime"
+                    app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+
+                <Button
+                    android:id="@+id/selectTimeButton"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/custom_confirm_button"
+                    android:drawableStart="@drawable/ic_baseline_access_time_24"
+                    android:padding="1.5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/timeTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/timeTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSpinner"
@@ -152,7 +257,7 @@
             app:contentPadding="@dimen/padding_standard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardEditText">
+            app:layout_constraintTop_toBottomOf="@id/cardDate_Time">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -283,7 +388,6 @@
                 </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

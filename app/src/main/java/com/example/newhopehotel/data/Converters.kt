@@ -1,9 +1,10 @@
 package com.example.newhopehotel.data
 
 import androidx.room.TypeConverter
+import java.util.*
 
 
-class RoomTypeConverter {
+class RoomConverter {
 
     @TypeConverter
     fun convertRoomTypeToPosition(roomType: RoomType?): Int {
@@ -14,9 +15,6 @@ class RoomTypeConverter {
     fun convertPositionToRoomType(position: Int): RoomType {
         return RoomType.values()[position]
     }
-}
-
-class RoomStatusConverter {
 
     @TypeConverter
     fun convertRoomStatusToInt(type: RoomStatus?): Int {
@@ -27,9 +25,6 @@ class RoomStatusConverter {
     fun convertIntToRoomStatus(enumOrdinal: Int): RoomStatus? {
         return if (enumOrdinal == -1) null else RoomStatus.values()[enumOrdinal]
     }
-}
-
-class RoomIDConverter {
 
     @TypeConverter
     fun convertRoomIDToPosition(roomID: RoomID?): Int {
@@ -39,5 +34,15 @@ class RoomIDConverter {
     @TypeConverter
     fun convertPositionToRoomID(position: Int): RoomID {
         return RoomID.values()[position]
+    }
+
+    @TypeConverter
+    fun fromTimestamp(value: Long?): Date? {
+        return value?.let { Date(it) }
+    }
+
+    @TypeConverter
+    fun dateToTimestamp(date: Date?): Long? {
+        return date?.time?.toLong()
     }
 }

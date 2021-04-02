@@ -18,9 +18,6 @@ class AddCicoViewModel(
             cicoBeingModified = chosenCico.copy()
             mIsEdit = true
         } else {
-            /*This is for adding a new toy. We initialize a ToyEntry with default or null values
-            This is because two-way databinding in the AddToyFragment is designed to
-            register changes automatically, but it will need a toy object to register those changes.*/
             cicoBeingModified = emptyCico
             mIsEdit = false
         }
@@ -52,6 +49,8 @@ class AddCicoViewModel(
                 custName = "",
                 icNo = "",
                 contactNo = "",
+                checkinDate = "dd/mm/yyyy",
+                checkinTime = "hh:mm am",
                 morningCall = false
             )
         }

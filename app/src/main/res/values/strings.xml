@@ -85,5 +85,7 @@
     </string-array>
 
     <string name="add_a_new_record">Add a new record</string>
+    <string name="check_in_time">Check In Time</string>
+    <string name="check_in_date">Check In Date</string>
 
 </resources>

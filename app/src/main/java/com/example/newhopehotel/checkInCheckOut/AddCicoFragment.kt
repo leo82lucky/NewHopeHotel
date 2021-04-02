@@ -1,8 +1,8 @@
 package com.example.newhopehotel.checkInCheckOut
 
-import androidx.lifecycle.ViewModelProvider
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -10,11 +10,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.databinding.AddCicoBinding
 import com.example.newhopehotel.utils.provideRepository
 import org.jetbrains.anko.toast
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddCicoFragment : Fragment() {
 
@@ -29,7 +34,7 @@ class AddCicoFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.add_cico_fragment, container, false
         )
@@ -51,6 +56,8 @@ class AddCicoFragment : Fragment() {
 
         binding.myAddCicoViewModel = viewModel
 
+        binding.selectDateButton.setOnClickListener { pickDate() }
+        binding.selectTimeButton.setOnClickListener { pickTime() }
         binding.fab.setOnClickListener {
             saveToy()
         }
@@ -99,5 +106,52 @@ class AddCicoFragment : Fragment() {
             .setNegativeButton(android.R.string.no, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
+    }
+
+    private fun pickDate() {
+        val currentDate = Calendar.getInstance()
+        val startYear = currentDate.get(Calendar.YEAR)
+        val startMonth = currentDate.get(Calendar.MONTH)
+        val startDay = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(requireContext(), { _, year, month, day ->
+            val pickedDate = Calendar.getInstance()
+            pickedDate.set(year, month, day)
+            setDateTextView(pickedDate)
+        }, startYear, startMonth, startDay).show()
+    }
+
+    private fun pickTime() {
+        val currentTime = Calendar.getInstance()
+        val startHour = currentTime.get(Calendar.HOUR)
+        val startMinute = currentTime.get(Calendar.MINUTE)
+        val style = R.style.SpinnerTimePickerDialog
+
+        TimePickerDialog(
+            requireContext(), style,
+            { _, hour, minute ->
+                val pickedTime = Calendar.getInstance()
+                pickedTime.set(hour, minute)
+                setTimeTextView(pickedTime)
+            }, startHour, startMinute, false
+        ).show()
+    }
+
+    private fun setDateTextView(pickedDate: Calendar) {
+        val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val formattedDate: String = dateFormat.format(pickedDate.time)
+        (formattedDate).also { binding.dateTextView.text = it }
+//        ("${pickedDate.get(Calendar.DAY_OF_MONTH)}/" +
+//                "${pickedDate.get(Calendar.MONTH)}/" +
+//                "${pickedDate.get(Calendar.YEAR)}").also { binding.dateTextView.text = it }
+    }
+
+    private fun setTimeTextView(pickedTime: Calendar) {
+
+        val dateFormat: DateFormat = SimpleDateFormat("hh:mm a")
+        val formattedTime: String = dateFormat.format(pickedTime.time)
+        (formattedTime).also { binding.timeTextView.text = it }
+//        ("${pickedTime.get(Calendar.HOUR_OF_DAY)}:" +
+//                "${pickedTime.get(Calendar.MINUTE)}").also { binding.timeTextView.text = it }
     }
 }
