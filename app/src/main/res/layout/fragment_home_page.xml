@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/check_in"
-                        android:contentDescription="TODO" />
+                        android:contentDescription="@string/check_in_check_out" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/housekeeping"
-                        android:contentDescription="TODO" />
+                        android:contentDescription="@string/housekeeping" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/room_service"
-                        android:contentDescription="TODO" />
+                        android:contentDescription="@string/room_service" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -217,7 +217,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/customer_feedback"
-                        android:contentDescription="TODO" />
+                        android:contentDescription="@string/customer_feedback" />
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -3,75 +3,144 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="cicoItem"
+            type="com.example.newhopehotel.database.CheckInCheckOutEntity" />
+
+        <variable
+            name="cicoItemClick"
+            type="com.example.newhopehotel.checkInCheckOut.CicoAdapter.CicoClickListener" />
+
+        <import type="com.example.newhopehotel.utils.BindingUtils" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:background="@color/yellow_green_crayola"
-        android:orientation="vertical">
+        android:layout_margin="4dp"
+        android:background="@color/tea_green"
+        android:onClick="@{() ->  cicoItemClick.onCicoClicked(cicoItem)}">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/item_cust_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/mantis_green"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/black"
+            android:text="@{cicoItem.custName}"
+            android:textSize="@dimen/text_size_large"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/name" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/item_contact_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{cicoItem.contactNo}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/item_cust_name"
+            app:layout_constraintTop_toTopOf="@+id/item_cust_name"
+            tools:text="Contact No" />
 
+        <TextView
+            android:id="@+id/item_checkin_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{cicoItem.checkinDate}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/item_contact_no"
+            app:layout_constraintStart_toEndOf="@+id/item_contact_no"
+            app:layout_constraintTop_toTopOf="@+id/item_contact_no"
+            tools:text="dd/mm/yyyy" />
 
-                <TextView
-                    android:id="@+id/CustomerName_TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/name"
-                    android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/IC_TextView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.529" />
+        <TextView
+            android:id="@+id/item_checkin_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{cicoItem.checkinTime}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/item_room_ID"
+            app:layout_constraintStart_toEndOf="@+id/item_room_ID"
+            app:layout_constraintTop_toTopOf="@+id/item_room_ID"
+            tools:text="hh:mm am" />
 
-                <TextView
-                    android:id="@+id/IC_TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/i_c"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/CustomerName_TextView"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/item_room_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{BindingUtils.setToText(cicoItem.roomStatus)}"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_cust_name"
+            tools:text="Status" />
 
-                <TextView
-                    android:id="@+id/ContactNo_TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/contact_no"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/CustomerName_TextView"
-                    app:layout_constraintTop_toBottomOf="@+id/IC_TextView" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/item_room_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{BindingUtils.setToText(cicoItem.roomType)}"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/item_room_status"
+            app:layout_constraintStart_toEndOf="@+id/item_room_status"
+            app:layout_constraintTop_toTopOf="@+id/item_room_status"
+            tools:text="Type" />
+
+        <TextView
+            android:id="@+id/item_room_ID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{BindingUtils.setToText(cicoItem.roomID)}"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/item_room_type"
+            app:layout_constraintStart_toEndOf="@+id/item_room_type"
+            app:layout_constraintTop_toTopOf="@+id/item_room_type"
+            tools:text="Room ID" />
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/item_gender_drawable"-->
+        <!--            android:layout_width="@dimen/gender_image_width"-->
+        <!--            android:layout_height="@dimen/gender_image_height"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:layout_marginEnd="@dimen/margin_small"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:contentDescription="@string/cd_item_gender"-->
+        <!--            app:genderDrawable="@{toy.gender}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:src="@drawable/ic_boy" />-->
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/item_state_drawable"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginEnd="@dimen/margin_small"-->
+        <!--            android:padding="@dimen/padding_small"-->
+        <!--            android:contentDescription="@string/cd_state_symbol"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/item_gender_drawable"-->
+        <!--            app:layout_constraintDimensionRatio="w,1:1"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/item_gender_drawable"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/item_gender_drawable"-->
+        <!--            app:stateDrawable="@{toy.procurementType}"-->
+        <!--            tools:srcCompat="@drawable/ic_gift" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
