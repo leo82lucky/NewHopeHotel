@@ -50,15 +50,29 @@
             tools:text="Contact No" />
 
         <TextView
+            android:id="@+id/textView_checkin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Check In:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_checkout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_room_status" />
+
+        <TextView
             android:id="@+id/item_checkin_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@{cicoItem.checkinDate}"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/item_contact_no"
-            app:layout_constraintStart_toEndOf="@+id/item_contact_no"
-            app:layout_constraintTop_toTopOf="@+id/item_contact_no"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_checkin"
+            app:layout_constraintStart_toEndOf="@+id/textView_checkin"
+            app:layout_constraintTop_toTopOf="@+id/textView_checkin"
             tools:text="dd/mm/yyyy" />
 
         <TextView
@@ -68,9 +82,47 @@
             android:layout_marginStart="16dp"
             android:text="@{cicoItem.checkinTime}"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/item_room_ID"
-            app:layout_constraintStart_toEndOf="@+id/item_room_ID"
-            app:layout_constraintTop_toTopOf="@+id/item_room_ID"
+            app:layout_constraintBottom_toBottomOf="@+id/item_checkin_date"
+            app:layout_constraintStart_toEndOf="@+id/item_checkin_date"
+            app:layout_constraintTop_toTopOf="@+id/item_checkin_date"
+            tools:text="hh:mm am" />
+
+        <TextView
+            android:id="@+id/textView_checkout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Checkout:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_checkin" />
+
+        <TextView
+            android:id="@+id/item_checkout_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{cicoItem.checkoutDate}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_checkout"
+            app:layout_constraintStart_toEndOf="@+id/textView_checkout"
+            app:layout_constraintTop_toTopOf="@+id/textView_checkout"
+            tools:text="dd/mm/yyyy" />
+
+        <TextView
+            android:id="@+id/item_checkout_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{cicoItem.checkoutTime}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/item_checkout_date"
+            app:layout_constraintStart_toEndOf="@+id/item_checkout_date"
+            app:layout_constraintTop_toTopOf="@+id/item_checkout_date"
             tools:text="hh:mm am" />
 
         <TextView
@@ -79,11 +131,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@{BindingUtils.setToText(cicoItem.roomStatus)}"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView_checkin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_cust_name"
             tools:text="Status" />

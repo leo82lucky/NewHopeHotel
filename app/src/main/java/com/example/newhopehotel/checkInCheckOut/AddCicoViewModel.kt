@@ -51,6 +51,8 @@ class AddCicoViewModel(
                 contactNo = "",
                 checkinDate = "dd/mm/yyyy",
                 checkinTime = "hh:mm am",
+                checkoutDate = "dd/mm/yyyy",
+                checkoutTime = "hh:mm am",
                 morningCall = false
             )
         }

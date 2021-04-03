@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="?android:attr/actionBarSize"
-                android:text="@string/add_new_room_service"
+                android:text="@string/add_room_service"
 
                 android:textAlignment="center"
                 android:textColor="@color/white"

@@ -87,5 +87,10 @@
     <string name="add_a_new_record">Add a new record</string>
     <string name="check_in_time">Check In Time</string>
     <string name="check_in_date">Check In Date</string>
+    <string name="add_room_service">Add Room Service</string>
+    <string name="total_no">Total No</string>
+    <string name="checkout_date">Checkout Date</string>
+    <string name="checkout_time">Checkout Time</string>
+    <string name="customer_information">Customer Information</string>
 
 </resources>

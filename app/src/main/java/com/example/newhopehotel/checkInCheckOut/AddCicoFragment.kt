@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -56,11 +57,11 @@ class AddCicoFragment : Fragment() {
 
         binding.myAddCicoViewModel = viewModel
 
-        binding.selectDateButton.setOnClickListener { pickDate() }
-        binding.selectTimeButton.setOnClickListener { pickTime() }
-        binding.fab.setOnClickListener {
-            saveToy()
-        }
+        binding.selectDateButton.setOnClickListener { pickDate(binding.dateTextView) }
+        binding.selectTimeButton.setOnClickListener { pickTime(binding.timeTextView) }
+        binding.selectCheckoutDateButton.setOnClickListener { pickDate(binding.checkoutDateTextView) }
+        binding.selectCheckoutTimeButton.setOnClickListener { pickTime(binding.checkoutTimeTextView) }
+        binding.fab.setOnClickListener { saveToy() }
     }
 
     private fun saveToy() {
@@ -108,7 +109,7 @@ class AddCicoFragment : Fragment() {
             .show()
     }
 
-    private fun pickDate() {
+    private fun pickDate(textViewDate: TextView) {
         val currentDate = Calendar.getInstance()
         val startYear = currentDate.get(Calendar.YEAR)
         val startMonth = currentDate.get(Calendar.MONTH)
@@ -117,11 +118,11 @@ class AddCicoFragment : Fragment() {
         DatePickerDialog(requireContext(), { _, year, month, day ->
             val pickedDate = Calendar.getInstance()
             pickedDate.set(year, month, day)
-            setDateTextView(pickedDate)
+            setDateTextView(pickedDate, textViewDate)
         }, startYear, startMonth, startDay).show()
     }
 
-    private fun pickTime() {
+    private fun pickTime(textViewTime: TextView) {
         val currentTime = Calendar.getInstance()
         val startHour = currentTime.get(Calendar.HOUR)
         val startMinute = currentTime.get(Calendar.MINUTE)
@@ -132,25 +133,28 @@ class AddCicoFragment : Fragment() {
             { _, hour, minute ->
                 val pickedTime = Calendar.getInstance()
                 pickedTime.set(hour, minute)
-                setTimeTextView(pickedTime)
+                setTimeTextView(pickedTime, textViewTime)
             }, startHour, startMinute, false
         ).show()
     }
 
-    private fun setDateTextView(pickedDate: Calendar) {
+    private fun setDateTextView(pickedDate: Calendar, textViewDate: TextView) {
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
         val formattedDate: String = dateFormat.format(pickedDate.time)
-        (formattedDate).also { binding.dateTextView.text = it }
+        (formattedDate).also {
+            textViewDate.text = it
+        }
 //        ("${pickedDate.get(Calendar.DAY_OF_MONTH)}/" +
 //                "${pickedDate.get(Calendar.MONTH)}/" +
 //                "${pickedDate.get(Calendar.YEAR)}").also { binding.dateTextView.text = it }
     }
 
-    private fun setTimeTextView(pickedTime: Calendar) {
-
+    private fun setTimeTextView(pickedTime: Calendar, textViewTime: TextView) {
         val dateFormat: DateFormat = SimpleDateFormat("hh:mm a")
         val formattedTime: String = dateFormat.format(pickedTime.time)
-        (formattedTime).also { binding.timeTextView.text = it }
+        (formattedTime).also {
+            textViewTime.text = it
+        }
 //        ("${pickedTime.get(Calendar.HOUR_OF_DAY)}:" +
 //                "${pickedTime.get(Calendar.MINUTE)}").also { binding.timeTextView.text = it }
     }
