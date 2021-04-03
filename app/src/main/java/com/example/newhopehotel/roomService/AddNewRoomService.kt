@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.newhopehotel.R
-import com.example.newhopehotel.housekeeping.AssignWork
 import kotlinx.android.synthetic.main.add_new_room_service.*
 import android.view.Gravity
 import android.widget.EditText
