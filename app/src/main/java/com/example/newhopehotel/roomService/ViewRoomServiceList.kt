@@ -12,9 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityMainBinding
-import com.example.newhopehotel.housekeeping.AssignWork
 import com.example.newhopehotel.roomService.RoomServiceListAdapter
-import kotlinx.android.synthetic.main.activity_assign_work_worker_list.*
 
 import kotlinx.android.synthetic.main.activity_recycler_room_service_list.*
 import kotlinx.android.synthetic.main.activity_recycler_room_service_list.recyclerView
