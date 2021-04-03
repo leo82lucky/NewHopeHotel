@@ -15,6 +15,8 @@ class HotelRepository private constructor(
 
     val customers: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico
+    val morningCalls: LiveData<List<MorningCallEntity>>
+        get() = hotelDatabase.morningCallDao().allMorningCall
 
     //    val users = registerDatabaseDao.getAllUsers()
 //    val customers = checkInCheckOutDatabaseDao.allCustomers
@@ -57,6 +59,25 @@ class HotelRepository private constructor(
 //    suspend fun deleteAllCustomer(): Int {
 //        return customers.deleteAll()
 //    }
+
+    val morningCallList: LiveData<List<MorningCallEntity>>
+        get() = hotelDatabase.morningCallDao().allMorningCall
+
+    fun getChosenMorningCall(mcId: Int): LiveData<MorningCallEntity> {
+        return hotelDatabase.morningCallDao().getChosenMorningCall(mcId)
+    }
+
+    fun insertMorningCall(morningCall:MorningCallEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.morningCallDao().insertMorningCall(morningCall) }
+    }
+
+    fun updateMorningCall(morningCall: MorningCallEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.morningCallDao().updateMorningCall(morningCall) }
+    }
+
+    fun deleteMorningCall(morningCall: MorningCallEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.morningCallDao().deleteMorningCall(morningCall) }
+    }
 
     val cicoList: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico

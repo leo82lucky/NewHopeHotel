@@ -57,7 +57,9 @@
     <string name="reserved">Reserved</string>
     <string name="undo">UNDO</string>
     <string name="record_is_deleted">One record is deleted</string>
-
+    <string name="morning_call_date">Date</string>
+    <string name="morning_call_time">Time</string>
+    <string name="morning_call_title">Morning Call</string>
     //RoomID String Array
     <string-array name="roomid_array">
         <item>R001</item>

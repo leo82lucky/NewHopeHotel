@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.newhopehotel.R
+import com.example.newhopehotel.roomService.viewMorningCallList.MorningCall
 import kotlinx.android.synthetic.main.activity_room_service.*
 
 class RoomServiceMain : AppCompatActivity() {
@@ -20,6 +21,11 @@ class RoomServiceMain : AppCompatActivity() {
            buttonViewRoomServiceList.context.startActivity(intent)
 
 
+        }
+
+        buttonViewMorningCallList.setOnClickListener{
+            val intent = Intent(buttonViewRoomServiceList.context, MorningCall::class.java)
+            buttonViewRoomServiceList.context.startActivity(intent)
         }
     }
 }

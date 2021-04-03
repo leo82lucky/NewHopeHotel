@@ -17,7 +17,7 @@
         <activity android:name=".roomService.AddNewRoomService"
             android:parentActivityName=".roomService.ViewRoomServiceList"/>
 
-
+        <activity android:name=".roomService.viewMorningCallList.MorningCall" />
         <activity android:name=".housekeeping.Housekeeping" />
         <activity android:name=".housekeeping.AssignWork"
             android:parentActivityName=".housekeeping.Housekeeping"/>

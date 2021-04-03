@@ -14,11 +14,8 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityMainBinding
 import com.example.newhopehotel.housekeeping.AssignWork
 import com.example.newhopehotel.roomService.RoomServiceListAdapter
-import com.example.newhopehotel.roomService.rsdb.RoomService
-import com.example.newhopehotel.roomService.rsdb.RoomServiceDatabase
-import com.example.newhopehotel.roomService.rsdb.RoomServiceRepository
 import kotlinx.android.synthetic.main.activity_assign_work_worker_list.*
-import kotlinx.android.synthetic.main.activity_housekeeping.*
+
 import kotlinx.android.synthetic.main.activity_recycler_room_service_list.*
 import kotlinx.android.synthetic.main.activity_recycler_room_service_list.recyclerView
 import kotlinx.android.synthetic.main.activity_recycler_room_service_list.toolbar

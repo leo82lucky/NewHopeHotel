@@ -1,4 +1,4 @@
-package com.example.newhopehotel.checkInCheckOut
+package com.example.newhopehotel.roomService.viewMorningCallList
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -15,18 +15,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.database.CheckInCheckOutEntity
+import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.databinding.AddCicoBinding
-import com.example.newhopehotel.databinding.AddMorningCallBindingImpl
+import com.example.newhopehotel.databinding.AddMorningCallBinding
 import com.example.newhopehotel.utils.provideRepository
 import org.jetbrains.anko.toast
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddCicoFragment : Fragment() {
+class AddMorningCallFragment : Fragment() {
 
-    private lateinit var binding: AddCicoBinding
-    private lateinit var viewModel: AddCicoViewModel
+    private lateinit var binding: AddMorningCallBinding
+    private lateinit var viewModel: AddMorningCallViewModel
 
     init {
         retainInstance = true
@@ -38,7 +39,7 @@ class AddCicoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.add_cico_fragment, container, false
+            inflater, R.layout.add_morning_call_fragment, container, false
         )
         setHasOptionsMenu(true)
 
@@ -50,25 +51,21 @@ class AddCicoFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //If there is no id specified in the arguments, then it should be a new toy
-        val chosenRoom: CheckInCheckOutEntity? = arguments?.getParcelable(CHOSEN_CICO)
+        val chosenRoom: MorningCallEntity? = arguments?.getParcelable(CHOSEN_MC)
 
         //Get the view model instance and pass it to the binding implementation
-        val factory = AddCicoViewModelFactory(provideRepository(requireContext()), chosenRoom)
-        viewModel = ViewModelProvider(this, factory).get(AddCicoViewModel::class.java)
+        val factory = AddMorningCallViewModelFactory(provideRepository(requireContext()), chosenRoom)
+        viewModel = ViewModelProvider(this, factory).get(AddMorningCallViewModel::class.java)
 
-        
-        binding.myAddCicoViewModel = viewModel
-
+        binding.myAddMorningCallViewModel= viewModel
         binding.selectDateButton.setOnClickListener { pickDate(binding.dateTextView) }
         binding.selectTimeButton.setOnClickListener { pickTime(binding.timeTextView) }
-        binding.selectCheckoutDateButton.setOnClickListener { pickDate(binding.checkoutDateTextView) }
-        binding.selectCheckoutTimeButton.setOnClickListener { pickTime(binding.checkoutTimeTextView) }
-        binding.fab.setOnClickListener { saveToy() }
+        binding.addNewButton.setOnClickListener { saveToy() }
     }
 
     private fun saveToy() {
         // Check if toy name is not empty
-        if (viewModel.cicoBeingModified.custName.isBlank()) {
+        if (viewModel.morningCallBeingModified.custName.isBlank()) {
             context?.toast(R.string.cico_empty_warning)
             return
         }

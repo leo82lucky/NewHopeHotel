@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="AddMorningCallBinding">
+
+        <variable
+            name="myAddMorningCallViewModel"
+            type="com.example.newhopehotel.roomService.viewMorningCallList.AddMorningCallViewModel" />
+
+        <import type="com.example.newhopehotel.utils.BindingUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:theme="@style/Theme.MaterialComponents">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/green_pigment"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:contentPadding="@dimen/padding_standard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="293dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_standard"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.3" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/info_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/name"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/guidelineET"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/customerNameLayout"
+                    style="@style/Widget.Enpassio.TextInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guidelineET"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/customerNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:text="@={myAddMorningCallViewModel.morningCallBeingModified.custName}" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/info_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/morning_call_date"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="97dp" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/info_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/morning_call_time"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="157dp" />
+
+                <Button
+                    android:id="@+id/selectDateButton"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:background="@drawable/custom_confirm_button"
+                    android:drawableStart="@drawable/ic_baseline_date_range_24"
+                    android:padding="1.5dp"
+                    tools:layout_editor_absoluteX="305dp"
+                    tools:layout_editor_absoluteY="94dp" />
+
+                <Button
+                    android:id="@+id/selectTimeButton"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:background="@drawable/custom_confirm_button"
+                    android:drawableStart="@drawable/ic_baseline_access_time_24"
+                    android:padding="1.5dp"
+                    tools:layout_editor_absoluteX="306dp"
+                    tools:layout_editor_absoluteY="151dp" />
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:text="@={myAddMorningCallViewModel.morningCallBeingModified.date}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    tools:layout_editor_absoluteY="92dp" />
+
+                <TextView
+                    android:id="@+id/timeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="75dp"
+                    android:text="@={myAddMorningCallViewModel.morningCallBeingModified.time}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    tools:layout_editor_absoluteY="151dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/addNewButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:onClick="confirmInput"
+            android:text="Add"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
