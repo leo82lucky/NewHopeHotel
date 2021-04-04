@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toDrawable
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
+import kotlinx.android.synthetic.main.fragment_assign_work.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +35,21 @@ class AssignWorkFragment : Fragment(R.layout.fragment_assign_work) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //access elements here
+
+        // change this to get data from database
+        var workerList = mutableListOf(
+            Worker(R.drawable.worker_image_sample.toDrawable(), "name1"),
+            Worker(R.drawable.worker_image_sample.toDrawable(), "name2"),
+            Worker(R.drawable.worker_image_sample.toDrawable(), "name3"),
+            Worker(R.drawable.worker_image_sample.toDrawable(), "name4"),
+            Worker(R.drawable.worker_image_sample.toDrawable(), "name5")
+        )
+
+        val adapter = WorkerAdapter(workerList)
+        rvWorkers.adapter = adapter
+        rvWorkers.layoutManager = LinearLayoutManager(this.context)
+
+        // make it so that clicking on the items on recycler view brings user to 'assignRooms fragment'
     }
 
     companion object {
