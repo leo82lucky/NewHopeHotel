@@ -1,4 +1,4 @@
-package com.example.newhopehotel.roomService.viewMorningCallList
+package com.example.newhopehotel.roomService.viewRoomServiceList
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -17,17 +17,17 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.AddMorningCallBinding
-import com.example.newhopehotel.roomService.viewRoomServiceList.AddRoomServiceViewModelFactory
+import com.example.newhopehotel.databinding.AddRoomServiceBinding
 import com.example.newhopehotel.utils.provideRepository
 import org.jetbrains.anko.toast
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddMorningCallFragment : Fragment() {
+class AddRoomServiceFragment : Fragment() {
 
-    private lateinit var binding: AddMorningCallBinding
-    private lateinit var viewModel: AddMorningCallViewModel
+    private lateinit var binding: AddRoomServiceBinding
+    private lateinit var viewModel: AddRoomServiceViewModel
 
     init {
         retainInstance = true
@@ -39,7 +39,7 @@ class AddMorningCallFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.add_morning_call_fragment, container, false
+            inflater, R.layout.add_room_service_fragment, container, false
         )
         setHasOptionsMenu(true)
 
@@ -51,25 +51,23 @@ class AddMorningCallFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //If there is no id specified in the arguments, then it should be a new toy
-        val chosenRoom:MorningCallEntity? = arguments?.getParcelable(CHOSEN_MC)
+        val chosenRoom: RoomServiceEntity? = arguments?.getParcelable(CHOSEN_RS)
 
         //Get the view model instance and pass it to the binding implementation
-        val factory = AddMorningCallViewModelFactory(provideRepository(requireContext()), chosenRoom)
-        viewModel = ViewModelProvider(this, factory).get(AddMorningCallViewModel::class.java)
+        val factory = AddRoomServiceViewModelFactory(provideRepository(requireContext()), chosenRoom)
+        viewModel = ViewModelProvider(this, factory).get(AddRoomServiceViewModel::class.java)
 
-        binding.myAddMorningCallViewModel= viewModel
-        binding.selectDateButton.setOnClickListener { pickDate(binding.dateTextView) }
-        binding.selectTimeButton.setOnClickListener { pickTime(binding.timeTextView) }
+        binding.myAddRoomServiceViewModel= viewModel
         binding.addNewButton.setOnClickListener { saveToy() }
     }
 
     private fun saveToy() {
         // Check if toy name is not empty
-        if (viewModel.morningCallBeingModified.custName.isBlank()) {
+        if (viewModel.roomServiceBeingModified.custName.isBlank()) {
             context?.toast(R.string.cico_empty_warning)
             return
         }
-        viewModel.saveMorningCall()
+        viewModel.saveRoomService()
         fragmentManager?.popBackStack()
     }
 

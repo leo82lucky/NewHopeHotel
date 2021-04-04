@@ -32,7 +32,7 @@ class AddMorningCallViewModel(
         mRepo.updateMorningCall(morningCall)
     }
 
-    fun saveCico() {
+    fun saveMorningCall() {
         if (!mIsEdit) {
             insertMorningCall(morningCallBeingModified)
         } else {
