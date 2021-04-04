@@ -60,6 +60,7 @@
     <string name="morning_call_date">Date</string>
     <string name="morning_call_time">Time</string>
     <string name="morning_call_title">Morning Call</string>
+    <string name="morning_call_snack">One Morning Call Deleted</string>
     //RoomID String Array
     <string-array name="roomid_array">
         <item>R001</item>

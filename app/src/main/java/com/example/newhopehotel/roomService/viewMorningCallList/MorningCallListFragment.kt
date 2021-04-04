@@ -100,7 +100,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
                 morningCallActivityViewModel.deleteMorningCall(morningCallToErase)
 
                 //Show a snack bar for undoing delete
-                coordinator?.longSnackbar(R.string.record_is_deleted, R.string.undo) {
+                coordinator?.longSnackbar(R.string.morning_call_snack, R.string.undo) {
                     morningCallActivityViewModel.insertMorningCall(morningCallToErase)
                 }
             }

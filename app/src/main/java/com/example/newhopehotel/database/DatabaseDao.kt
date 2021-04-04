@@ -57,7 +57,7 @@ interface CheckInCheckOutDatabaseDao {
 
 @Dao
 interface MorningCallDatabaseDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMorningCall(morningCall: MorningCallEntity)
 
     @get:Query("SELECT * FROM Morning_Call_Table")
