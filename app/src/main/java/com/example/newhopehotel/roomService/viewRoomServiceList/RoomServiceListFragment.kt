@@ -1,4 +1,4 @@
-package com.example.newhopehotel.roomService.viewMorningCallList
+package com.example.newhopehotel.roomService.viewRoomServiceList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,18 +14,19 @@ import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.MorningCallEntity
-import com.example.newhopehotel.databinding.FragmentMorningCallListBinding
+import com.example.newhopehotel.database.RoomServiceEntity
+import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
 import org.jetbrains.anko.design.longSnackbar
 
-const val CHOSEN_MC = "chosenMC"
+const val CHOSEN_RS = "chosenRS"
 
-class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickListener {
+class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickListener {
 
-    private lateinit var morningCallActivityViewModel: MorningCallViewModel
+    private lateinit var roomServiceActivityViewModel: RoomServiceViewModel
 
-    private lateinit var mAdapter: MorningCallAdapter
-    private lateinit var binding: FragmentMorningCallListBinding
-    private var mMorningCallList: List<MorningCallEntity>? = null
+    private lateinit var mAdapter: RoomServiceAdapter
+    private lateinit var binding: FragmentRoomServiceListBinding
+    private var mRoomServiceList: List<RoomServiceEntity>? = null
 
     init {
         retainInstance = true
@@ -36,11 +37,11 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_morning_call_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_room_service_list, container, false)
 
-        morningCallActivityViewModel = ViewModelProvider(this).get(MorningCallViewModel::class.java)
+        roomServiceActivityViewModel = ViewModelProvider(this).get(RoomServiceViewModel::class.java)
 
-        mAdapter = MorningCallAdapter(this)
+        mAdapter = RoomServiceAdapter(this)
         val dividerItemDecoration = DividerItemDecoration(
             requireActivity(), LinearLayoutManager.VERTICAL
         )
@@ -51,7 +52,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
         }
 
         //When fab clicked, open AddToyFragment
-        binding.fab.setOnClickListener { openAddToyFrag(AddMorningCallFragment()) }
+        binding.fab.setOnClickListener { openAddToyFrag(AddRoomServiceFragment()) }
 
         return binding.root
     }
@@ -62,17 +63,17 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
         (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         //Get the view model instance and pass it to the binding implementation
-        binding.uiState = morningCallActivityViewModel.uiState
+        binding.uiState = roomServiceActivityViewModel.uiState
 
         //Claim list of toys from view model
 
-        morningCallActivityViewModel.morningCallList?.observe(viewLifecycleOwner, { morningCallEntries ->
-            if (morningCallEntries.isNullOrEmpty()) {
-                morningCallActivityViewModel.uiState.set(UIState.EMPTY)
+        roomServiceActivityViewModel.roomServiceList?.observe(viewLifecycleOwner, { roomServiceEntries ->
+            if (roomServiceEntries.isNullOrEmpty()) {
+                roomServiceActivityViewModel.uiState.set(UIState.EMPTY)
             } else {
-                morningCallActivityViewModel.uiState.set(UIState.HAS_DATA)
-                mAdapter.morningCallList = morningCallEntries
-                mMorningCallList = morningCallEntries
+                roomServiceActivityViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.roomServiceList = roomServiceEntries
+                mRoomServiceList =roomServiceEntries
             }
         })
 
@@ -93,14 +94,14 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
                 //First take a backup of the toy to erase
                 //If user is swiping an item, we can assume that list is not null
-                val morningCallToErase = mMorningCallList!![position]
+                val roomServiceToErase = mRoomServiceList!![position]
 
                 //Then delete the toy
-                morningCallActivityViewModel.deleteMorningCall(morningCallToErase)
+                roomServiceActivityViewModel.deleteRoomService(roomServiceToErase)
 
                 //Show a snack bar for undoing delete
-                coordinator?.longSnackbar(R.string.morning_call_snack, R.string.undo) {
-                    morningCallActivityViewModel.insertMorningCall(morningCallToErase)
+                coordinator?.longSnackbar(R.string.room_service_snack, R.string.undo) {
+                    roomServiceActivityViewModel.insertRoomService(roomServiceToErase)
                 }
             }
         }).attachToRecyclerView(binding.recycler)
@@ -108,7 +109,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
 
 
-    private fun openAddToyFrag(frag: AddMorningCallFragment) {
+    private fun openAddToyFrag(frag: AddRoomServiceFragment) {
         fragmentManager?.transaction {
             replace(R.id.main_container, frag)
             addToBackStack(null)
@@ -117,14 +118,19 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
 
 
-    override fun onMorningCallClicked(chosenToy: MorningCallEntity) {
+
+    override fun onRoomServiceClicked(chosenToy: RoomServiceEntity) {
         //Pass chosen toy id to the AddToyFragment
         val args = Bundle()
-        args.putParcelable(CHOSEN_MC, chosenToy)
-        val frag = AddMorningCallFragment()
+        args.putParcelable(CHOSEN_RS, chosenToy)
+        val frag = AddRoomServiceFragment()
         frag.arguments = args
 
         //Open AddToyFragment in edit form
         openAddToyFrag(frag)
     }
+
+
+
+
 }

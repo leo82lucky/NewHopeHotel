@@ -2,6 +2,7 @@ package com.example.newhopehotel.database
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.room.Room
 import com.example.newhopehotel.utils.AppExecutors
 
 class HotelRepository private constructor(
@@ -17,7 +18,8 @@ class HotelRepository private constructor(
         get() = hotelDatabase.cicoDao().allCico
     val morningCalls: LiveData<List<MorningCallEntity>>
         get() = hotelDatabase.morningCallDao().allMorningCall
-
+    val roomServices: LiveData<List<RoomServiceEntity>>
+        get() = hotelDatabase.roomServiceDao().allRoomService
     //    val users = registerDatabaseDao.getAllUsers()
 //    val customers = checkInCheckOutDatabaseDao.allCustomers
 //    suspend fun insert(user: RegisterEntity) {
@@ -79,6 +81,25 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.morningCallDao().deleteMorningCall(morningCall) }
     }
 
+    val roomServiceList: LiveData<List<RoomServiceEntity>>
+        get() = hotelDatabase.roomServiceDao().allRoomService
+
+    fun getChosenRoomService(custId: Int): LiveData<RoomServiceEntity> {
+        return hotelDatabase.roomServiceDao().getChosenRoomService(custId)
+    }
+
+    fun insertRoomService(roomService: RoomServiceEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.roomServiceDao().insertRoomService(roomService) }
+    }
+
+    fun updateRoomService(roomService: RoomServiceEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.roomServiceDao().updateRoomService(roomService) }
+    }
+
+    fun deleteRoomService(roomService: RoomServiceEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.roomServiceDao().deleteRoomService(roomService)}
+    }
+
     val cicoList: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico
 
@@ -97,7 +118,6 @@ class HotelRepository private constructor(
     fun deleteCico(cico: CheckInCheckOutEntity) {
         mExecutors.diskIO().execute { hotelDatabase.cicoDao().deleteCico(cico) }
     }
-
 
     companion object {
 

@@ -1,4 +1,4 @@
-package com.example.newhopehotel.roomService.viewMorningCallList
+package com.example.newhopehotel.roomService.viewRoomServiceList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,20 +6,21 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.transaction
 import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityMorningCallBinding
-import com.example.newhopehotel.roomService.viewRoomServiceList.AddRoomServiceFragment
+import com.example.newhopehotel.databinding.ActivityRoomServiceBinding
+import com.example.newhopehotel.roomService.viewRoomServiceList.RoomServiceListFragment
 
-class MorningCall : AppCompatActivity() {
+class RoomService : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMorningCallBinding>(
+        val binding = DataBindingUtil.setContentView<ActivityRoomServiceBinding>(
             this,
-            R.layout.activity_morning_call
+            R.layout.activity_room_service
         )
         setSupportActionBar(binding.toolbar)
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {
-                add(R.id.main_container,MorningCallListFragment())
+                add(R.id.main_container,RoomServiceListFragment())
             }
         }
     }

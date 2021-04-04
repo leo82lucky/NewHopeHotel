@@ -12,12 +12,10 @@
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".roomService.RoomServiceMain"
             android:parentActivityName=".homePage.HomePageFragment"/>
-        <activity android:name=".roomService.ViewRoomServiceList"
-            android:parentActivityName=".roomService.RoomServiceMain"/>
-        <activity android:name=".roomService.AddNewRoomService"
-            android:parentActivityName=".roomService.ViewRoomServiceList"/>
+
 
         <activity android:name=".roomService.viewMorningCallList.MorningCall" />
+        <activity android:name=".roomService.viewRoomServiceList.RoomService" />
         <activity android:name=".housekeeping.Housekeeping" />
         <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />

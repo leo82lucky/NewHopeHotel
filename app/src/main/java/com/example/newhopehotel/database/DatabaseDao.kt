@@ -84,3 +84,34 @@ interface MorningCallDatabaseDao {
 //    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
 //    suspend fun getCustomer(): CheckInCheckOutEntity?
 }
+
+
+@Dao
+interface RoomServiceDatabaseDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRoomService(roomService: RoomServiceEntity)
+
+    @get:Query("SELECT * FROM Room_Service_Table")
+    val allRoomService: LiveData<List< RoomServiceEntity>>
+
+    @Query("SELECT * FROM room_service_table WHERE rsId = :id")
+    fun getChosenRoomService(id: Int): LiveData<RoomServiceEntity>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateRoomService(roomService: RoomServiceEntity)
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC")
+//    fun getAllCustomers(): LiveData<List<CheckInCheckOutEntity>>
+
+    @Query("DELETE FROM Room_Service_Table")
+    fun deleteAllRoomService(): Int
+
+    @Delete
+    fun deleteRoomService(checkIn: RoomServiceEntity)
+
+    @Query("SELECT * FROM Room_Service_Table WHERE custName LIKE :customerName")
+    fun getCustomerName(customerName: String): RoomServiceEntity?
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
+//    suspend fun getCustomer(): CheckInCheckOutEntity?
+}
