@@ -97,5 +97,10 @@
     <string name="customer_information">Customer Information</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="optional">Optional</string>
+    <string name="eight_am">8 AM</string>
+    <string name="nine_am">9 AM</string>
+    <string name="ten_am">10 AM</string>
+    <string name="eleven_am">11 AM</string>
 
 </resources>

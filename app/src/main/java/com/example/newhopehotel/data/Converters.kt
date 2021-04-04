@@ -1,6 +1,8 @@
 package com.example.newhopehotel.data
 
 import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
 
 
@@ -37,12 +39,14 @@ class RoomConverter {
     }
 
     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return value?.let { Date(it) }
+    fun convertMapToJson(morningCall: Map<String, Boolean>): String {
+        val categoryMap = object : TypeToken<Map<String, Boolean>>() {}.type
+        return Gson().toJson(morningCall, categoryMap)
     }
 
     @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time?.toLong()
+    fun convertJsonToMap(jsonToConvert: String): Map<String, Boolean> {
+        val morningCallMap = object : TypeToken<Map<String, Boolean>>() {}.type
+        return Gson().fromJson(jsonToConvert, morningCallMap)
     }
 }

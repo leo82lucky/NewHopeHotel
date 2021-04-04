@@ -22,14 +22,16 @@ data class CheckInCheckOutEntity(
     var checkinTime: String,
     var checkoutDate: String,
     var checkoutTime: String,
-    var morningCall: Boolean,
+    var morningCall: Map<String, Boolean>,
     @PrimaryKey(autoGenerate = true) val cicoId: Int = 0
 ) : Parcelable {
     fun copy(): CheckInCheckOutEntity {
+        val newMorningCall = mutableMapOf<String, Boolean>()
+        newMorningCall.putAll(morningCall)
         return CheckInCheckOutEntity(
             custName, icNo, contactNo, roomType,
             roomStatus, roomID, checkinDate, checkinTime, checkoutDate,
-            checkoutTime, morningCall, cicoId
+            checkoutTime, newMorningCall, cicoId
         )
     }
 }

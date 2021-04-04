@@ -399,7 +399,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardCheckOutDate_Time"
+                android:id="@+id/cardMorningCallCheckbox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_standard"
@@ -410,6 +410,94 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardStatusRadioGroup">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidelineCB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_standard"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.3" />
+
+                    <TextView
+                        style="@style/info_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/morning_call"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_8am"
+                        app:layout_constraintEnd_toStartOf="@+id/checkBox_8am" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox_8am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.EIGHT_AM]}"
+                        android:text="@string/eight_am"
+                        app:layout_constraintStart_toStartOf="@+id/guidelineCB"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox_9am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.NINE_AM]}"
+                        android:text="@string/nine_am"
+                        app:layout_constraintStart_toEndOf="@+id/barrier"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox_10am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.TEN_AM]}"
+                        android:text="@string/ten_am"
+                        app:layout_constraintStart_toStartOf="@+id/guidelineCB"
+                        app:layout_constraintTop_toBottomOf="@+id/checkBox_8am" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox_11am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.ELEVEN_AM]}"
+                        android:text="@string/eleven_am"
+                        app:layout_constraintStart_toEndOf="@+id/barrier"
+                        app:layout_constraintTop_toBottomOf="@+id/checkBox_9am" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/barrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="right"
+                        app:constraint_referenced_ids="checkBox_10am,checkBox_8am"
+                        tools:layout_editor_absoluteX="411dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCheckOutDate_Time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_standard"
+                app:cardBackgroundColor="@color/green_pigment"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation"
+                app:contentPadding="@dimen/padding_standard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardMorningCallCheckbox">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

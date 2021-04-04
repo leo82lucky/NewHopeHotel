@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.databinding.AddCicoBinding
-import com.example.newhopehotel.databinding.AddMorningCallBindingImpl
 import com.example.newhopehotel.utils.provideRepository
 import org.jetbrains.anko.toast
 import java.text.DateFormat
