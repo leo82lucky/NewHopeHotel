@@ -50,8 +50,8 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
             adapter = mAdapter
         }
 
-        //When fab clicked, open AddToyFragment
-        binding.fab.setOnClickListener { openAddToyFrag(AddCicoFragment()) }
+        //When fab clicked, open AddCicoFragment
+        binding.fab.setOnClickListener { openAddCicoFrag(AddCicoFragment()) }
 
         return binding.root
     }
@@ -64,7 +64,7 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
         //Get the view model instance and pass it to the binding implementation
         binding.uiState = cicoActivityViewModel.uiState
 
-        //Claim list of toys from view model
+        //Claim list of cico from view model
         cicoActivityViewModel.cicoList?.observe(viewLifecycleOwner, { cicoEntries ->
             if (cicoEntries.isNullOrEmpty()) {
                 cicoActivityViewModel.uiState.set(UIState.EMPTY)
@@ -90,11 +90,10 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
 
-                //First take a backup of the toy to erase
+                //First take a backup of the cico to erase
                 //If user is swiping an item, we can assume that list is not null
                 val cicoToErase = mCicoList!![position]
 
-                //Then delete the toy
                 cicoActivityViewModel.deleteCico(cicoToErase)
 
                 //Show a snack bar for undoing delete
@@ -106,17 +105,15 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
     }
 
     override fun onCicoClicked(chosenToy: CheckInCheckOutEntity) {
-        //Pass chosen toy id to the AddToyFragment
         val args = Bundle()
         args.putParcelable(CHOSEN_CICO, chosenToy)
         val frag = AddCicoFragment()
         frag.arguments = args
 
-        //Open AddToyFragment in edit form
-        openAddToyFrag(frag)
+        openAddCicoFrag(frag)
     }
 
-    private fun openAddToyFrag(frag: AddCicoFragment) {
+    private fun openAddCicoFrag(frag: AddCicoFragment) {
         fragmentManager?.transaction {
             replace(R.id.main_container, frag)
             addToBackStack(null)

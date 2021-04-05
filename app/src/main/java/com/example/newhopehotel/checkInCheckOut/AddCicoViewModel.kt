@@ -3,6 +3,7 @@ package com.example.newhopehotel.checkInCheckOut
 import androidx.lifecycle.ViewModel
 import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.HotelRepository
+import java.util.regex.Pattern
 
 class AddCicoViewModel(
     private val mRepo: HotelRepository,
@@ -69,4 +70,5 @@ class AddCicoViewModel(
         const val TEN_AM = "10 AM"
         const val ELEVEN_AM = "11 AM"
     }
+
 }

@@ -53,6 +53,7 @@
                         style="@style/info_text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
                         android:text="@string/name"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/customerNameLayout"
@@ -68,7 +69,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guidelineET"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endIconMode="clear_text"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="30">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/customerNameEditText"
@@ -83,6 +87,7 @@
                         style="@style/info_text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
                         android:text="@string/i_c"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/icLayout"
@@ -99,7 +104,12 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guidelineET"
-                        app:layout_constraintTop_toBottomOf="@+id/customerNameLayout">
+                        app:layout_constraintTop_toBottomOf="@+id/customerNameLayout"
+                        app:errorEnabled="false"
+                        app:endIconMode="clear_text"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="16"
+                        app:counterTextAppearance="@style/CounterText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/icEditText"
@@ -114,6 +124,7 @@
                         style="@style/info_text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
                         android:text="@string/contact_no"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/contactNoLayout"
@@ -130,13 +141,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guidelineET"
-                        app:layout_constraintTop_toBottomOf="@+id/icLayout">
+                        app:layout_constraintTop_toBottomOf="@+id/icLayout"
+                        app:errorEnabled="false"
+                        app:endIconMode="clear_text"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="12"
+                        app:counterTextAppearance="@style/CounterText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/contactNoEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text|phone|number"
+                            android:inputType="phone|number"
                             android:text="@={myAddCicoViewModel.cicoBeingModified.contactNo}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -594,20 +610,32 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
+            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--                android:id="@+id/fab"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:contentDescription="@string/save_record"-->
+            <!--                app:backgroundTint="@color/yellow_green_crayola"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/cardCheckOutDate_Time"-->
+            <!--                app:maxImageSize="30dp"-->
+            <!--                app:pressedTranslationZ="@dimen/fab_pressed_elevation"-->
+            <!--                app:srcCompat="@drawable/ic_save"-->
+            <!--                app:useCompatPadding="true" />-->
+            <Button
+                android:id="@+id/save_Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/add_a_new_record"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/save_record"
+                android:gravity="center"
+                android:text="@string/save"
                 app:backgroundTint="@color/yellow_green_crayola"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardCheckOutDate_Time"
-                app:maxImageSize="30dp"
-                app:pressedTranslationZ="@dimen/fab_pressed_elevation"
-                app:srcCompat="@drawable/ic_save"
-                app:useCompatPadding="true" />
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardCheckOutDate_Time" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
