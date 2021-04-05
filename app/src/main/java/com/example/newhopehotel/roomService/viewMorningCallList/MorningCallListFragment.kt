@@ -13,8 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.databinding.FragmentMorningCallListBinding
+import com.example.newhopehotel.roomService.viewRoomServiceList.AddRoomServiceFragment
+import com.example.newhopehotel.roomService.viewRoomServiceList.CHOSEN_RS
 import org.jetbrains.anko.design.longSnackbar
 
 const val CHOSEN_MC = "chosenMC"
@@ -25,7 +28,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
     private lateinit var mAdapter: MorningCallAdapter
     private lateinit var binding: FragmentMorningCallListBinding
-    private var mMorningCallList: List<MorningCallEntity>? = null
+    private var mMorningCallList: List<CheckInCheckOutEntity>? = null
 
     init {
         retainInstance = true
@@ -50,8 +53,6 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
             adapter = mAdapter
         }
 
-        //When fab clicked, open AddToyFragment
-        binding.fab.setOnClickListener { openAddToyFrag(AddMorningCallFragment()) }
 
         return binding.root
     }
@@ -76,55 +77,12 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
             }
         })
 
-        //Attach an ItemTouchHelper for swipe-to-delete functionality
-        val coordinator: CoordinatorLayout? = activity?.findViewById(R.id.main_coordinator)
-        ItemTouchHelper(object :
-            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
+    }
 
-                //First take a backup of the toy to erase
-                //If user is swiping an item, we can assume that list is not null
-                val morningCallToErase = mMorningCallList!![position]
+    override fun onMorningCallClicked(chosenToy: CheckInCheckOutEntity) {
 
-                //Then delete the toy
-                morningCallActivityViewModel.deleteMorningCall(morningCallToErase)
-
-                //Show a snack bar for undoing delete
-                coordinator?.longSnackbar(R.string.morning_call_snack, R.string.undo) {
-                    morningCallActivityViewModel.insertMorningCall(morningCallToErase)
-                }
-            }
-        }).attachToRecyclerView(binding.recycler)
     }
 
 
-
-    private fun openAddToyFrag(frag: AddMorningCallFragment) {
-        fragmentManager?.transaction {
-            replace(R.id.main_container, frag)
-            addToBackStack(null)
-        }
-    }
-
-
-
-    override fun onMorningCallClicked(chosenToy: MorningCallEntity) {
-        //Pass chosen toy id to the AddToyFragment
-        val args = Bundle()
-        args.putParcelable(CHOSEN_MC, chosenToy)
-        val frag = AddMorningCallFragment()
-        frag.arguments = args
-
-        //Open AddToyFragment in edit form
-        openAddToyFrag(frag)
-    }
 }
