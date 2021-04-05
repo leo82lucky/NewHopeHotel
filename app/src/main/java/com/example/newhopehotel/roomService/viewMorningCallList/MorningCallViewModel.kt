@@ -15,16 +15,16 @@ class MorningCallViewModel(application: Application) : AndroidViewModel(applicat
 
     val uiState = ObservableField(UIState.LOADING)
 
-    var morningCallList: LiveData<List<MorningCallEntity>>? = null
+    var morningCallList: LiveData<List<CheckInCheckOutEntity>>? = null
         get() {
-            return field ?: mRepo.morningCallList.also { field = it }
+            return field ?: mRepo.cicoList.also { field = it }
         }
 
-    fun insertMorningCall(morningCall: MorningCallEntity) {
-        mRepo.insertMorningCall(morningCall)
+    fun insertMorningCall(morningCall: CheckInCheckOutEntity) {
+        mRepo.insertCico(morningCall)
     }
 
-    fun deleteMorningCall(morningCall: MorningCallEntity) {
-        mRepo.insertMorningCall(morningCall)
+    fun deleteMorningCall(morningCall: CheckInCheckOutEntity) {
+        mRepo.insertCico(morningCall)
     }
 }

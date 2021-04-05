@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
+import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.databinding.MorningCallListItemBinding
 
 class MorningCallAdapter(private val mListener: MorningCallClickListener) :
     RecyclerView.Adapter<MorningCallAdapter.MorningCallViewHolder>() {
 
-    var morningCallList: List<MorningCallEntity>? = null
+    var morningCallList: List<CheckInCheckOutEntity>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,7 +32,7 @@ class MorningCallAdapter(private val mListener: MorningCallClickListener) :
     class MorningCallViewHolder(private val binding: MorningCallListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currentMorningCall: MorningCallEntity?, clickListener:MorningCallClickListener) {
+        fun bind(currentMorningCall: CheckInCheckOutEntity?, clickListener:MorningCallClickListener) {
             binding.morningCallItem = currentMorningCall
             binding.morningCallItemClick= clickListener
             binding.executePendingBindings()
@@ -51,7 +52,7 @@ class MorningCallAdapter(private val mListener: MorningCallClickListener) :
     }
 
     interface MorningCallClickListener {
-        fun onMorningCallClicked(chosenToy: MorningCallEntity)
+        fun onMorningCallClicked(chosenToy: CheckInCheckOutEntity)
     }
 
 }
