@@ -7,16 +7,18 @@ import androidx.room.*
 interface RegisterDatabaseDao {
 
     @Insert
-    suspend fun insert(register: RegisterEntity)
+    fun insert(register: RegisterEntity)
 
     //@Delete
     //suspend  fun deleteSubscriber(register: RegisterEntity):Int
 
-    @Query("SELECT * FROM Register_users_table ORDER BY userId DESC")
-    fun getAllUsers(): LiveData<List<RegisterEntity>>
+    //    @Query("SELECT * FROM Register_users_table ORDER BY userId DESC")
+//    fun getAllUsers(): LiveData<List<RegisterEntity>>
+    @get:Query("SELECT * FROM Register_users_table")
+    val allUsers: LiveData<List<RegisterEntity>>
 
     @Query("DELETE FROM Register_users_table")
-    suspend fun deleteAll(): Int
+    fun deleteAll(): Int
 
     @Query("SELECT * FROM Register_users_table WHERE user_name LIKE :userName")
     suspend fun getUsername(userName: String): RegisterEntity?
@@ -26,25 +28,90 @@ interface RegisterDatabaseDao {
 @Dao
 interface CheckInCheckOutDatabaseDao {
     @Insert
-    suspend fun insert(checkIn: CheckInCheckOutEntity)
+    fun insertCico(checkIn: CheckInCheckOutEntity)
 
-    @Update
-    suspend fun update(checkIn: CheckInCheckOutEntity)
+    @get:Query("SELECT * FROM CheckIn_Checkout_Table")
+    val allCico: LiveData<List<CheckInCheckOutEntity>>
 
-    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC")
-    fun getAllCustomers(): LiveData<List<CheckInCheckOutEntity>>
+    @Query("SELECT * FROM CheckIn_Checkout_Table WHERE cicoId = :id")
+    fun getChosenCico(id: Int): LiveData<CheckInCheckOutEntity>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateCico(checkIn: CheckInCheckOutEntity)
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC")
+//    fun getAllCustomers(): LiveData<List<CheckInCheckOutEntity>>
 
     @Query("DELETE FROM CheckIn_Checkout_Table")
-    suspend fun deleteAll(): Int
+    fun deleteAllCico(): Int
 
-//    @Delete
-//    suspend fun deleteCustomer(checkIn: CheckInCheckOutEntity)
+    @Delete
+    fun deleteCico(checkIn: CheckInCheckOutEntity)
 
-    @Query("SELECT * FROM CheckIn_Checkout_Table WHERE cust_name LIKE :customerName")
-    suspend fun getCustomerName(customerName: String): CheckInCheckOutEntity?
+    @Query("SELECT * FROM CheckIn_Checkout_Table WHERE custName LIKE :customerName")
+    fun getCustomerName(customerName: String): CheckInCheckOutEntity?
 
-    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
-    suspend fun getCustomer(): CheckInCheckOutEntity?
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
+//    suspend fun getCustomer(): CheckInCheckOutEntity?
+}
+
+@Dao
+interface MorningCallDatabaseDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMorningCall(morningCall: MorningCallEntity)
+
+    @get:Query("SELECT * FROM Morning_Call_Table")
+    val allMorningCall: LiveData<List< MorningCallEntity>>
+
+    @Query("SELECT * FROM Morning_Call_Table WHERE mcId = :id")
+    fun getChosenMorningCall(id: Int): LiveData<MorningCallEntity>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateMorningCall(morningCall: MorningCallEntity)
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC")
+//    fun getAllCustomers(): LiveData<List<CheckInCheckOutEntity>>
+
+    @Query("DELETE FROM Morning_Call_Table")
+    fun deleteAllMorningCall(): Int
+
+    @Delete
+    fun deleteMorningCall(checkIn: MorningCallEntity)
+
+    @Query("SELECT * FROM Morning_Call_Table WHERE custName LIKE :customerName")
+    fun getCustomerName(customerName: String): MorningCallEntity?
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
+//    suspend fun getCustomer(): CheckInCheckOutEntity?
+}
 
 
+@Dao
+interface RoomServiceDatabaseDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRoomService(roomService: RoomServiceEntity)
+
+    @get:Query("SELECT * FROM Room_Service_Table")
+    val allRoomService: LiveData<List< RoomServiceEntity>>
+
+    @Query("SELECT * FROM room_service_table WHERE rsId = :id")
+    fun getChosenRoomService(id: Int): LiveData<RoomServiceEntity>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateRoomService(roomService: RoomServiceEntity)
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC")
+//    fun getAllCustomers(): LiveData<List<CheckInCheckOutEntity>>
+
+    @Query("DELETE FROM Room_Service_Table")
+    fun deleteAllRoomService(): Int
+
+    @Delete
+    fun deleteRoomService(checkIn: RoomServiceEntity)
+
+    @Query("SELECT * FROM Room_Service_Table WHERE custName LIKE :customerName")
+    fun getCustomerName(customerName: String): RoomServiceEntity?
+
+//    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
+//    suspend fun getCustomer(): CheckInCheckOutEntity?
 }

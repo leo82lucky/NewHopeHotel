@@ -2,19 +2,17 @@ package com.example.newhopehotel.register
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.HotelDatabase
-import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentRegisterBinding
+import com.example.newhopehotel.utils.provideRepository
 
 class RegisterFragment : Fragment() {
 
@@ -23,7 +21,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentRegisterBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_register, container, false
@@ -31,12 +29,12 @@ class RegisterFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//
+//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
-        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
-        val factory = RegisterViewModelFactory(repository, application)
+        val factory = RegisterViewModelFactory(provideRepository(requireContext()), application)
 
         registerViewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
 

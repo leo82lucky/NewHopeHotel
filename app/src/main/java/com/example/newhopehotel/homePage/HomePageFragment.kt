@@ -2,20 +2,19 @@ package com.example.newhopehotel.homePage
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.checkInCheckOut.CheckInCheckOut
 import com.example.newhopehotel.customerFeedback.CustomerFeedback1
-import com.example.newhopehotel.database.HotelDatabase
-import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentHomePageBinding
 import com.example.newhopehotel.housekeeping.Housekeeping
-import com.example.newhopehotel.roomService.RoomService
+import com.example.newhopehotel.roomService.RoomServiceMain
+import com.example.newhopehotel.utils.provideRepository
 
 class HomePageFragment : Fragment() {
 
@@ -25,19 +24,19 @@ class HomePageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
-    ): View? {
+    ): View {
         val binding: FragmentHomePageBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home_page, container, false
         )
 
         val application = requireNotNull(this.activity).application
 
-        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//
+//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
-        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
-        val factory = HomePageViewModelFactory(repository, application)
+        val factory = HomePageViewModelFactory(provideRepository(requireContext()), application)
 
         homepageViewModel = ViewModelProvider(this, factory).get(HomePageViewModel::class.java)
 
@@ -61,7 +60,7 @@ class HomePageFragment : Fragment() {
 
         binding.roomServiceButton.setOnClickListener {
             run {
-                val intent = Intent(requireActivity(), RoomService::class.java)
+                val intent = Intent(requireActivity(), RoomServiceMain::class.java)
                 startActivity(intent)
             }
         }

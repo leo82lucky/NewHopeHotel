@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="morningCallItem"
+            type="com.example.newhopehotel.database.MorningCallEntity" />
+
+        <variable
+            name="morningCallItemClick"
+            type="com.example.newhopehotel.roomService.viewMorningCallList.MorningCallAdapter.MorningCallClickListener" />
+
+        <import type="com.example.newhopehotel.utils.BindingUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="127dp"
+        android:layout_margin="4dp"
+        android:background="@color/tea_green"
+        android:onClick="@{() -> morningCallItemClick.onMorningCallClicked(morningCallItem)}">
+
+        <TextView
+            android:id="@+id/item_cust_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/roboto"
+            android:text="@{morningCallItem.custName}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/name" />
+
+        <TextView
+            android:id="@+id/item_checkin_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:text="@{morningCallItem.date}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_checkin"
+            app:layout_constraintStart_toEndOf="@+id/textView_checkin"
+            app:layout_constraintTop_toTopOf="@+id/textView_checkin"
+            app:layout_constraintVertical_bias="0.8"
+            tools:text="dd/mm/yyyy" />
+
+        <TextView
+            android:id="@+id/item_checkin_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{morningCallItem.time}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/item_checkin_date"
+            app:layout_constraintStart_toEndOf="@+id/item_checkin_date"
+            app:layout_constraintTop_toTopOf="@+id/item_checkin_date"
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="hh:mm am" />
+
+        <TextView
+            android:id="@+id/textView_checkin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="When:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="86dp" />
+
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/item_gender_drawable"-->
+        <!--            android:layout_width="@dimen/gender_image_width"-->
+        <!--            android:layout_height="@dimen/gender_image_height"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:layout_marginEnd="@dimen/margin_small"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:contentDescription="@string/cd_item_gender"-->
+        <!--            app:genderDrawable="@{toy.gender}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:src="@drawable/ic_boy" />-->
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/item_state_drawable"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_marginEnd="@dimen/margin_small"-->
+        <!--            android:padding="@dimen/padding_small"-->
+        <!--            android:contentDescription="@string/cd_state_symbol"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/item_gender_drawable"-->
+        <!--            app:layout_constraintDimensionRatio="w,1:1"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/item_gender_drawable"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/item_gender_drawable"-->
+        <!--            app:stateDrawable="@{toy.procurementType}"-->
+        <!--            tools:srcCompat="@drawable/ic_gift" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

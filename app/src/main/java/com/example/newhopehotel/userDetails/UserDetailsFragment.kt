@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import com.example.newhopehotel.database.HotelDatabase
-import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.databinding.FragmentUserDetailsBinding
+import com.example.newhopehotel.utils.provideRepository
 
 class UserDetailsFragment : Fragment() {
 
@@ -23,7 +22,7 @@ class UserDetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_user_details, container, false
@@ -31,12 +30,12 @@ class UserDetailsFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
+//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
+//
+//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
 
-        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
-        val factory = UserDetailsFactory(repository, application)
+        val factory = UserDetailsFactory(provideRepository(requireContext()), application)
 
         userDetailsViewModel =
             ViewModelProvider(this, factory).get(UserDetailsViewModel::class.java)
