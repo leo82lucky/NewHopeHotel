@@ -5,8 +5,15 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerFeedback1"
+    tools:context=".customerFeedback.FeedbackScene"
     tools:layout_editor_absoluteY="25dp">
+
+    <data>
+
+        <variable
+            android:name="myFeedbackSceneViewModel"
+            android:type="com.example.newhopehotel.customerFeedback.FeedbackSceneViewModel" />
+    </data>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -76,11 +83,12 @@
         android:layout_width="414dp"
         android:layout_height="539dp"
         android:layout_marginBottom="4dp"
+        android:isScrollContainer="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5"
         tools:itemCount="5"
-        tools:listitem="@layout/feedbacks"/>
+        tools:listitem="@layout/feedbacks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

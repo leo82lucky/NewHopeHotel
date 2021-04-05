@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/feedbackItems"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:context=".customerFeedback.Feedback">
+
+    <data>
+
+        <variable
+            android:name="myFeedbackViewModel"
+            android:type="com.example.newhopehotel.customerFeedback.FeedbackViewModel" />
+    </data>
 
     <ImageView
         android:id="@+id/imageView"
