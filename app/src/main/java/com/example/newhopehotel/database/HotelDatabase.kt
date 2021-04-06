@@ -9,8 +9,8 @@ import com.example.newhopehotel.data.RoomConverter
 
 
 @Database(
-    entities = [RegisterEntity::class, CheckInCheckOutEntity::class,MorningCallEntity::class,RoomServiceEntity::class],
-    version = 7, exportSchema = false
+    entities = [RegisterEntity::class, CheckInCheckOutEntity::class, MorningCallEntity::class, RoomServiceEntity::class],
+    version = 8, exportSchema = false
 )
 @TypeConverters(RoomConverter::class)
 abstract class HotelDatabase : RoomDatabase() {

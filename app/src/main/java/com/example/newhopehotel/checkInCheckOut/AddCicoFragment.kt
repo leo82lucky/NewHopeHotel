@@ -21,6 +21,7 @@ import org.jetbrains.anko.toast
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 class AddCicoFragment : Fragment() {
 
@@ -62,7 +63,7 @@ class AddCicoFragment : Fragment() {
         binding.selectTimeButton.setOnClickListener { pickTime(binding.timeTextView) }
         binding.selectCheckoutDateButton.setOnClickListener { pickDate(binding.checkoutDateTextView) }
         binding.selectCheckoutTimeButton.setOnClickListener { pickTime(binding.checkoutTimeTextView) }
-        binding.fab.setOnClickListener { saveToy() }
+        binding.saveButton.setOnClickListener { saveToy() }
     }
 
     private fun saveToy() {
@@ -71,6 +72,22 @@ class AddCicoFragment : Fragment() {
             context?.toast(R.string.cico_empty_warning)
             return
         }
+        if (!viewModel.cicoBeingModified.contactNo.isPhoneNumber()) {
+            binding.contactNoLayout.error = getString(R.string.contactNoError)
+            context?.toast(R.string.contact_toast_error)
+            return
+        } else {
+            binding.contactNoLayout.error = null
+        }
+
+        if (!viewModel.cicoBeingModified.icNo.isICNumber()) {
+            binding.icLayout.error = getString(R.string.icError)
+            context?.toast(R.string.ic_toast_error)
+            return
+        } else {
+            binding.icLayout.error = null
+        }
+
         viewModel.saveCico()
         fragmentManager?.popBackStack()
     }
@@ -159,4 +176,10 @@ class AddCicoFragment : Fragment() {
 //        ("${pickedTime.get(Calendar.HOUR_OF_DAY)}:" +
 //                "${pickedTime.get(Calendar.MINUTE)}").also { binding.timeTextView.text = it }
     }
+
+    private var CONTACT_NO_PATTERN: Pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$")
+    private fun CharSequence.isPhoneNumber(): Boolean = CONTACT_NO_PATTERN.matcher(this).find()
+
+    private var IC_PATTERN: Pattern = Pattern.compile("^\\d{6}[- .]?\\d{2}[- .]?\\d{4}$")
+    private fun CharSequence.isICNumber(): Boolean = IC_PATTERN.matcher(this).find()
 }
