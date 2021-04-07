@@ -2,13 +2,12 @@ package com.example.newhopehotel.housekeeping
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import kotlinx.android.synthetic.main.fragment_assign_work.*
+import kotlinx.android.synthetic.main.fragment_worker.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +16,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AssignWorkFragment.newInstance] factory method to
+ * Use the [WorkerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AssignWorkFragment : Fragment(R.layout.fragment_assign_work) {
+class WorkerFragment : Fragment(R.layout.fragment_worker) {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,6 +34,18 @@ class AssignWorkFragment : Fragment(R.layout.fragment_assign_work) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val cleaningListFragment = CleaningListFragment()
+
+        val activity = context as AppCompatActivity
+
+        btnCleaningList.setOnClickListener {
+            activity.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.houseKeepingFragmentHolder, cleaningListFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
 
         // change this to get data from database
         var workerList = mutableListOf(
@@ -64,7 +75,7 @@ class AssignWorkFragment : Fragment(R.layout.fragment_assign_work) {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            AssignWorkFragment().apply {
+            WorkerFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

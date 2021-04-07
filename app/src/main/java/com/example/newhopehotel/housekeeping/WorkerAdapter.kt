@@ -3,9 +3,12 @@ package com.example.newhopehotel.housekeeping
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.item_worker.view.*
+
 
 class WorkerAdapter(
     var workers: List<Worker>
@@ -29,10 +32,24 @@ class WorkerAdapter(
             //calculate no. rooms assigned from database
             val noRoomsAssigned = 0
             if(noRoomsAssigned > 0)
-                tvRoomsAssigned.text = noRoomsAssigned.toString() + " rooms assigned."
+                tvRoomsAssigned.text = "Rooms assigned : " + noRoomsAssigned
             else
-                tvRoomsAssigned.text = "No rooms assigned."
+                tvRoomsAssigned.text = "Rooms assigned : 0"
+
+            setOnClickListener {
+                Toast.makeText(context, tvName.text, Toast.LENGTH_SHORT).show()
+
+                val roomsToCleanFragment = RoomsToCleanFragment()
+                val activity = context as AppCompatActivity
+
+                activity.supportFragmentManager.beginTransaction().apply {
+                    replace(R.id.houseKeepingFragmentHolder, roomsToCleanFragment)
+                    addToBackStack(null)
+                    commit()
+                }
+
+                tvRoomsAssigned.text = "Rooms assigned : 4"
+            }
         }
     }
-
 }
