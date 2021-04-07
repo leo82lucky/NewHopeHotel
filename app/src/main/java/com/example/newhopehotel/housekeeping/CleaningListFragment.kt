@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.fragment_cleaning_list.*
@@ -34,7 +35,18 @@ class CleaningListFragment : Fragment(R.layout.fragment_cleaning_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //access elements here
+
+        val workerFragment = WorkerFragment()
+
+        val activity = context as AppCompatActivity
+
+        btnAssignWork.setOnClickListener {
+            activity.supportFragmentManager.beginTransaction().apply {
+                replace(R.id.houseKeepingFragmentHolder, workerFragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
 
         // change this to get data from database
         var cleaningList = mutableListOf(

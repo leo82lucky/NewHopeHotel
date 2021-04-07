@@ -1,6 +1,5 @@
 package com.example.newhopehotel.housekeeping
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.newhopehotel.R
@@ -15,28 +14,12 @@ class Housekeeping : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val cleaningListFragment = CleaningListFragment()
-        val assignWorkFragment = AssignWorkFragment()
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.houseKeepingFragmentHolder, cleaningListFragment)
             commit()
         }
 
-        btnCleaningList.setOnClickListener {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.houseKeepingFragmentHolder, cleaningListFragment)
-                addToBackStack(null)
-                commit()
-            }
-        }
-
-        btnAssignWork.setOnClickListener {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.houseKeepingFragmentHolder, assignWorkFragment)
-                addToBackStack(null)
-                commit()
-            }
-        }
     }
 
 }
