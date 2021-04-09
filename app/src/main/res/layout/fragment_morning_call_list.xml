@@ -34,11 +34,57 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/margin_standard"
-            app:visible="@{uiState == UIState.HAS_DATA}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.656"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_9am"
+            app:layout_constraintVertical_bias="0.0"
+            app:visible="@{uiState == UIState.HAS_DATA}" />
+
+        <Button
+            android:id="@+id/btn_8am"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8 AM"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_9am"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_9am"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9 AM"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_10am"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_8am"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_10am"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 AM"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_11am"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_9am"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_11am"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11 AM"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_10am"
             app:layout_constraintTop_toTopOf="parent" />
 
 
