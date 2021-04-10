@@ -2,9 +2,7 @@ package com.example.newhopehotel.housekeeping
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.newhopehotel.R
 import kotlinx.android.synthetic.main.fragment_rooms_to_clean.*
@@ -104,31 +102,31 @@ class RoomsToCleanFragment : Fragment(R.layout.fragment_rooms_to_clean) {
         )
 
         val adapter = RoomsToCleanAdapter(roomsToCleanList[0])
-        rvRoomsToClean.adapter = adapter
-        rvRoomsToClean.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
+        rv_morning_call_list.adapter = adapter
+        rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
 
-        btn8am.setOnClickListener {
+        btn_8am.setOnClickListener {
             val adapter = RoomsToCleanAdapter(roomsToCleanList[0])
-            rvRoomsToClean.adapter = adapter
-            rvRoomsToClean.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
+            rv_morning_call_list.adapter = adapter
+            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
         }
 
-        btn12pm.setOnClickListener {
+        btn_9am.setOnClickListener {
             val adapter = RoomsToCleanAdapter(roomsToCleanList[1])
-            rvRoomsToClean.adapter = adapter
-            rvRoomsToClean.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
+            rv_morning_call_list.adapter = adapter
+            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
         }
 
-        btn4pm.setOnClickListener {
+        btn_10am.setOnClickListener {
             val adapter = RoomsToCleanAdapter(roomsToCleanList[2])
-            rvRoomsToClean.adapter = adapter
-            rvRoomsToClean.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
+            rv_morning_call_list.adapter = adapter
+            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
         }
 
-        btn8pm.setOnClickListener {
+        btn_11am.setOnClickListener {
             val adapter = RoomsToCleanAdapter(roomsToCleanList[3])
-            rvRoomsToClean.adapter = adapter
-            rvRoomsToClean.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
+            rv_morning_call_list.adapter = adapter
+            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
         }
 
         btnAssign.setOnClickListener {

@@ -1,5 +1,8 @@
 package com.example.newhopehotel.roomService.viewMorningCallList
 
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,13 +24,17 @@ import com.example.newhopehotel.databinding.FragmentMorningCallListBinding
 import com.example.newhopehotel.roomService.viewRoomServiceList.AddRoomServiceFragment
 import com.example.newhopehotel.roomService.viewRoomServiceList.CHOSEN_RS
 import kotlinx.android.synthetic.main.fragment_morning_call_list.*
-import org.jetbrains.anko.design.longSnackbar
+import kotlinx.android.synthetic.main.fragment_worker.*
+import kotlinx.android.synthetic.main.morning_call_list_item.*
+
 
 const val CHOSEN_MC = "chosenMC"
 
 class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickListener {
 
     private lateinit var morningCallActivityViewModel: MorningCallViewModel
+
+    var morningCallListIsEmpty: Boolean? = false
 
     private lateinit var mAdapter: MorningCallAdapter
     private lateinit var binding: FragmentMorningCallListBinding
@@ -46,7 +53,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
         morningCallActivityViewModel = ViewModelProvider(this).get(MorningCallViewModel::class.java)
 
-        mAdapter = MorningCallAdapter(this)
+        mAdapter = MorningCallAdapter(this,requireActivity())
         val dividerItemDecoration = DividerItemDecoration(
             requireActivity(), LinearLayoutManager.VERTICAL
         )
@@ -63,8 +70,9 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true)
         //Get the view model instance and pass it to the binding implementation
         binding.uiState = morningCallActivityViewModel.uiState
 
@@ -72,30 +80,78 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
         morningCallActivityViewModel.morningCallList?.observe(viewLifecycleOwner, { morningCallEntries ->
             if (morningCallEntries.isNullOrEmpty()) {
+                morningCallListIsEmpty=true
                 morningCallActivityViewModel.uiState.set(UIState.EMPTY)
+                btn_8am.setTextColor(Color.parseColor("#ffffff"))
+                btn_9am.setTextColor(Color.parseColor("#C0C0C0"))
+                btn_10am.setTextColor(Color.parseColor("#C0C0C0"))
+                btn_11am.setTextColor(Color.parseColor("#C0C0C0"))
             } else {
+
                 morningCallActivityViewModel.uiState.set(UIState.HAS_DATA)
-                mAdapter.morningCallList = morningCallEntries
+                morningCallListIsEmpty=false
                 mMorningCallList = morningCallEntries
 
+                filter8AMMc( mMorningCallList !!)
+                btn_8am.setTextColor(Color.parseColor("#ffffff"))
+                btn_9am.setTextColor(Color.parseColor("#C0C0C0"))
+                btn_10am.setTextColor(Color.parseColor("#C0C0C0"))
+                btn_11am.setTextColor(Color.parseColor("#C0C0C0"))
 
             }
         })
+
         btn_8am.setOnClickListener({
-            Toast.makeText(activity, "8AM Morning Call List", Toast.LENGTH_SHORT).show()
-             filter8AMMc( mMorningCallList !!)
+
+            if(morningCallListIsEmpty==false)
+            {
+                filter8AMMc( mMorningCallList !!)
+            }
+
+
+            btn_8am.setTextColor(Color.parseColor("#ffffff"))
+            btn_9am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_10am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_11am.setTextColor(Color.parseColor("#C0C0C0"))
             })
         btn_9am.setOnClickListener({
-            Toast.makeText(activity, "9AM Morning Call List", Toast.LENGTH_SHORT).show()
-            filter9AMMc( mMorningCallList !!)
+
+            if(morningCallListIsEmpty==false)
+            {
+                filter9AMMc( mMorningCallList !!)
+            }
+
+
+            btn_8am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_9am.setTextColor(Color.parseColor("#ffffff"))
+            btn_10am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_11am.setTextColor(Color.parseColor("#C0C0C0"))
         })
         btn_10am.setOnClickListener({
-            Toast.makeText(activity, "10AM Morning Call List", Toast.LENGTH_SHORT).show()
-            filter10AMMc( mMorningCallList !!)
+
+            if(morningCallListIsEmpty==false)
+            {
+                filter10AMMc( mMorningCallList !!)
+            }
+
+
+            btn_8am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_9am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_10am.setTextColor(Color.parseColor("#ffffff"))
+            btn_11am.setTextColor(Color.parseColor("#C0C0C0"))
         })
         btn_11am.setOnClickListener({
-            Toast.makeText(activity, "11AM Morning Call List", Toast.LENGTH_SHORT).show()
-            filter11AMMc( mMorningCallList !!)
+
+            if(morningCallListIsEmpty==false)
+            {
+                filter11AMMc( mMorningCallList !!)
+            }
+
+
+            btn_8am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_9am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_10am.setTextColor(Color.parseColor("#C0C0C0"))
+            btn_11am.setTextColor(Color.parseColor("#ffffff"))
         })
 
 
@@ -108,6 +164,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
             AddCicoViewModel.EIGHT_AM to true, AddCicoViewModel.NINE_AM to false,
             AddCicoViewModel.TEN_AM to false, AddCicoViewModel.ELEVEN_AM to false
         )
+
         filterMCList(mcEntries,eightAM)
     }
     fun filter9AMMc( mcEntries:List<CheckInCheckOutEntity>)
@@ -146,6 +203,17 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
             }
         }
         mAdapter.morningCallList = tempMCList
+
+        if(tempMCList.size==0)
+        {
+            empty_imageview!!.visibility = View.VISIBLE
+            no_data!!.visibility = View.VISIBLE
+        }
+        else
+        {
+            empty_imageview!!.visibility = View.GONE
+            no_data!!.visibility = View.GONE
+        }
         mAdapter.notifyDataSetChanged()
     }
     override fun onMorningCallClicked(chosenToy: CheckInCheckOutEntity) {

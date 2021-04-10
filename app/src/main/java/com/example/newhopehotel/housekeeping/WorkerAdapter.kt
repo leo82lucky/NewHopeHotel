@@ -27,17 +27,17 @@ class WorkerAdapter(
     override fun onBindViewHolder(holder: WorkerViewHolder, position: Int) {
         holder.itemView.apply {
             ivPicture.setImageDrawable(workers[position].picture)
-            tvName.text = workers[position].name
+            tv_name.text = workers[position].name
 
             //calculate no. rooms assigned from database
             val noRoomsAssigned = 0
             if(noRoomsAssigned > 0)
-                tvRoomsAssigned.text = "Rooms assigned : " + noRoomsAssigned
+                tv_phone_no.text = "Rooms assigned : " + noRoomsAssigned
             else
-                tvRoomsAssigned.text = "Rooms assigned : 0"
+                tv_phone_no.text = "Rooms assigned : 0"
 
             setOnClickListener {
-                Toast.makeText(context, tvName.text, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, tv_name.text, Toast.LENGTH_SHORT).show()
 
                 val roomsToCleanFragment = RoomsToCleanFragment()
                 val activity = context as AppCompatActivity
@@ -48,7 +48,7 @@ class WorkerAdapter(
                     commit()
                 }
 
-                tvRoomsAssigned.text = "Rooms assigned : 4"
+                tv_phone_no.text = "Rooms assigned : 4"
             }
         }
     }

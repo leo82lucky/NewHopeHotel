@@ -8,7 +8,7 @@
     tools:context=".housekeeping.RoomsToCleanFragment">
 
     <Button
-        android:id="@+id/btn8am"
+        android:id="@+id/btn_8am"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -16,13 +16,13 @@
         android:text="@string/_8am"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn12pm"
+        app:layout_constraintEnd_toStartOf="@+id/btn_9am"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn12pm"
+        android:id="@+id/btn_9am"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -30,13 +30,13 @@
         android:text="@string/_12pm"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn4pm"
+        app:layout_constraintEnd_toStartOf="@+id/btn_10am"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn8am"
+        app:layout_constraintStart_toEndOf="@+id/btn_8am"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn4pm"
+        android:id="@+id/btn_10am"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -44,13 +44,13 @@
         android:text="@string/_4pm"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn8pm"
+        app:layout_constraintEnd_toStartOf="@+id/btn_11am"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn12pm"
+        app:layout_constraintStart_toEndOf="@+id/btn_9am"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn8pm"
+        android:id="@+id/btn_11am"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -60,17 +60,17 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn4pm"
+        app:layout_constraintStart_toEndOf="@+id/btn_10am"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRoomsToClean"
+        android:id="@+id/rv_morning_call_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAssign"
-        app:layout_constraintTop_toBottomOf="@+id/btn8am" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_8am" />
 
     <Button
         android:id="@+id/btnAssign"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnAssign"
-        app:layout_constraintTop_toBottomOf="@+id/rvRoomsToClean" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_morning_call_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
