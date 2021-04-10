@@ -59,3 +59,4 @@ fun roomIDToPosition(room_id: RoomID?): Int {
 fun positionToRoomID(position: Int): RoomID {
     return RoomID.values()[position]
 }
+

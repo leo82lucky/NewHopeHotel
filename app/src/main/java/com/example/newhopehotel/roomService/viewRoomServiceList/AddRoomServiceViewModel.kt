@@ -12,6 +12,7 @@ class AddRoomServiceViewModel(
 
     private var mIsEdit: Boolean = false
 
+
     init {
         if (chosenRoomService!= null) {
             //This is edit case
@@ -23,7 +24,7 @@ class AddRoomServiceViewModel(
         }
     }
 
-    private fun insertRoomService(roomService:RoomServiceEntity) {
+    private fun insertRoomService(roomService: RoomServiceEntity) {
         mRepo.insertRoomService(roomService)
     }
 
@@ -33,9 +34,9 @@ class AddRoomServiceViewModel(
 
     fun saveRoomService() {
         if (!mIsEdit) {
-            insertRoomService( roomServiceBeingModified)
+            insertRoomService(roomServiceBeingModified)
         } else {
-            updateRoomService( roomServiceBeingModified)
+            updateRoomService(roomServiceBeingModified)
         }
     }
 
