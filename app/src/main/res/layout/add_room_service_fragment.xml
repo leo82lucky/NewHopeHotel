@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-
+            android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.roomNo}"
             android:textSize="24dp"
             app:layout_constraintStart_toEndOf="@+id/tv_room_no"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />

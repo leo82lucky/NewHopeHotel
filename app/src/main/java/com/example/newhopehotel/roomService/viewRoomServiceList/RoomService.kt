@@ -8,6 +8,7 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityMorningCallBinding
 import com.example.newhopehotel.databinding.ActivityRoomServiceBinding
 import com.example.newhopehotel.roomService.viewRoomServiceList.RoomServiceListFragment
+import kotlinx.android.synthetic.main.activity_room_service.*
 
 class RoomService : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

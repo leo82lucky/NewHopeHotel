@@ -16,6 +16,7 @@ import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_morning_call_list.*
 import kotlinx.android.synthetic.main.fragment_room_service_list.*
 import org.jetbrains.anko.design.longSnackbar
@@ -29,6 +30,9 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
     private lateinit var mAdapter: RoomServiceAdapter
     private lateinit var binding: FragmentRoomServiceListBinding
     private var mRoomServiceList: List<RoomServiceEntity>? = null
+
+
+
 
     init {
         retainInstance = true
@@ -105,10 +109,13 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
                 //Then delete the toy
                 roomServiceActivityViewModel.deleteRoomService(roomServiceToErase)
 
-                //Show a snack bar for undoing delete
-                coordinator?.longSnackbar(R.string.room_service_snack, R.string.undo) {
+                Snackbar.make(viewHolder.itemView, R.string.room_service_snack, Snackbar.LENGTH_LONG).setAction(R.string.undo) {
                     roomServiceActivityViewModel.insertRoomService(roomServiceToErase)
-                }
+
+
+                }.show()
+
+
             }
         }).attachToRecyclerView(binding.recycler)
     }
