@@ -7,12 +7,12 @@
     android:layout_height="wrap_content"
     tools:context=".customerFeedback.Feedback">
 
-    <data>
+    <!--    <data>-->
 
-        <variable
-            android:name="myFeedbackViewModel"
-            android:type="com.example.newhopehotel.customerFeedback.FeedbackViewModel" />
-    </data>
+    <!--        <variable-->
+    <!--            android:name="myFeedbackViewModel"-->
+    <!--            android:type="com.example.newhopehotel.customerFeedback.FeedbackViewModel" />-->
+    <!--    </data>-->
 
     <ImageView
         android:id="@+id/imageView"
