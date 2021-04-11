@@ -34,11 +34,7 @@ class RoomService : AppCompatActivity() {
         if (currentFrag is AddRoomServiceFragment) {
             currentFrag.onBackClicked()
         }
-        else if(currentFrag is RoomServiceListFragment)
-        {
-            //Toast.makeText(this, "The Room Service Back Fragment", Toast.LENGTH_SHORT).show()
-            //currentFrag.onBackClicked()
-        }
+
         else {
             super.onBackPressed()
         }

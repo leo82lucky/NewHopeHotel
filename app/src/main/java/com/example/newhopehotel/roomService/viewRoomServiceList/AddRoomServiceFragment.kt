@@ -179,13 +179,15 @@ class AddRoomServiceFragment : Fragment() {
 
     /*This can be triggered either by up or both buttons. In both cases,
     we first need to check whether there are unsaved changes and warn the user if necessary*/
+
     fun onBackClicked() {
-
-
-
-       //fragmentManager?.popBackStack()
-
+        if (viewModel.isChanged) {
+            openAlertDialog()
+        } else {
+            fragmentManager?.popBackStack()
+        }
     }
+
 
     private fun openAlertDialog() {
         AlertDialog.Builder(requireContext())

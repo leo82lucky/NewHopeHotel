@@ -9,12 +9,7 @@
     android:backgroundTint="#FFFFFF"
     tools:context=".customerFeedback.FeedbackEdit">
 
-    <data>
 
-        <variable
-            android:name="myFeedbackEditViewModel"
-            android:type="com.example.newhopehotel.customerFeedback.FeedbackEditViewModel" />
-    </data>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar4"
