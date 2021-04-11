@@ -18,26 +18,115 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="127dp"
-        android:layout_margin="4dp"
-        android:background="@color/tea_green">
+        android:layout_height="120dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/white"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/iv_name"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_customer" />
 
         <TextView
-            android:id="@+id/item_cust_name"
+            android:id="@+id/tv_room_no_data"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/roboto"
+            android:text="@{BindingUtils.setToText(morningCallItem.roomID)}"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_room_no"
+            app:layout_constraintTop_toBottomOf="@+id/tv_phone_no" />
+
+        <TextView
+            android:id="@+id/tv_phone_no_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="@{morningCallItem.contactNo}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_phone_no"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_name_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="@{morningCallItem.custName}"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:text="Name:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_phone_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
+            android:text="Phone No:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_phone_no"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_room_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="Room  No:"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toBottomOf="@+id/tv_phone_no" />
+
+        <ImageView
+            android:id="@+id/iv_phone_no"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/name" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_name"
+            app:srcCompat="@drawable/ic_baseline_contact_phone_24" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_phone_no"
+            app:srcCompat="@drawable/ic_baseline_hotel_24" />
+
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/green_pigment"
+            android:drawableLeft="@android:drawable/stat_sys_phone_call"
+            android:padding="8dp"
+            android:text="Call"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 </layout>

@@ -16,6 +16,8 @@ import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
+import kotlinx.android.synthetic.main.fragment_morning_call_list.*
+import kotlinx.android.synthetic.main.fragment_room_service_list.*
 import org.jetbrains.anko.design.longSnackbar
 
 const val CHOSEN_RS = "chosenRS"
@@ -70,7 +72,11 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
         roomServiceActivityViewModel.roomServiceList?.observe(viewLifecycleOwner, { roomServiceEntries ->
             if (roomServiceEntries.isNullOrEmpty()) {
                 roomServiceActivityViewModel.uiState.set(UIState.EMPTY)
+                empty_imageview_room_service!!.visibility = View.VISIBLE
+                no_data_room_service!!.visibility = View.VISIBLE
             } else {
+                empty_imageview_room_service!!.visibility = View.GONE
+                no_data_room_service!!.visibility = View.GONE
                 roomServiceActivityViewModel.uiState.set(UIState.HAS_DATA)
                 mAdapter.roomServiceList = roomServiceEntries
                 mRoomServiceList =roomServiceEntries

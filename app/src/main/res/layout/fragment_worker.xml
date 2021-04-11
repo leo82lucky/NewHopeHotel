@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow_green_crayola"
-    tools:context=".housekeeping.CleaningListFragment">
+    tools:context=".housekeeping.WorkerFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btnAssignWork"
+        android:id="@+id/cardView2"
         android:layout_width="195dp"
         android:layout_height="40dp"
         android:layout_rowWeight="1"
@@ -19,7 +19,7 @@
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/btnCleaningList"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -42,7 +42,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/btnCleaningList"
         android:layout_width="195dp"
         android:layout_height="40dp"
         android:layout_rowWeight="1"
@@ -51,7 +51,7 @@
         android:backgroundTint="@color/green_pigment"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnAssignWork"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -76,27 +76,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCleaningList"
+        android:id="@+id/rvWorkers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnMarkAsDone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <Button
-        android:id="@+id/btnMarkAsDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="@color/green_pigment"
-        android:text="@string/mark_as_done"
-        android:textColor="@color/white"
-        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCleaningList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

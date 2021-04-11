@@ -12,11 +12,12 @@ data class RoomServiceEntity(
 
     var custName: String,
     var request: String,
+    var roomNo:String,
     @PrimaryKey(autoGenerate = true) val rsId: Int = 0
 ) : Parcelable {
     fun copy(): RoomServiceEntity {
         return RoomServiceEntity(
-            custName, request,
+            custName, request,roomNo,
             rsId
         )
     }

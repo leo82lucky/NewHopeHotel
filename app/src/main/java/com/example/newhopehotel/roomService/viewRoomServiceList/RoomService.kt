@@ -16,7 +16,7 @@ class RoomService : AppCompatActivity() {
             this,
             R.layout.activity_room_service
         )
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.tbRoomService)
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {

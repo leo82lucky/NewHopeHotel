@@ -9,7 +9,6 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.roomService.viewMorningCallList.MorningCall
 import com.example.newhopehotel.roomService.viewRoomServiceList.RoomService
 import kotlinx.android.synthetic.main.activity_room_service.*
-import kotlinx.android.synthetic.main.activity_room_service.toolbar
 import kotlinx.android.synthetic.main.activity_room_service_main.*
 
 class RoomServiceMain : AppCompatActivity() {
