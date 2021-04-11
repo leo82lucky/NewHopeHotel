@@ -106,7 +106,7 @@ class AddRoomServiceFragment : Fragment() {
                 {
                     customerNameCollector.setText(customerNameList[position])
                     tv_room_no_data.setText(roomNoList[position])
-                    Toast.makeText(requireActivity().baseContext, customerNameList[position], Toast.LENGTH_SHORT).show()
+
 
 
                 }
@@ -115,7 +115,7 @@ class AddRoomServiceFragment : Fragment() {
 
                     customerNameCollector.setText("Please Select a Customer")
                     tv_room_no_data.setText("")
-                    Toast.makeText(requireActivity().baseContext, "Please Select a Customer", Toast.LENGTH_SHORT).show()
+
                     spinCount=spinCount.inc()
                 }
 
@@ -129,6 +129,7 @@ class AddRoomServiceFragment : Fragment() {
 
         }
         btn_add_room_service.setOnClickListener({
+
             saveToy()
             })
 
@@ -152,10 +153,15 @@ class AddRoomServiceFragment : Fragment() {
     }
     private fun saveToy() {
         // Check if toy name is not empty
-        if (viewModel.roomServiceBeingModified.custName.isBlank()) {
+        if (viewModel.roomServiceBeingModified.custName.isBlank()||viewModel.roomServiceBeingModified.custName.equals("Please Select a Customer")) {
             context?.toast(R.string.cico_empty_warning)
             return
         }
+        if (viewModel.roomServiceBeingModified.request.isBlank()) {
+            context?.toast(R.string.error_no_request)
+            return
+        }
+        Toast.makeText(requireActivity().baseContext,"Room Service Added", Toast.LENGTH_SHORT).show()
         viewModel.saveRoomService()
         fragmentManager?.popBackStack()
     }

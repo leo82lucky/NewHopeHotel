@@ -108,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:alpha="0.4"
-            android:text="No Morning Calls For This Time Slot."
+            android:text="No Morning Calls For This Time"
+
             android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

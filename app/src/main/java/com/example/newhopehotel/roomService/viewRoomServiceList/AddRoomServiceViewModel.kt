@@ -48,7 +48,8 @@ class AddRoomServiceViewModel(
 //            )
             return RoomServiceEntity(
                 custName = "",
-                request = ""
+                request = "",
+                roomNo=""
 
             )
         }

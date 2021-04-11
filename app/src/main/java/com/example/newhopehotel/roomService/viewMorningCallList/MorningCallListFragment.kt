@@ -80,6 +80,8 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
 
         morningCallActivityViewModel.morningCallList?.observe(viewLifecycleOwner, { morningCallEntries ->
             if (morningCallEntries.isNullOrEmpty()) {
+                empty_imageview!!.visibility = View.VISIBLE
+                no_data!!.visibility = View.VISIBLE
                 morningCallListIsEmpty=true
                 morningCallActivityViewModel.uiState.set(UIState.EMPTY)
                 btn_8am.setTextColor(Color.parseColor("#ffffff"))
@@ -88,6 +90,8 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
                 btn_11am.setTextColor(Color.parseColor("#C0C0C0"))
             } else {
 
+                empty_imageview!!.visibility = View.GONE
+                no_data!!.visibility = View.GONE
                 morningCallActivityViewModel.uiState.set(UIState.HAS_DATA)
                 morningCallListIsEmpty=false
                 mMorningCallList = morningCallEntries

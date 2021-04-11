@@ -11,12 +11,14 @@
 
         <import type="com.example.newhopehotel.utils.BindingUtils" />
     </data>
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:background="@color/white"
         android:padding="16dp">
@@ -38,6 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:text="Name :"
+
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/iv_name"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,59 +55,66 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-        <TextView
-            android:id="@+id/tv_request"
-            android:layout_width="0dp"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_request"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Request :"
-            android:textSize="24sp"
+            android:layout_marginTop="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="150"
+
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_room_no" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_room_no">
 
-       <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editRequest"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="8dp"
-           android:layout_marginTop="16dp"
-           android:ems="10"
-           android:hint="request"
-           android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.request}"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toEndOf="@+id/tv_request"
-           app:layout_constraintTop_toBottomOf="@+id/tv_room_no"
-           android:inputType="text"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editRequest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Request"
+                android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.request}"
+                android:inputType="textMultiLine"
+                android:maxLength="150" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Spinner
+        <Spinner
             android:id="@+id/sp_name"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="42dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_name"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+
             android:id="@+id/btn_add_room_service"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="Add"
+            android:background="@color/green_pigment"
+            android:textColor="@color/white"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_request" />
 
         <TextView
             android:id="@+id/customerNameCollector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.custName}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 </layout>

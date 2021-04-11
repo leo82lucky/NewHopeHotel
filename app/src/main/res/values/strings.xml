@@ -64,6 +64,8 @@
     <string name="room_service_title">Room Service</string>
     <string name="room_service_snack">One Room Service Deleted</string>
     <string name="request">request</string>
+    <string name="error_no_request">Request Field Cannot Be Empty</string>
+    <string name="please_select_customer">Please Select a Customer</string>
     //RoomID String Array
     <string-array name="roomid_array">
         <item>R001</item>
