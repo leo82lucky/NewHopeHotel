@@ -6,13 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.transaction
 import com.example.newhopehotel.R
-import com.example.newhopehotel.databinding.ActivityMainBinding
-import com.example.newhopehotel.databinding.ActivityMorningCallBinding
-import com.example.newhopehotel.roomService.viewMorningCallList.MorningCallListFragment
+import com.example.newhopehotel.databinding.ActivityCustomerFeedback1Binding
 
 class CustomerFeedback1 : AppCompatActivity() {
 
-    var binding:ActivityMainBinding?=null
+    var binding: ActivityCustomerFeedback1Binding? = null
 
     val feedback = Feedback()
     val feedbackEdit = FeedbackEdit()
@@ -33,17 +31,17 @@ class CustomerFeedback1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        val binding = DataBindingUtil.setContentView<ActivityMorningCallBinding>(
+        val binding = DataBindingUtil.setContentView<ActivityCustomerFeedback1Binding>(
             this,
-            R.layout.activity_morning_call
+            R.layout.activity_customer_feedback1
         )
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {
-                add(R.id.main_container, MorningCallListFragment())
+                add(R.id.main_container, FeedbackScene())
             }
         }
-        setSupportActionBar(binding.tbMorningCall)
+        setSupportActionBar(binding.toolbar)
     }
 
 
