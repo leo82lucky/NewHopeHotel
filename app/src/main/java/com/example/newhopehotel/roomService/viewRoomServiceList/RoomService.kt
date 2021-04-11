@@ -5,9 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.transaction
 import com.example.newhopehotel.R
-import com.example.newhopehotel.databinding.ActivityMorningCallBinding
 import com.example.newhopehotel.databinding.ActivityRoomServiceBinding
-import com.example.newhopehotel.roomService.viewRoomServiceList.RoomServiceListFragment
 
 class RoomService : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

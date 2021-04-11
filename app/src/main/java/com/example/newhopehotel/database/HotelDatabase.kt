@@ -26,7 +26,6 @@ abstract class HotelDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: HotelDatabase? = null
 
-
         fun getInstance(context: Context): HotelDatabase {
             synchronized(this) {
 

@@ -13,10 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.UIState
-import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
-import kotlinx.android.synthetic.main.fragment_morning_call_list.*
 import kotlinx.android.synthetic.main.fragment_room_service_list.*
 import org.jetbrains.anko.design.longSnackbar
 
