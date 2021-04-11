@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-
+            android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.roomNo}"
             android:textSize="24dp"
             app:layout_constraintStart_toEndOf="@+id/tv_room_no"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -95,15 +95,35 @@
             android:id="@+id/btn_add_room_service"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
-            android:text="Add"
             android:background="@color/green_pigment"
-            android:textColor="@color/white"
+            android:text="Done"
 
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_request"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/spanish_grey"
+            android:text="Cancel"
+
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add_room_service"
+            app:layout_constraintHorizontal_bias="0.222"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_request" />
+            app:layout_constraintTop_toBottomOf="@+id/text_input_request"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/customerNameCollector"

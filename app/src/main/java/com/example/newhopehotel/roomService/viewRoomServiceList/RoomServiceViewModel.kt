@@ -25,6 +25,6 @@ class RoomServiceViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun deleteRoomService(roomService: RoomServiceEntity) {
-        mRepo.insertRoomService(roomService)
+        mRepo.deleteRoomService(roomService)
     }
 }

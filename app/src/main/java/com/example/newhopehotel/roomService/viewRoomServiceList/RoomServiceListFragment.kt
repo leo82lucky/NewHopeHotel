@@ -1,9 +1,12 @@
 package com.example.newhopehotel.roomService.viewRoomServiceList
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
@@ -12,9 +15,14 @@ import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
+import com.example.newhopehotel.customerFeedback.CustomerFeedback1
 import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
+import com.example.newhopehotel.roomService.RoomServiceMain
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_morning_call_list.*
 import kotlinx.android.synthetic.main.fragment_room_service_list.*
 import org.jetbrains.anko.design.longSnackbar
 
@@ -28,10 +36,20 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
     private lateinit var binding: FragmentRoomServiceListBinding
     private var mRoomServiceList: List<RoomServiceEntity>? = null
 
+
+
+
     init {
         retainInstance = true
     }
 
+    fun onBackClicked() {
+
+        val intent = Intent(requireActivity(), RoomServiceMain::class.java)
+        startActivity(intent)
+        //fragmentManager?.popBackStack()
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,6 +80,8 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
 
         (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
+
+
         //Get the view model instance and pass it to the binding implementation
         binding.uiState = roomServiceActivityViewModel.uiState
 
@@ -82,7 +102,7 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
         })
 
         //Attach an ItemTouchHelper for swipe-to-delete functionality
-        val coordinator: CoordinatorLayout? = activity?.findViewById(R.id.main_coordinator)
+        val coordinator: FrameLayout? = activity?.findViewById(R.id.main_container)
         ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -103,10 +123,13 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
                 //Then delete the toy
                 roomServiceActivityViewModel.deleteRoomService(roomServiceToErase)
 
-                //Show a snack bar for undoing delete
-                coordinator?.longSnackbar(R.string.room_service_snack, R.string.undo) {
+                Snackbar.make(viewHolder.itemView, R.string.room_service_snack, Snackbar.LENGTH_LONG).setAction(R.string.undo) {
                     roomServiceActivityViewModel.insertRoomService(roomServiceToErase)
-                }
+
+
+                }.show()
+
+
             }
         }).attachToRecyclerView(binding.recycler)
     }

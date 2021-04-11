@@ -28,11 +28,14 @@ class RoomServiceAdapter(private val mListener: RoomServiceClickListener) :
 
     class RoomServiceViewHolder(private val binding: RoomServiceListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        var formattedRSID:String=""
         fun bind(currentRoomService: RoomServiceEntity?, clickListener:RoomServiceClickListener) {
             binding.roomServiceItem = currentRoomService
             binding.roomServiceItemClick= clickListener
+            formatIDText(binding.roomServiceItem!!.rsId)
+            binding.tvRoomServiceId.setText(formattedRSID )
             binding.executePendingBindings()
+
         }
 
         companion object {
@@ -46,11 +49,32 @@ class RoomServiceAdapter(private val mListener: RoomServiceClickListener) :
                 return RoomServiceViewHolder(binding)
             }
         }
+        fun formatIDText(currentNo:Int)
+        {
+
+            if(currentNo<10)
+            {
+                formattedRSID="RS00"+currentNo.toString()
+                return
+            }
+            if(currentNo<100)
+            {
+                formattedRSID="RS0"+currentNo.toString()
+                return
+            }
+            if(currentNo<1000)
+            {
+                formattedRSID="RS"+currentNo.toString()
+                return
+            }
+        }
     }
 
     interface RoomServiceClickListener {
         fun onRoomServiceClicked(chosenToy: RoomServiceEntity)
+
     }
+
 
 
 
@@ -59,3 +83,4 @@ class RoomServiceAdapter(private val mListener: RoomServiceClickListener) :
     }
 
 }
+

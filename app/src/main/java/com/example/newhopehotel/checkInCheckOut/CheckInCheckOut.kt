@@ -14,7 +14,7 @@ class CheckInCheckOut : AppCompatActivity() {
             this,
             R.layout.activity_check_in__check_out
         )
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.tbCheckInCheckOut)
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {
