@@ -2,6 +2,7 @@ package com.example.newhopehotel.roomService.viewRoomServiceList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.transaction
 import com.example.newhopehotel.R
@@ -32,7 +33,13 @@ class RoomService : AppCompatActivity() {
         val currentFrag = supportFragmentManager.findFragmentById(R.id.main_container)
         if (currentFrag is AddRoomServiceFragment) {
             currentFrag.onBackClicked()
-        } else {
+        }
+        else if(currentFrag is RoomServiceListFragment)
+        {
+            //Toast.makeText(this, "The Room Service Back Fragment", Toast.LENGTH_SHORT).show()
+            //currentFrag.onBackClicked()
+        }
+        else {
             super.onBackPressed()
         }
     }

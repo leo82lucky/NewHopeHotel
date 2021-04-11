@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -87,7 +88,31 @@ class AddCicoFragment : Fragment() {
         } else {
             binding.icLayout.error = null
         }
+        if (viewModel.cicoBeingModified.roomStatus==null) {
+            Toast.makeText(requireContext(), "Please Select a Room Status", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(viewModel.cicoBeingModified.checkinDate.equals("dd/mm/yyyy"))
+        {
+            Toast.makeText(requireContext(), "Please Select a Check in Date", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(viewModel.cicoBeingModified.checkinTime.equals("hh:mm am"))
+        {
+            Toast.makeText(requireContext(), "Please Select a Check In Time", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(viewModel.cicoBeingModified.checkoutDate.equals("dd/mm/yyyy"))
+        {
+            Toast.makeText(requireContext(), "Please Select a Check Out Date", Toast.LENGTH_SHORT).show()
+            return
+        }
 
+        if(viewModel.cicoBeingModified.checkoutTime.equals("hh:mm am"))
+        {
+            Toast.makeText(requireContext(), "Please Select a Check Out Time", Toast.LENGTH_SHORT).show()
+            return
+        }
         viewModel.saveCico()
         fragmentManager?.popBackStack()
     }
@@ -107,7 +132,7 @@ class AddCicoFragment : Fragment() {
         if (viewModel.isChanged) {
             openAlertDialog()
         } else {
-            fragmentManager?.popBackStack()
+         fragmentManager?.popBackStack()
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
@@ -76,7 +77,7 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
         })
 
         //Attach an ItemTouchHelper for swipe-to-delete functionality
-        val coordinator: CoordinatorLayout? = activity?.findViewById(R.id.main_coordinator)
+        val coordinator:FrameLayout? = activity?.findViewById(R.id.main_container)
         ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -109,8 +110,8 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
         args.putParcelable(CHOSEN_CICO, chosenToy)
         val frag = AddCicoFragment()
         frag.arguments = args
-
         openAddCicoFrag(frag)
+
     }
 
     private fun openAddCicoFrag(frag: AddCicoFragment) {

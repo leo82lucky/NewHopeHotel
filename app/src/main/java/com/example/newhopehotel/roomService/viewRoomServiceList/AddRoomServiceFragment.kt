@@ -26,6 +26,7 @@ import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.AddRoomServiceBinding
 import com.example.newhopehotel.databinding.FragmentCicoListBinding
 import com.example.newhopehotel.utils.provideRepository
+import kotlinx.android.synthetic.main.activity_morning_call.*
 import kotlinx.android.synthetic.main.add_room_service_fragment.*
 import org.jetbrains.anko.toast
 import java.util.*
@@ -64,6 +65,7 @@ class AddRoomServiceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         //If there is no id specified in the arguments, then it should be a new toy
         val chosenRoom: RoomServiceEntity? = arguments?.getParcelable(CHOSEN_RS)
@@ -179,8 +181,25 @@ class AddRoomServiceFragment : Fragment() {
     we first need to check whether there are unsaved changes and warn the user if necessary*/
     fun onBackClicked() {
 
-            fragmentManager?.popBackStack()
+
+
+       //fragmentManager?.popBackStack()
 
     }
 
+    private fun openAlertDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.unsaved_changes_warning_title))
+            .setMessage(getString(R.string.unsaved_changes_warning_message))
+            // Specifying a listener allows you to take an action before dismissing the dialog.
+            // The dialog is automatically dismissed when a dialog button is clicked.
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                // Continue with back operation
+                fragmentManager?.popBackStack()
+            }
+            // A null listener allows the button to dismiss the dialog and take no further action.
+            .setNegativeButton(android.R.string.no, null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
+    }
 }

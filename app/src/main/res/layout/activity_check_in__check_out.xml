@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".checkInCheckOut.CheckInCheckOut">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/main_coordinator"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".checkInCheckOut.CheckInCheckOut">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:weightSum="10">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_check_in_check_out"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/mantis_green"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="@string/check_in_check_out"
-                app:titleTextColor="@android:color/white" />
+                android:layout_height="match_parent"
+                android:layout_marginEnd="?android:attr/actionBarSize"
+                android:text="@string/check_in_check_out"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-        <FrameLayout
-            android:id="@+id/main_container"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="match_parent">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="vertical">-->
+            <FrameLayout
+                android:id="@+id/main_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--        <androidx.fragment.app.FragmentContainerView-->
-    <!--            android:id="@+id/cicoFragmentNavHost"-->
-    <!--            android:name="androidx.navigation.fragment.NavHostFragment"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            app:defaultNavHost="true"-->
-    <!--            app:navGraph="@navigation/checkin_checkout_navigation" />-->
+        <!-- ROW 1  -->
+        <!-- COLUMN 1  -->
 
-    <!--    </LinearLayout>-->
+
+    </LinearLayout>
+
 
 </layout>

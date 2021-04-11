@@ -15,11 +15,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="@dimen/margin_standard"
             android:theme="@style/Theme.MaterialComponents">
 
@@ -66,13 +66,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/name"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="30"
+                        app:endIconMode="clear_text"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guidelineET"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:endIconMode="clear_text"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="30">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/customerNameEditText"
@@ -101,15 +101,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:hint="@string/i_c"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="16"
+                        app:counterTextAppearance="@style/CounterText"
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guidelineET"
-                        app:layout_constraintTop_toBottomOf="@+id/customerNameLayout"
-                        app:errorEnabled="false"
-                        app:endIconMode="clear_text"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="16"
-                        app:counterTextAppearance="@style/CounterText">
+                        app:layout_constraintTop_toBottomOf="@+id/customerNameLayout">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/icEditText"
@@ -138,15 +138,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:hint="@string/contact_no"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="12"
+                        app:counterTextAppearance="@style/CounterText"
+                        app:endIconMode="clear_text"
+                        app:errorEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guidelineET"
-                        app:layout_constraintTop_toBottomOf="@+id/icLayout"
-                        app:errorEnabled="false"
-                        app:endIconMode="clear_text"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="12"
-                        app:counterTextAppearance="@style/CounterText">
+                        app:layout_constraintTop_toBottomOf="@+id/icLayout">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/contactNoEditText"
@@ -623,6 +623,7 @@
             <!--                app:pressedTranslationZ="@dimen/fab_pressed_elevation"-->
             <!--                app:srcCompat="@drawable/ic_save"-->
             <!--                app:useCompatPadding="true" />-->
+
             <Button
                 android:id="@+id/save_Button"
                 android:layout_width="wrap_content"
@@ -632,11 +633,10 @@
                 android:gravity="center"
                 android:text="@string/save"
                 app:backgroundTint="@color/yellow_green_crayola"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardCheckOutDate_Time" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 </layout>
