@@ -18,7 +18,8 @@
 
         <activity android:name=".roomService.viewMorningCallList.MorningCall"
             android:parentActivityName=".roomService.RoomServiceMain"/>
-        <activity android:name=".roomService.viewRoomServiceList.RoomService"/>
+        <activity android:name=".roomService.viewRoomServiceList.RoomService"
+            android:parentActivityName=".roomService.RoomServiceMain"/>
         <activity android:name=".housekeeping.Housekeeping" />
         <activity android:name=".checkInCheckOut.CheckInCheckOut" />
         <activity android:name=".customerFeedback.CustomerFeedback1" />

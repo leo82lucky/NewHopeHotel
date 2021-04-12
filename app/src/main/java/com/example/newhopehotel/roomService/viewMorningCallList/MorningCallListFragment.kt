@@ -131,6 +131,7 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
         }
         btn_11am.setOnClickListener {
 
+
             if (morningCallListIsEmpty == false) {
                 filter11AMMc(mMorningCallList!!)
             }
@@ -146,47 +147,53 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
     }
 
     fun filter8AMMc( mcEntries:List<CheckInCheckOutEntity>) {
-//        val eightAM= mutableMapOf(
-//            AddCicoViewModel.EIGHT_AM to true, AddCicoViewModel.NINE_AM to false,
-//            AddCicoViewModel.TEN_AM to false, AddCicoViewModel.ELEVEN_AM to false
-//        )
-        val eightAM =
-            filterMCList(mcEntries, eightAM)
-    }
-    fun filter9AMMc( mcEntries:List<CheckInCheckOutEntity>)
-    {
-        val nineAM= mutableMapOf(
-            AddCicoViewModel.EIGHT_AM to false, AddCicoViewModel.NINE_AM to true,
-            AddCicoViewModel.TEN_AM to false, AddCicoViewModel.ELEVEN_AM to false
-        )
-        filterMCList(mcEntries,nineAM)
-    }
-    fun filter10AMMc( mcEntries:List<CheckInCheckOutEntity>)
-    {
-        val tenAM= mutableMapOf(
-            AddCicoViewModel.EIGHT_AM to false, AddCicoViewModel.NINE_AM to false,
-            AddCicoViewModel.TEN_AM to true, AddCicoViewModel.ELEVEN_AM to false
-        )
-        filterMCList(mcEntries,tenAM)
-    }
-
-    fun filter11AMMc(mcEntries: List<CheckInCheckOutEntity>) {
-        val elevenAM = mutableMapOf(
-            AddCicoViewModel.EIGHT_AM to false, AddCicoViewModel.NINE_AM to false,
-            AddCicoViewModel.TEN_AM to false, AddCicoViewModel.ELEVEN_AM to true
-        )
-        filterMCList(mcEntries, elevenAM)
-    }
-
-    fun filterMCList(mcEntries: List<CheckInCheckOutEntity>, time: MorningCall) {
         var tempMCList: MutableList<CheckInCheckOutEntity> = ArrayList()
-
         for (item in mcEntries) {
 
-            if (item.morningCall == time) {
+            if (item.morningCall == com.example.newhopehotel.data.MorningCall.EightAM) {
                 tempMCList.add(item)
             }
         }
+        filterMCList(tempMCList)
+    }
+    fun filter9AMMc( mcEntries:List<CheckInCheckOutEntity>)
+    {
+        var tempMCList: MutableList<CheckInCheckOutEntity> = ArrayList()
+        for (item in mcEntries) {
+
+            if (item.morningCall == com.example.newhopehotel.data.MorningCall.NineAM) {
+                tempMCList.add(item)
+            }
+        }
+        filterMCList(tempMCList)
+    }
+    fun filter10AMMc( mcEntries:List<CheckInCheckOutEntity>)
+    {
+        var tempMCList: MutableList<CheckInCheckOutEntity> = ArrayList()
+        for (item in mcEntries) {
+
+            if (item.morningCall == com.example.newhopehotel.data.MorningCall.TenAM) {
+                tempMCList.add(item)
+            }
+        }
+        filterMCList(tempMCList)
+    }
+
+    fun filter11AMMc(mcEntries: List<CheckInCheckOutEntity>) {
+        var tempMCList: MutableList<CheckInCheckOutEntity> = ArrayList()
+        for (item in mcEntries) {
+
+            if (item.morningCall == com.example.newhopehotel.data.MorningCall.ElevenAM) {
+                tempMCList.add(item)
+            }
+        }
+        filterMCList(tempMCList)
+    }
+
+    fun filterMCList(tempMCList:List<CheckInCheckOutEntity>) {
+
+
+
         mAdapter.morningCallList = tempMCList
 
         if(tempMCList.size==0)
@@ -203,12 +210,6 @@ class MorningCallListFragment : Fragment(), MorningCallAdapter.MorningCallClickL
     }
     override fun onMorningCallClicked(chosenToy: CheckInCheckOutEntity) {
 
-    }
-    companion object {
-        const val EIGHT_AM = "8 AM"
-        const val NINE_AM = "9 AM"
-        const val TEN_AM = "10 AM"
-        const val ELEVEN_AM = "11 AM"
     }
 
 }

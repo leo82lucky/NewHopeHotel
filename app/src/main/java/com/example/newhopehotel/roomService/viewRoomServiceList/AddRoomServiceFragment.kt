@@ -27,6 +27,7 @@ import com.example.newhopehotel.databinding.AddRoomServiceBinding
 import com.example.newhopehotel.databinding.FragmentCicoListBinding
 import com.example.newhopehotel.utils.provideRepository
 import kotlinx.android.synthetic.main.activity_morning_call.*
+import kotlinx.android.synthetic.main.activity_room_service.*
 import kotlinx.android.synthetic.main.add_room_service_fragment.*
 import org.jetbrains.anko.toast
 import java.util.*
@@ -64,9 +65,10 @@ class AddRoomServiceFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as RoomService).activateAddRoomServiceTitle()
+        tv_name_data!!.visibility = View.GONE
+        sp_name!!.visibility = View.VISIBLE
         //If there is no id specified in the arguments, then it should be a new toy
         val chosenRoom: RoomServiceEntity? = arguments?.getParcelable(CHOSEN_RS)
 
@@ -104,10 +106,18 @@ class AddRoomServiceFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                if(spinCount>0)
+                if((activity as RoomService).editMode==true)
+                {
+                    tv_name_data!!.visibility = View.VISIBLE
+                    sp_name!!.visibility = View.GONE
+                    //tv_name_data.setText(customerNameList[position])
+                    //tv_room_no_data.setText(roomNoList[position])
+                    (activity as RoomService).editMode=false
+                }
+                else if(spinCount>0)
                 {
                     customerNameCollector.setText(customerNameList[position])
-                    tv_room_no_data.setText(roomNoList[position])
+                   tv_room_no_data.setText(roomNoList[position])
 
 
 
@@ -132,10 +142,20 @@ class AddRoomServiceFragment : Fragment() {
         }
         btn_add_room_service.setOnClickListener({
 
-            saveToy()
+            if (viewModel.isChanged) {
+                saveToy()
+            }
+            else
+            {
+                fragmentManager?.popBackStack()
+            }
+
             })
 
+        btn_cancel.setOnClickListener({
 
+            onBackClicked()
+            })
 
 
 
@@ -163,7 +183,7 @@ class AddRoomServiceFragment : Fragment() {
             context?.toast(R.string.error_no_request)
             return
         }
-        Toast.makeText(requireActivity().baseContext,"Room Service Added", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity().baseContext,"Room Service List Updated", Toast.LENGTH_SHORT).show()
         viewModel.saveRoomService()
         fragmentManager?.popBackStack()
     }
@@ -179,7 +199,6 @@ class AddRoomServiceFragment : Fragment() {
 
     /*This can be triggered either by up or both buttons. In both cases,
     we first need to check whether there are unsaved changes and warn the user if necessary*/
-
     fun onBackClicked() {
         if (viewModel.isChanged) {
             openAlertDialog()

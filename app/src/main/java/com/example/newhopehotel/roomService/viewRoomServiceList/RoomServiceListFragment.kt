@@ -3,6 +3,7 @@ package com.example.newhopehotel.roomService.viewRoomServiceList
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -22,6 +23,7 @@ import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
 import com.example.newhopehotel.roomService.RoomServiceMain
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_room_service.*
 import kotlinx.android.synthetic.main.fragment_morning_call_list.*
 import kotlinx.android.synthetic.main.fragment_room_service_list.*
 import org.jetbrains.anko.design.longSnackbar
@@ -43,13 +45,8 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
         retainInstance = true
     }
 
-    fun onBackClicked() {
 
-        val intent = Intent(requireActivity(), RoomServiceMain::class.java)
-        startActivity(intent)
-        //fragmentManager?.popBackStack()
 
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,8 +75,10 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayShowHomeEnabled(true)
 
+        (activity as RoomService).activateRoomServiceTitle()
 
 
         //Get the view model instance and pass it to the binding implementation
@@ -152,7 +151,7 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
         args.putParcelable(CHOSEN_RS, chosenToy)
         val frag = AddRoomServiceFragment()
         frag.arguments = args
-
+        (activity as RoomService).editMode=true
         //Open AddToyFragment in edit form
         openAddToyFrag(frag)
     }
