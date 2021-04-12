@@ -53,7 +53,7 @@
             android:id="@+id/item_morningCall"
             android:layout_width="0dp"
             android:layout_height="16dp"
-            android:text="@{BindingUtils.attachMorningCall(cicoItem.morningCall)}"
+            android:text="@{BindingUtils.setToText(cicoItem.morningCall)}"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -62,7 +62,7 @@
             tools:text="Morning Call" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineCB"
+            android:id="@+id/guidelineMorningCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -80,7 +80,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView_checkout"
             app:layout_constraintEnd_toStartOf="@+id/guidelineCico"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCB"
+            app:layout_constraintStart_toStartOf="@+id/guidelineMorningCall"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -118,7 +118,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guidelineCico"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCB"
+            app:layout_constraintStart_toStartOf="@+id/guidelineMorningCall"
             app:layout_constraintTop_toBottomOf="@+id/textView_checkin" />
 
         <TextView
@@ -160,23 +160,6 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.85" />
 
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/item_room_status"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:padding="4dp"-->
-        <!--            android:rotation="90"-->
-        <!--            android:text="@{BindingUtils.setToText(cicoItem.roomStatus)}"-->
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textSize="18sp"-->
-        <!--            android:textStyle="bold"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toEndOf="@+id/item_checkin_time"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:statusBackgroundColor="@{cicoItem.roomStatus}"-->
-        <!--            tools:text="Status" />-->
         <ImageView
             android:id="@+id/item_room_status"
             android:layout_width="wrap_content"
@@ -253,33 +236,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/item_gender_drawable"-->
-        <!--            android:layout_width="@dimen/gender_image_width"-->
-        <!--            android:layout_height="@dimen/gender_image_height"-->
-        <!--            android:layout_marginTop="8dp"-->
-        <!--            android:layout_marginEnd="@dimen/margin_small"-->
-        <!--            android:layout_marginBottom="8dp"-->
-        <!--            android:contentDescription="@string/cd_item_gender"-->
-        <!--            app:genderDrawable="@{toy.gender}"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            tools:src="@drawable/ic_boy" />-->
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/item_state_drawable"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginEnd="@dimen/margin_small"-->
-        <!--            android:padding="@dimen/padding_small"-->
-        <!--            android:contentDescription="@string/cd_state_symbol"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@+id/item_gender_drawable"-->
-        <!--            app:layout_constraintDimensionRatio="w,1:1"-->
-        <!--            app:layout_constraintEnd_toStartOf="@+id/item_gender_drawable"-->
-        <!--            app:layout_constraintTop_toTopOf="@+id/item_gender_drawable"-->
-        <!--            app:stateDrawable="@{toy.procurementType}"-->
-        <!--            tools:srcCompat="@drawable/ic_gift" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

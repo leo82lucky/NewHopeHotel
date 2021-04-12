@@ -20,7 +20,6 @@ fun ImageView.setBgColor(roomStatus: RoomStatus?) {
         val colorId = when (this) {
             RoomStatus.Available -> R.drawable.status_available
             RoomStatus.Unavailable -> R.drawable.status_unavailable
-            RoomStatus.Reserved -> R.drawable.status_reserved
         }
         setImageResource(colorId)
     }

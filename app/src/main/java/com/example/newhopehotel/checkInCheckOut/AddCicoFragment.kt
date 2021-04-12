@@ -50,10 +50,8 @@ class AddCicoFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //If there is no id specified in the arguments, then it should be a new toy
         val chosenRoom: CheckInCheckOutEntity? = arguments?.getParcelable(CHOSEN_CICO)
 
-        //Get the view model instance and pass it to the binding implementation
         val factory = AddCicoViewModelFactory(provideRepository(requireContext()), chosenRoom)
         viewModel = ViewModelProvider(this, factory).get(AddCicoViewModel::class.java)
 
@@ -64,11 +62,10 @@ class AddCicoFragment : Fragment() {
         binding.selectTimeButton.setOnClickListener { pickTime(binding.timeTextView) }
         binding.selectCheckoutDateButton.setOnClickListener { pickDate(binding.checkoutDateTextView) }
         binding.selectCheckoutTimeButton.setOnClickListener { pickTime(binding.checkoutTimeTextView) }
-        binding.saveButton.setOnClickListener { saveToy() }
+        binding.saveButton.setOnClickListener { saveCico() }
     }
 
-    private fun saveToy() {
-        // Check if toy name is not empty
+    private fun saveCico() {
         if (viewModel.cicoBeingModified.custName.isBlank()) {
             context?.toast(R.string.cico_empty_warning)
             return

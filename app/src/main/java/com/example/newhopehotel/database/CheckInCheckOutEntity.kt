@@ -3,6 +3,7 @@ package com.example.newhopehotel.database
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.newhopehotel.data.MorningCall
 import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.RoomType
@@ -22,16 +23,17 @@ data class CheckInCheckOutEntity(
     var checkinTime: String,
     var checkoutDate: String,
     var checkoutTime: String,
-    var morningCall: Map<String, Boolean>,
+//    var morningCall: Map<String, Boolean>,
+    var morningCall: MorningCall = MorningCall.EightAM,
     @PrimaryKey(autoGenerate = true) val cicoId: Int = 0
 ) : Parcelable {
     fun copy(): CheckInCheckOutEntity {
-        val newMorningCall = mutableMapOf<String, Boolean>()
-        newMorningCall.putAll(morningCall)
+//        val newMorningCall = mutableMapOf<String, Boolean>()
+//        newMorningCall.putAll(morningCall)
         return CheckInCheckOutEntity(
             custName, icNo, contactNo, roomType,
             roomStatus, roomID, checkinDate, checkinTime, checkoutDate,
-            checkoutTime, newMorningCall, cicoId
+            checkoutTime, morningCall, cicoId
         )
     }
 }

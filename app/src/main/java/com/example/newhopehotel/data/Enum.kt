@@ -27,7 +27,14 @@ enum class RoomType {
 }
 
 enum class RoomStatus {
-    Reserved,
+    //    Reserved,
     Available,
     Unavailable
+}
+
+enum class MorningCall {
+    EightAM,
+    NineAM,
+    TenAM,
+    ElevenAM
 }

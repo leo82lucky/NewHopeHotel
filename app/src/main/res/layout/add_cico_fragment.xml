@@ -380,7 +380,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:checkedButton="@={BindingUtils.statusToButtonId(myAddCicoViewModel.cicoBeingModified.roomStatus)}"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guidelineRadio"
                         app:layout_constraintTop_toTopOf="parent">
@@ -401,21 +401,13 @@
                             android:layout_marginEnd="@dimen/margin_standard"
                             android:text="@string/unavailable" />
 
-                        <RadioButton
-                            android:id="@+id/radioBtn_reserved"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_small"
-                            android:layout_marginEnd="@dimen/margin_standard"
-                            android:text="@string/reserved" />
-
                     </RadioGroup>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardMorningCallCheckbox"
+                android:id="@+id/cardMorningCall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_standard"
@@ -432,7 +424,7 @@
                     android:layout_height="match_parent">
 
                     <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guidelineCB"
+                        android:id="@+id/guidelineMorningCall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_standard"
@@ -446,58 +438,19 @@
                         android:layout_height="wrap_content"
                         android:text="@string/morning_call"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_8am"
-                        app:layout_constraintEnd_toStartOf="@+id/checkBox_8am" />
+                        app:layout_constraintBaseline_toBaselineOf="@+id/spinner_MorningCall"
+                        app:layout_constraintEnd_toStartOf="@+id/guidelineMorningCall" />
 
-                    <CheckBox
-                        android:id="@+id/checkBox_8am"
-                        android:layout_width="wrap_content"
+                    <Spinner
+                        android:id="@+id/spinner_MorningCall"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.EIGHT_AM]}"
-                        android:text="@string/eight_am"
-                        app:layout_constraintStart_toStartOf="@+id/guidelineCB"
+                        android:entries="@array/morningcall_array"
+                        android:selectedItemPosition="@={BindingUtils.morningCallToPosition(myAddCicoViewModel.cicoBeingModified.morningCall)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guidelineMorningCall"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox_9am"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.NINE_AM]}"
-                        android:text="@string/nine_am"
-                        app:layout_constraintStart_toEndOf="@+id/barrier"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox_10am"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.TEN_AM]}"
-                        android:text="@string/ten_am"
-                        app:layout_constraintStart_toStartOf="@+id/guidelineCB"
-                        app:layout_constraintTop_toBottomOf="@+id/checkBox_8am" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox_11am"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:checked="@={myAddCicoViewModel.cicoBeingModified.morningCall[myAddCicoViewModel.ELEVEN_AM]}"
-                        android:text="@string/eleven_am"
-                        app:layout_constraintStart_toEndOf="@+id/barrier"
-                        app:layout_constraintTop_toBottomOf="@+id/checkBox_9am" />
-
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/barrier"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:barrierDirection="right"
-                        app:constraint_referenced_ids="checkBox_10am,checkBox_8am"
-                        tools:layout_editor_absoluteX="411dp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -513,7 +466,7 @@
                 app:contentPadding="@dimen/padding_standard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardMorningCallCheckbox">
+                app:layout_constraintTop_toBottomOf="@id/cardMorningCall">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -609,20 +562,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--                android:id="@+id/fab"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:contentDescription="@string/save_record"-->
-            <!--                app:backgroundTint="@color/yellow_green_crayola"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/cardCheckOutDate_Time"-->
-            <!--                app:maxImageSize="30dp"-->
-            <!--                app:pressedTranslationZ="@dimen/fab_pressed_elevation"-->
-            <!--                app:srcCompat="@drawable/ic_save"-->
-            <!--                app:useCompatPadding="true" />-->
 
             <Button
                 android:id="@+id/save_Button"

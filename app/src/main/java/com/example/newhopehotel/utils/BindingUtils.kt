@@ -4,15 +4,16 @@ package com.example.newhopehotel.utils
 
 import androidx.databinding.InverseMethod
 import com.example.newhopehotel.R
+import com.example.newhopehotel.data.MorningCall
 import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.RoomType
 
-fun attachMorningCall(morningCall: Map<String, Boolean>): String? {
-    return morningCall.filter { it.value }
-        .keys
-        .joinToString(separator = ", ")
-}
+//fun attachMorningCall(morningCall: Map<String, Boolean>): String? {
+//    return morningCall.filter { it.value }
+//        .keys
+//        .joinToString(separator = ", ")
+//}
 
 fun setToText(anyNotString: Any?): String {
     return anyNotString.toString()
@@ -26,7 +27,6 @@ fun statusToButtonId(roomStatus: RoomStatus?): Int {
         selectedButtonId = when (this) {
             RoomStatus.Available -> R.id.radioBtn_available
             RoomStatus.Unavailable -> R.id.radioBtn_unavailable
-            RoomStatus.Reserved -> R.id.radioBtn_reserved
         }
     }
 
@@ -37,7 +37,6 @@ fun buttonIdToStatus(selectedButtonId: Int): RoomStatus? {
     return when (selectedButtonId) {
         R.id.radioBtn_available -> RoomStatus.Available
         R.id.radioBtn_unavailable -> RoomStatus.Unavailable
-        R.id.radioBtn_reserved -> RoomStatus.Reserved
         else -> null
     }
 }
@@ -58,5 +57,14 @@ fun roomIDToPosition(room_id: RoomID?): Int {
 
 fun positionToRoomID(position: Int): RoomID {
     return RoomID.values()[position]
+}
+
+@InverseMethod("positionToMorningCall")
+fun morningCallToPosition(morning_call: MorningCall?): Int {
+    return morning_call?.ordinal ?: 0
+}
+
+fun positionToMorningCall(position: Int): MorningCall {
+    return MorningCall.values()[position]
 }
 
