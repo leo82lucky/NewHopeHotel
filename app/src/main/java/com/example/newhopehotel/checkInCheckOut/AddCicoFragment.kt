@@ -1,5 +1,6 @@
 package com.example.newhopehotel.checkInCheckOut
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -85,29 +86,30 @@ class AddCicoFragment : Fragment() {
         } else {
             binding.icLayout.error = null
         }
-        if (viewModel.cicoBeingModified.roomStatus==null) {
-            Toast.makeText(requireContext(), "Please Select a Room Status", Toast.LENGTH_SHORT).show()
+        if (viewModel.cicoBeingModified.roomStatus == null) {
+            Toast.makeText(requireContext(), "Please Select a Room Status", Toast.LENGTH_SHORT)
+                .show()
             return
         }
-        if(viewModel.cicoBeingModified.checkinDate.equals("dd/mm/yyyy"))
-        {
-            Toast.makeText(requireContext(), "Please Select a Check in Date", Toast.LENGTH_SHORT).show()
+        if (viewModel.cicoBeingModified.checkinDate == ("dd/mm/yyyy")) {
+            Toast.makeText(requireContext(), "Please Select a Check in Date", Toast.LENGTH_SHORT)
+                .show()
             return
         }
-        if(viewModel.cicoBeingModified.checkinTime.equals("hh:mm am"))
-        {
-            Toast.makeText(requireContext(), "Please Select a Check In Time", Toast.LENGTH_SHORT).show()
+        if (viewModel.cicoBeingModified.checkinTime == ("hh:mm am")) {
+            Toast.makeText(requireContext(), "Please Select a Check In Time", Toast.LENGTH_SHORT)
+                .show()
             return
         }
-        if(viewModel.cicoBeingModified.checkoutDate.equals("dd/mm/yyyy"))
-        {
-            Toast.makeText(requireContext(), "Please Select a Check Out Date", Toast.LENGTH_SHORT).show()
+        if (viewModel.cicoBeingModified.checkoutDate == ("dd/mm/yyyy")) {
+            Toast.makeText(requireContext(), "Please Select a Check Out Date", Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
-        if(viewModel.cicoBeingModified.checkoutTime.equals("hh:mm am"))
-        {
-            Toast.makeText(requireContext(), "Please Select a Check Out Time", Toast.LENGTH_SHORT).show()
+        if (viewModel.cicoBeingModified.checkoutTime == "hh:mm am") {
+            Toast.makeText(requireContext(), "Please Select a Check Out Time", Toast.LENGTH_SHORT)
+                .show()
             return
         }
         viewModel.saveCico()
@@ -178,6 +180,7 @@ class AddCicoFragment : Fragment() {
         ).show()
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun setDateTextView(pickedDate: Calendar, textViewDate: TextView) {
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
         val formattedDate: String = dateFormat.format(pickedDate.time)
@@ -189,6 +192,7 @@ class AddCicoFragment : Fragment() {
 //                "${pickedDate.get(Calendar.YEAR)}").also { binding.dateTextView.text = it }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun setTimeTextView(pickedTime: Calendar, textViewTime: TextView) {
         val dateFormat: DateFormat = SimpleDateFormat("hh:mm a")
         val formattedTime: String = dateFormat.format(pickedTime.time)

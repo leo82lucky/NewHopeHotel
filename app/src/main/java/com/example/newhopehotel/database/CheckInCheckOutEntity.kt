@@ -24,7 +24,7 @@ data class CheckInCheckOutEntity(
     var checkoutDate: String,
     var checkoutTime: String,
 //    var morningCall: Map<String, Boolean>,
-    var morningCall: MorningCall = MorningCall.EightAM,
+    var morningCall: MorningCall = MorningCall.NONE,
     @PrimaryKey(autoGenerate = true) val cicoId: Int = 0
 ) : Parcelable {
     fun copy(): CheckInCheckOutEntity {
