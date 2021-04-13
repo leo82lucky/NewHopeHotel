@@ -15,7 +15,7 @@
     <!--    </data>-->
 
     <ImageView
-        android:id="@+id/bg"
+        android:id="@+id/bg_feedback"
         android:layout_width="413dp"
         android:layout_height="261dp"
         android:background="@color/mantis_green"

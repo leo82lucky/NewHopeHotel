@@ -16,16 +16,15 @@
     <!--    </data>-->
 
     <ImageView
-        android:id="@+id/bg"
-        android:layout_width="410dp"
-        android:layout_height="193dp"
-        android:background="@color/mantis_green"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/bg_feedback"
+        android:layout_width="413dp"
+        android:layout_height="184dp"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/username"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/mantis_green" />
 
     <TextView
         android:id="@+id/question"
