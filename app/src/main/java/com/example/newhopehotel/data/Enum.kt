@@ -27,7 +27,19 @@ enum class RoomType {
 }
 
 enum class RoomStatus {
-    Reserved,
     Available,
     Unavailable
+}
+
+enum class MorningCall(val time: String) {
+    NONE("None"),
+    EightAM("8 AM"),
+    NineAM("9 AM"),
+    TenAM("10 AM"),
+    ElevenAM("11 AM")
+//    NONE,
+//    EightAM,
+//    NineAM,
+//    TenAM,
+//    ElevenAM
 }

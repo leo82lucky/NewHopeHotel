@@ -17,12 +17,25 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_room_service_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/room_service_title"
+
                 android:layout_marginEnd="?android:attr/actionBarSize"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_add_room_service_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/add_room_service"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:visibility="gone"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

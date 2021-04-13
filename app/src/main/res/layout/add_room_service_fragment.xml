@@ -25,6 +25,17 @@
 
 
         <TextView
+            android:id="@+id/tv_name_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.custName}"
+            android:textSize="24dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/tv_room_no_data"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
