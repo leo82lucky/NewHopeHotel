@@ -10,14 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import com.example.newhopehotel.checkInCheckOut.CICOViewModel
-import com.example.newhopehotel.database.CheckInCheckOutEntity
-import com.example.newhopehotel.database.FeedbackEntity
-import com.example.newhopehotel.databinding.FragmentCicoListBinding
-import com.example.newhopehotel.housekeeping.CleaningList
-import com.example.newhopehotel.housekeeping.CleaningListAdapter
-import com.example.newhopehotel.housekeeping.WorkerFragment
-import kotlinx.android.synthetic.main.fragment_cleaning_list.*
+import kotlinx.android.synthetic.main.fragment_customer_feedback1.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,8 +66,8 @@ class FeedbackScene1 : Fragment(R.layout.fragment_customer_feedback1) {
         )
 
         val adapter = FeedbackAdapter(feedbackList)
-        rvCleaningList.adapter = adapter
-        rvCleaningList.layoutManager = LinearLayoutManager(this.context)
+        rvFeedbackList.adapter = adapter
+        rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
 
         //btnMarkAsDone.setOnClickListener {
             //update database
