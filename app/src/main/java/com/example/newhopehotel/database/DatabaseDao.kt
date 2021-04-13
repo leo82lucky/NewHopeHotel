@@ -115,3 +115,26 @@ interface RoomServiceDatabaseDao {
 //    @Query("SELECT * FROM CheckIn_Checkout_Table ORDER BY custId DESC LIMIT 1")
 //    suspend fun getCustomer(): CheckInCheckOutEntity?
 }
+
+@Dao
+interface FeedbackDao{
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFeedback(feedback: FeedbackEntity)
+
+    @get:Query("SELECT * FROM Feedback_Table")
+    val allFeedback: LiveData<List< FeedbackEntity>>
+
+    @Query("SELECT * FROM Feedback_Table WHERE feedbackID = :id")
+    fun getChosenFeedback(id: Int): LiveData<FeedbackEntity>
+
+    @Query("DELETE FROM Feedback_Table")
+    fun deleteAllFeedback(): Int
+
+    @Delete
+    fun deleteFeedback(feedback: FeedbackEntity)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateFeedback(feedback: FeedbackEntity)
+
+}

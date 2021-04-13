@@ -10,16 +10,16 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
-class ViewedFeedbackViewModelFactory(private val repository: HotelRepository,
-                                     private val application: Application) :
+class FeedbackScene1ViewModelFactory(private val repository: HotelRepository,
+                                    private val application: Application) :
     ViewModelProvider.Factory {
 
     @Suppress("Unchecked_cast")
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(ViewedFeedbackViewModel::class.java)) {
-            return ViewedFeedbackViewModel(repository, application) as T
+        if (modelClass.isAssignableFrom(FeedbackScene1ViewModel::class.java)) {
+            return FeedbackScene1ViewModel(repository, application) as T
         }
 
         throw IllegalArgumentException("Unknown View Model Class")

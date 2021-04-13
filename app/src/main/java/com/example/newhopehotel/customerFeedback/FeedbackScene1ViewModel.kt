@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class ViewedFeedbackViewModel(repository: HotelRepository, application: Application) :
+class FeedbackScene1ViewModel(repository: HotelRepository, application: Application) :
     AndroidViewModel(application), Observable {
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
