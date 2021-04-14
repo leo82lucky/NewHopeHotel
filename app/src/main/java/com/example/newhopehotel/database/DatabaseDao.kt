@@ -60,6 +60,24 @@ interface CheckInCheckOutDatabaseDao {
 }
 
 @Dao
+interface CleaningListDatabaseDao {
+    @Insert
+    fun insertCleaningList(cleaningList: CleaningListEntity)
+
+    @get:Query("SELECT * FROM Cleaning_List_Table")
+    val allCleaningList: LiveData<List<CleaningListEntity>>
+
+    @Query("SELECT * FROM Cleaning_List_Table WHERE userID = :id")
+    fun findCleaningList(id: Int): LiveData<List<CleaningListEntity>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateCleaningList(cleaningList: CleaningListEntity)
+
+    @Delete
+    fun deleteCleaningList(cleaningList: CleaningListEntity)
+}
+
+@Dao
 interface MorningCallDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMorningCall(morningCall: MorningCallEntity)

@@ -2,7 +2,10 @@ package com.example.newhopehotel.housekeeping
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.transaction
 import com.example.newhopehotel.R
+import com.example.newhopehotel.databinding.ActivityHousekeepingBinding
 import kotlinx.android.synthetic.main.activity_housekeeping.*
 
 
@@ -10,16 +13,26 @@ class Housekeeping : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_housekeeping)
-        //setSupportActionBar(toolbar)
+        val binding = DataBindingUtil.setContentView<ActivityHousekeepingBinding>(
+            this,
+            R.layout.activity_housekeeping
+        )
+        setSupportActionBar(binding.tbHousekeeping)
 
-        val cleaningListFragment = CleaningListFragment()
-
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.houseKeepingFragmentHolder, cleaningListFragment)
-            commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.transaction {
+                add(R.id.main_container, CleaningListFragment())
+            }
         }
 
     }
 
+    override fun onBackPressed() {
+        //val currentFrag = supportFragmentManager.findFragmentById(R.id.main_container)
+        //if (currentFrag is CleaningListFragment) {
+        //    currentFrag.onBackClicked()
+        //} else  {
+            super.onBackPressed()
+        //}
+    }
 }

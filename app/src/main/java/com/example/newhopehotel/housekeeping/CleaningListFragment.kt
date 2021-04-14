@@ -5,85 +5,133 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.transaction
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
+import com.example.newhopehotel.data.RoomID
+import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.CleaningListEntity
+import com.example.newhopehotel.databinding.FragmentCleaningListBinding
 import kotlinx.android.synthetic.main.fragment_cleaning_list.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+const val CHOSEN_CLEANING_LIST = "chosenCleaningList"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CleaningListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CleaningListFragment : Fragment(R.layout.fragment_cleaning_list) {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var cleaningListViewModel: CleaningListViewModel
+
+    private lateinit var mAdapter: CleaningListAdapter
+    private lateinit var binding: FragmentCleaningListBinding
+    private var mCleaningList: List<CleaningListEntity>? = null
+
+    init {
+        retainInstance = true
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cleaning_list, container, false)
+
+        cleaningListViewModel = ViewModelProvider(this).get(CleaningListViewModel::class.java)
+
+        mAdapter = CleaningListAdapter(this)
+
+        binding.rvCleaningList.adapter = mAdapter
+        binding.rvCleaningList.layoutManager = LinearLayoutManager(this.context)
+
+        binding.btnAssignWork.setOnClickListener { /*openWorkerFrag(WorkerFragment())*/
+            Toast.makeText(this.context, "::" + mAdapter.itemCount, Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnMarkAsDone.setOnClickListener {
+            //check which is marked
+            //update their room status
+            //delete them from list/database
+
+            //testing by adding in data
+            cleaningListViewModel.insertCleaningList(CleaningListEntity(1, RoomID.R001, "8am"))
+            cleaningListViewModel.insertCleaningList(CleaningListEntity(2, RoomID.R002, "12pm"))
+            cleaningListViewModel.insertCleaningList(CleaningListEntity(3, RoomID.R003, "4pm"))
+        }
+
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
+        binding.uiState = cleaningListViewModel.uiState
+
+        var temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
+        temp?.observe(viewLifecycleOwner, { temp2 ->
+            if (temp2.isNullOrEmpty()) {
+                cleaningListViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                cleaningListViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.cleaningList = temp2
+                mCleaningList = temp2
+            }
+        })
+
+        //arrangeCleaningListByTest(cleaningListViewModel.cleaningList)
+    }
+
+    override fun onCleaningListClicked(chosenToy: CleaningListEntity) {
+
+    }
+
+    private fun openWorkerFrag(frag: WorkerFragment) {
+        fragmentManager?.transaction {
+            replace(R.id.main_container, frag)
+            addToBackStack(null)
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val workerFragment = WorkerFragment()
-
-        val activity = context as AppCompatActivity
-
-        btnAssignWork.setOnClickListener {
-            activity.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.houseKeepingFragmentHolder, workerFragment)
-                addToBackStack(null)
-                commit()
+    private fun arrangeCleaningListByTest(test: LiveData<List<CleaningListEntity>>?) {
+        test?.observe(viewLifecycleOwner, { cleaningListByTest ->
+            if (cleaningListByTest.isNullOrEmpty()) {
+                cleaningListViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                cleaningListViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.cleaningList = cleaningListByTest
+                mCleaningList = cleaningListByTest
             }
-        }
-
-        // change this to get data from database
-        var cleaningList = mutableListOf(
-            CleaningList("Room1", "8am",false),
-            CleaningList("Room2", "12pm",false),
-            CleaningList("Room3", "4pm",false),
-            CleaningList("Room4", "8pm",false),
-            CleaningList("Room5", "8am",false)
-        )
-
-        val adapter = CleaningListAdapter(cleaningList)
-        rvCleaningList.adapter = adapter
-        rvCleaningList.layoutManager = LinearLayoutManager(this.context)
-
-        btnMarkAsDone.setOnClickListener {
-            //update database
-            //remove done task
-        }
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CleaningListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CleaningListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        })
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
