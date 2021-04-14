@@ -17,6 +17,8 @@ class HotelRepository private constructor(
 
     val cicos: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico
+    val cleaningLists: LiveData<List<CleaningListEntity>>
+        get() = hotelDatabase.cleaningListDao().allCleaningList
     val morningCalls: LiveData<List<MorningCallEntity>>
         get() = hotelDatabase.morningCallDao().allMorningCall
     val roomServices: LiveData<List<RoomServiceEntity>>
@@ -97,6 +99,25 @@ class HotelRepository private constructor(
 
     fun deleteCico(cico: CheckInCheckOutEntity) {
         mExecutors.diskIO().execute { hotelDatabase.cicoDao().deleteCico(cico) }
+    }
+
+    val cleaningList: LiveData<List<CleaningListEntity>>
+        get() = hotelDatabase.cleaningListDao().allCleaningList
+
+    fun insertCleaningList(cleaningList: CleaningListEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.cleaningListDao().insertCleaningList(cleaningList) }
+    }
+
+    fun updateCleaningList(cleaningList: CleaningListEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.cleaningListDao().updateCleaningList(cleaningList) }
+    }
+
+    fun deleteCleaningList(cleaningList: CleaningListEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.cleaningListDao().deleteCleaningList(cleaningList) }
+    }
+
+    fun getCleaningListByUserID(userID: Int): LiveData<List<CleaningListEntity>> {
+        return hotelDatabase.cleaningListDao().findCleaningList(userID)
     }
 
     companion object {

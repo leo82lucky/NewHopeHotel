@@ -43,7 +43,7 @@ class WorkerAdapter(
                 val activity = context as AppCompatActivity
 
                 activity.supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.houseKeepingFragmentHolder, roomsToCleanFragment)
+                    replace(R.id.main_container, roomsToCleanFragment)
                     addToBackStack(null)
                     commit()
                 }

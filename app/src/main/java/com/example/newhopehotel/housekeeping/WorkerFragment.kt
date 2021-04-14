@@ -41,7 +41,7 @@ class WorkerFragment : Fragment(R.layout.fragment_worker) {
 
         btnCleaningList.setOnClickListener {
             activity.supportFragmentManager.beginTransaction().apply {
-                replace(R.id.houseKeepingFragmentHolder, cleaningListFragment)
+                replace(R.id.main_container, cleaningListFragment)
                 addToBackStack(null)
                 commit()
             }
