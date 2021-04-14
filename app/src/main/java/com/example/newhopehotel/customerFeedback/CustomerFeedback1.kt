@@ -22,7 +22,7 @@ class CustomerFeedback1 : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {
-                add(R.id.main_container, FeedbackScene1())
+                add(R.id.feedback_container, FeedbackScene1())
             }
         }
         setSupportActionBar(binding.toolbar)

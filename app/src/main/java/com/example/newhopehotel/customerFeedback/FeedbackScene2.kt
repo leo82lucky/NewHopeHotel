@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
+import kotlinx.android.synthetic.main.fragment_customer_feedback1.*
+import kotlinx.android.synthetic.main.fragment_customer_feedback_2.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +34,44 @@ class FeedbackScene2 : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_feedback_2, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val feedbackFragment = FeedbackScene2()
+
+        val activity = context as AppCompatActivity
+
+//        btnAssignWork.setOnClickListener {
+//            activity.supportFragmentManager.beginTransaction().apply {
+//                replace(R.id.houseKeepingFragmentHolder, workerFragment)
+//                addToBackStack(null)
+//                commit()
+//            }
+//        }
+
+        // change this to get data from database
+//        var cleaningList = mutableListOf(
+//            CleaningList("Room1", "8am",false),
+//            CleaningList("Room2", "12pm",false),
+//            CleaningList("Room3", "4pm",false),
+//            CleaningList("Room4", "8pm",false),
+//            CleaningList("Room5", "8am",false)
+//        )
+
+        var viewedFeedbackList = mutableListOf(
+
+            ViewedFeedbackList("John","12/2/2021","Testing 1", "Question 1")
+
+        )
+
+        val adapter = ViewedFeedbackAdapter(viewedFeedbackList)
+        rvViewedFBList.adapter = adapter
+        rvViewedFBList.layoutManager = LinearLayoutManager(this.context)
+
+        //btnMarkAsDone.setOnClickListener {
+        //update database
+        //remove done task
+        //}
     }
 
     companion object {
