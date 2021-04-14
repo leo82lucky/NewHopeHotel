@@ -38,9 +38,6 @@ class FeedbackScene1 : Fragment(R.layout.fragment_customer_feedback1) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val feedbackFragment = FeedbackScene1()
-
-        val activity = context as AppCompatActivity
 
 //        btnAssignWork.setOnClickListener {
 //            activity.supportFragmentManager.beginTransaction().apply {
@@ -50,31 +47,31 @@ class FeedbackScene1 : Fragment(R.layout.fragment_customer_feedback1) {
 //            }
 //        }
 
-        // change this to get data from database
-//        var cleaningList = mutableListOf(
-//            CleaningList("Room1", "8am",false),
-//            CleaningList("Room2", "12pm",false),
-//            CleaningList("Room3", "4pm",false),
-//            CleaningList("Room4", "8pm",false),
-//            CleaningList("Room5", "8am",false)
-//        )
-
         var feedbackList = mutableListOf(
 
             FeedbackList("John","12/2/2021","Testing 1"),
             FeedbackList("Johnathan","13/2/2021","Testing 2")
+        )
 
-
+        var viewedFeedbackList = mutableListOf(
+            ViewedFeedbackList("Jane", "10/11/2021","Answer 1","Question 1")
         )
 
         val adapter = FeedbackAdapter(feedbackList)
         rvFeedbackList.adapter = adapter
         rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
 
-        //btnMarkAsDone.setOnClickListener {
-            //update database
-            //remove done task
-        //}
+        fbButton.setOnClickListener{
+            val adapter = FeedbackAdapter(feedbackList)
+            rvFeedbackList.adapter = adapter
+            rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
+        }
+
+        viewedFbButton.setOnClickListener{
+            val adapter = ViewedFeedbackAdapter(viewedFeedbackList)
+            rvFeedbackList.adapter = adapter
+            rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
+        }
     }
 
     companion object {

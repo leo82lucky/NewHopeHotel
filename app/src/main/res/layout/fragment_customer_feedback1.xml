@@ -19,15 +19,37 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeedbackList"
-            android:layout_width="411dp"
-            android:layout_height="657dp"
+            android:layout_width="410dp"
+            android:layout_height="599dp"
             android:isScrollContainer="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/fbButton"
+            android:layout_width="198dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="4dp"
+            android:text="Feedback"
+            app:layout_constraintBottom_toTopOf="@+id/rvFeedbackList"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.148" />
+
+        <Button
+            android:id="@+id/viewedFbButton"
+            android:layout_width="199dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="Viewed Feedback"
+            app:layout_constraintBottom_toTopOf="@+id/rvFeedbackList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

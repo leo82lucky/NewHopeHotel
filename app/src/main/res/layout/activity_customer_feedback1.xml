@@ -34,29 +34,12 @@
             <FrameLayout
                 android:id="@+id/feedback_container"
                 android:layout_width="411dp"
-                android:layout_height="482dp"
+                android:layout_height="619dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/fbButton"
-                android:layout_width="204dp"
-                android:layout_height="46dp"
-                android:text="Feedback"
-                app:layout_constraintBottom_toTopOf="@+id/feedback_container"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/viewedFbButton"
-                android:layout_width="201dp"
-                android:layout_height="46dp"
-                android:text="Viewed Feedback"
-                app:layout_constraintBottom_toTopOf="@+id/feedback_container"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
