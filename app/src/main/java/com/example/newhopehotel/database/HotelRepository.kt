@@ -3,6 +3,7 @@ package com.example.newhopehotel.database
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.utils.AppExecutors
 
 class HotelRepository private constructor(
@@ -14,7 +15,7 @@ class HotelRepository private constructor(
     val users: LiveData<List<RegisterEntity>>
         get() = hotelDatabase.registerDao().allUsers
 
-    val customers: LiveData<List<CheckInCheckOutEntity>>
+    val cicos: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico
     val morningCalls: LiveData<List<MorningCallEntity>>
         get() = hotelDatabase.morningCallDao().allMorningCall
@@ -35,32 +36,6 @@ class HotelRepository private constructor(
         return hotelDatabase.registerDao().getUsername(userName)
 //        return registerDatabaseDao.getUsername(userName)
     }
-    //suspend fun deleteAll(): Int {
-    //    return dao.deleteAll()
-    //}
-
-//    suspend fun insertCustomer(customer: CheckInCheckOutEntity) {
-//        return checkInCheckOutDatabaseDao.insert(customer)
-//    }
-//
-//    suspend fun getCustomerName(customerName: String): CheckInCheckOutEntity? {
-//        Log.i("MYTAG", "hotel repo-getCustomerName() ")
-//        return checkInCheckOutDatabaseDao.getCustomerName(customerName)
-//    }
-//
-//    suspend fun getCustomer(custid:Int): CheckInCheckOutEntity? {
-//        Log.i("MYTAG", "hotel repo-getCustomer() ")
-//        return checkInCheckOutDatabaseDao.getChosenCustomer(custid)
-//    }
-
-//    suspend fun deleteCustomer(customer: CheckInCheckOutEntity) {
-//        Log.i("MYTAG", "hotel repo-deleteCustomer() ")
-//        return checkInCheckOutDatabaseDao.deleteCustomer(customer)
-//    }
-//
-//    suspend fun deleteAllCustomer(): Int {
-//        return customers.deleteAll()
-//    }
 
     val morningCallList: LiveData<List<MorningCallEntity>>
         get() = hotelDatabase.morningCallDao().allMorningCall
@@ -97,7 +72,8 @@ class HotelRepository private constructor(
     }
 
     fun deleteRoomService(roomService: RoomServiceEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.roomServiceDao().deleteRoomService(roomService)}
+        mExecutors.diskIO()
+            .execute { hotelDatabase.roomServiceDao().deleteRoomService(roomService) }
     }
 
     val cicoList: LiveData<List<CheckInCheckOutEntity>>
@@ -105,6 +81,10 @@ class HotelRepository private constructor(
 
     fun getChosenCico(custId: Int): LiveData<CheckInCheckOutEntity> {
         return hotelDatabase.cicoDao().getChosenCico(custId)
+    }
+
+    fun getCicoByStatus(status: RoomStatus): LiveData<List<CheckInCheckOutEntity>> {
+        return hotelDatabase.cicoDao().getCicoByStatus(status)
     }
 
     fun insertCico(cico: CheckInCheckOutEntity) {

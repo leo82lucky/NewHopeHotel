@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
@@ -32,10 +32,9 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
         retainInstance = true
     }
 
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cico_list, container, false)
 
@@ -66,18 +65,40 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
         binding.uiState = cicoActivityViewModel.uiState
 
         //Claim list of cico from view model
-        cicoActivityViewModel.cicoList?.observe(viewLifecycleOwner, { cicoEntries ->
-            if (cicoEntries.isNullOrEmpty()) {
-                cicoActivityViewModel.uiState.set(UIState.EMPTY)
-            } else {
-                cicoActivityViewModel.uiState.set(UIState.HAS_DATA)
-                mAdapter.cicoList = cicoEntries
-                mCicoList = cicoEntries
-            }
-        })
+//        cicoActivityViewModel.cicoList?.observe(viewLifecycleOwner, { cicoEntries ->
+//            if (cicoEntries.isNullOrEmpty()) {
+//                cicoActivityViewModel.uiState.set(UIState.EMPTY)
+//            } else {
+//                cicoActivityViewModel.uiState.set(UIState.HAS_DATA)
+//                mAdapter.cicoList = cicoEntries
+//                mCicoList = cicoEntries
+//            }
+//        })
+        arrangeCicoListByStatus(cicoActivityViewModel.cicoList)
+
+        binding.buttonAllStatus.setOnClickListener {
+            binding.buttonAllStatus.setBackgroundColor(resources.getColor(R.color.green_pigment))
+            binding.buttonAvailableStatus.setBackgroundColor(resources.getColor(R.color.independence_grey))
+            binding.buttonUnavailableStatus.setBackgroundColor(resources.getColor(R.color.independence_grey))
+            arrangeCicoListByStatus(cicoActivityViewModel.cicoList)
+        }
+
+        binding.buttonAvailableStatus.setOnClickListener {
+            binding.buttonAllStatus.setBackgroundColor(resources.getColor(R.color.independence_grey))
+            binding.buttonAvailableStatus.setBackgroundColor(resources.getColor(R.color.green_pigment))
+            binding.buttonUnavailableStatus.setBackgroundColor(resources.getColor(R.color.independence_grey))
+            arrangeCicoListByStatus(cicoActivityViewModel.cicoStatusAvailable)
+        }
+
+        binding.buttonUnavailableStatus.setOnClickListener {
+            binding.buttonAllStatus.setBackgroundColor(resources.getColor(R.color.independence_grey))
+            binding.buttonAvailableStatus.setBackgroundColor(resources.getColor(R.color.independence_grey))
+            binding.buttonUnavailableStatus.setBackgroundColor(resources.getColor(R.color.green_pigment))
+            arrangeCicoListByStatus(cicoActivityViewModel.cicoStatusUnavailable)
+        }
 
         //Attach an ItemTouchHelper for swipe-to-delete functionality
-        val coordinator:FrameLayout? = activity?.findViewById(R.id.main_container)
+        val coordinator: FrameLayout? = activity?.findViewById(R.id.main_container)
         ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -119,5 +140,17 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
             replace(R.id.main_container, frag)
             addToBackStack(null)
         }
+    }
+
+    private fun arrangeCicoListByStatus(status: LiveData<List<CheckInCheckOutEntity>>?) {
+        status?.observe(viewLifecycleOwner, { cicoByStatus ->
+            if (cicoByStatus.isNullOrEmpty()) {
+                cicoActivityViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                cicoActivityViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.cicoList = cicoByStatus
+                mCicoList = cicoByStatus
+            }
+        })
     }
 }

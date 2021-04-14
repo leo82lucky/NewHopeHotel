@@ -2,6 +2,7 @@ package com.example.newhopehotel.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.newhopehotel.data.RoomStatus
 
 @Dao
 interface RegisterDatabaseDao {
@@ -35,6 +36,9 @@ interface CheckInCheckOutDatabaseDao {
 
     @Query("SELECT * FROM CheckIn_Checkout_Table WHERE cicoId = :id")
     fun getChosenCico(id: Int): LiveData<CheckInCheckOutEntity>
+
+    @Query("SELECT * FROM CheckIn_Checkout_Table WHERE roomStatus = :roomStatus")
+    fun getCicoByStatus(roomStatus: RoomStatus): LiveData<List<CheckInCheckOutEntity>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateCico(checkIn: CheckInCheckOutEntity)
