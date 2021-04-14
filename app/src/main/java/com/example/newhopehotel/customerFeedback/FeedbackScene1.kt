@@ -61,7 +61,9 @@ class FeedbackScene1 : Fragment(R.layout.fragment_customer_feedback1) {
 
         var feedbackList = mutableListOf(
 
-            FeedbackList("John","12/2/2021","Testing 1")
+            FeedbackList("John","12/2/2021","Testing 1"),
+            FeedbackList("Johnathan","13/2/2021","Testing 2")
+
 
         )
 

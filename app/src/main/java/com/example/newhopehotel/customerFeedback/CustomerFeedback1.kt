@@ -25,11 +25,7 @@ class CustomerFeedback1 : AppCompatActivity() {
                 add(R.id.feedback_container, FeedbackScene1())
             }
         }
-        setSupportActionBar(binding.toolbar)
-    }
-
-    override fun getSupportFragmentManager(): FragmentManager {
-        return super.getSupportFragmentManager()
+        setSupportActionBar(binding.customerFeedback)
     }
 
 
