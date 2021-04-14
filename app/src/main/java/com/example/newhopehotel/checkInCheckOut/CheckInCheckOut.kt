@@ -8,6 +8,7 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityCheckInCheckOutBinding
 
 class CheckInCheckOut : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityCheckInCheckOutBinding>(
@@ -21,6 +22,7 @@ class CheckInCheckOut : AppCompatActivity() {
                 add(R.id.main_container, CicoListFragment())
             }
         }
+
     }
 
     override fun onBackPressed() {
@@ -33,4 +35,5 @@ class CheckInCheckOut : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
 }

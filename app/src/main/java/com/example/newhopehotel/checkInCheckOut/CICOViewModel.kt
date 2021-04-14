@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.HotelRepository
@@ -18,6 +19,20 @@ class CICOViewModel(application: Application) : AndroidViewModel(application) {
         get() {
             return field ?: mRepo.cicoList.also { field = it }
         }
+
+    var cicoStatusAvailable: LiveData<List<CheckInCheckOutEntity>>? = null
+        get() {
+            return field ?: mRepo.getCicoByStatus(RoomStatus.Available).also { field = it }
+        }
+
+    var cicoStatusUnavailable: LiveData<List<CheckInCheckOutEntity>>? = null
+        get() {
+            return field ?: mRepo.getCicoByStatus(RoomStatus.Unavailable).also { field = it }
+        }
+
+    fun getCicoByStatus(roomStatus: RoomStatus) {
+        mRepo.getCicoByStatus(roomStatus)
+    }
 
     fun insertCico(cico: CheckInCheckOutEntity) {
         mRepo.insertCico(cico)
