@@ -74,7 +74,7 @@ class RegisterViewModel(private val repository: HotelRepository, application: Ap
                     val email = inputUsername.value!!
                     val password = inputPassword.value!!
                     Log.i("MYTAG", "insidi Sumbit")
-                    insert(RegisterEntity(0, firstName, lastName, email, password))
+                    insert(RegisterEntity(0, firstName, lastName, email, password, 0))
                     inputFirstName.value = null
                     inputLastName.value = null
                     inputUsername.value = null
