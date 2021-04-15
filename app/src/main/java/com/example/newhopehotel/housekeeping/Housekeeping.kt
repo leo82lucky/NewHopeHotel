@@ -28,11 +28,6 @@ class Housekeeping : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        //val currentFrag = supportFragmentManager.findFragmentById(R.id.main_container)
-        //if (currentFrag is CleaningListFragment) {
-        //    currentFrag.onBackClicked()
-        //} else  {
             super.onBackPressed()
-        //}
     }
 }
