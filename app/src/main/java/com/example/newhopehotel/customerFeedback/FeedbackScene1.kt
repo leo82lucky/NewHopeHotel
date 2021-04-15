@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import kotlinx.android.synthetic.main.fragment_customer_feedback1.*
+import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.FeedbackEntity
+import com.example.newhopehotel.databinding.FragmentCustomerFeedback1Binding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,75 +25,81 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FeedbackEdit.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FeedbackScene1 : Fragment(R.layout.fragment_customer_feedback1) {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var feedbackListViewModel: FeedbackScene1ViewModel
+
+    private lateinit var mAdapter: FeedbackAdapter
+    private lateinit var binding: FragmentCustomerFeedback1Binding
+    private var mFeedbackList: List<FeedbackEntity>? = null
+
+    init {
+        retainInstance = true
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_customer_feedback1, container, false)
 
+        feedbackListViewModel = ViewModelProvider(this).get(FeedbackScene1ViewModel::class.java)
 
-//        btnAssignWork.setOnClickListener {
-//            activity.supportFragmentManager.beginTransaction().apply {
-//                replace(R.id.houseKeepingFragmentHolder, workerFragment)
-//                addToBackStack(null)
-//                commit()
-//            }
-//        }
+        mAdapter = FeedbackAdapter(this)
 
-        var feedbackList = mutableListOf(
+        binding.rvFeedbackList.adapter = mAdapter
+        binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
 
-            FeedbackList("John","12/2/2021","Testing 1"),
-            FeedbackList("Johnathan","13/2/2021","Testing 2")
-        )
+        feedbackListViewModel.insertFeedbackList(FeedbackEntity(1,"Jonhny","10/11/2021","Hi","Hello"))
+        feedbackListViewModel.insertFeedbackList(FeedbackEntity(2,"Johnson","10/11/2021","Testing 2",""))
 
-        var viewedFeedbackList = mutableListOf(
-            ViewedFeedbackList("Jane", "10/11/2021","Answer 1","Question 1")
-        )
-
-        val adapter = FeedbackAdapter(feedbackList)
-        rvFeedbackList.adapter = adapter
-        rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
-
-        fbButton.setOnClickListener{
-            val adapter = FeedbackAdapter(feedbackList)
-            rvFeedbackList.adapter = adapter
-            rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
-        }
-
-        viewedFbButton.setOnClickListener{
-            val adapter = ViewedFeedbackAdapter(viewedFeedbackList)
-            rvFeedbackList.adapter = adapter
-            rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
-        }
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FeedbackEdit.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FeedbackEdit().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
+        binding.uiState = feedbackListViewModel.uiState
+
+        var temp: LiveData<List<FeedbackEntity>>? = feedbackListViewModel.feedbackList
+        temp?.observe(viewLifecycleOwner, { temp2 ->
+            if (temp2.isNullOrEmpty()) {
+                feedbackListViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                feedbackListViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.feedbackList = temp2
+                mFeedbackList = temp2
             }
+        })
+
+        //arrangeCleaningListByTest(cleaningListViewModel.cleaningList)
     }
+
+    override fun onFeedbackEditClicked(chosenToy: FeedbackEntity) {
+
+    }
+
+//    private fun openWorkerFrag(frag: WorkerFragment) {
+//        fragmentManager?.transaction {
+//            replace(R.id.main_container, frag)
+//            addToBackStack(null)
+//        }
+//    }
+
+//    private fun arrangeCleaningListByTest(test: LiveData<List<CleaningListEntity>>?) {
+//        test?.observe(viewLifecycleOwner, { cleaningListByTest ->
+//            if (cleaningListByTest.isNullOrEmpty()) {
+//                cleaningListViewModel.uiState.set(UIState.EMPTY)
+//            } else {
+//                cleaningListViewModel.uiState.set(UIState.HAS_DATA)
+//                mAdapter.cleaningList = cleaningListByTest
+//                mCleaningList = cleaningListByTest
+//            }
+//        })
+//    }
+
+
 }

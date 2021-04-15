@@ -9,8 +9,8 @@ import com.example.newhopehotel.data.RoomConverter
 
 
 @Database(
-    entities = [RegisterEntity::class, CheckInCheckOutEntity::class, MorningCallEntity::class, RoomServiceEntity::class, CleaningListEntity::class],
-    version = 11, exportSchema = false
+    entities = [RegisterEntity::class, CheckInCheckOutEntity::class, MorningCallEntity::class, RoomServiceEntity::class, CleaningListEntity::class, FeedbackEntity::class],
+    version = 12, exportSchema = false
 )
 @TypeConverters(RoomConverter::class)
 abstract class HotelDatabase : RoomDatabase() {
@@ -22,6 +22,7 @@ abstract class HotelDatabase : RoomDatabase() {
     abstract fun morningCallDao():MorningCallDatabaseDao
     abstract fun roomServiceDao():RoomServiceDatabaseDao
     abstract fun cleaningListDao():CleaningListDatabaseDao
+    abstract fun feedbackListDao():FeedbackDao
 
     companion object {
 

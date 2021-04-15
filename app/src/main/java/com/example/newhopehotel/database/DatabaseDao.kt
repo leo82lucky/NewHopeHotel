@@ -148,7 +148,7 @@ interface FeedbackDao{
     val allFeedback: LiveData<List< FeedbackEntity>>
 
     @Query("SELECT * FROM Feedback_Table WHERE feedbackID = :id")
-    fun getChosenFeedback(id: Int): LiveData<FeedbackEntity>
+    fun getChosenFeedback(id: Int): LiveData<List<FeedbackEntity>>
 
     @Query("DELETE FROM Feedback_Table")
     fun deleteAllFeedback(): Int

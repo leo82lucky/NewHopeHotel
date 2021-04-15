@@ -33,6 +33,7 @@ class CleaningListAdapter(
             binding.cleaningListItem = currentCleaningList
             binding.cleaningListItemClick = clickListener
             binding.executePendingBindings()
+
         }
 
         companion object {

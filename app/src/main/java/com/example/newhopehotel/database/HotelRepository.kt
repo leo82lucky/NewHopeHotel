@@ -12,6 +12,7 @@ class HotelRepository private constructor(
     private val hotelDatabase: HotelDatabase,
     private val mExecutors: AppExecutors
 ) {
+
     val users: LiveData<List<RegisterEntity>>
         get() = hotelDatabase.registerDao().allUsers
 
@@ -23,6 +24,9 @@ class HotelRepository private constructor(
         get() = hotelDatabase.morningCallDao().allMorningCall
     val roomServices: LiveData<List<RoomServiceEntity>>
         get() = hotelDatabase.roomServiceDao().allRoomService
+
+    val feedbackList: LiveData<List<FeedbackEntity>>
+        get() = hotelDatabase.feedbackListDao().allFeedback
     //    val users = registerDatabaseDao.getAllUsers()
 //    val customers = checkInCheckOutDatabaseDao.allCustomers
 //    suspend fun insert(user: RegisterEntity) {
@@ -118,6 +122,18 @@ class HotelRepository private constructor(
 
     fun getCleaningListByUserID(userID: Int): LiveData<List<CleaningListEntity>> {
         return hotelDatabase.cleaningListDao().findCleaningList(userID)
+    }
+
+    fun getFeedbackListByUserID(feedbackID: Int): LiveData<List<FeedbackEntity>>{
+        return hotelDatabase.feedbackListDao().getChosenFeedback(feedbackID)
+    }
+
+    fun insertFeedbackList(feedbackList: FeedbackEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().insertFeedback(feedbackList) }
+    }
+
+    fun deleteFeedbackList(feedbackList: FeedbackEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().deleteFeedback(feedbackList) }
     }
 
     companion object {

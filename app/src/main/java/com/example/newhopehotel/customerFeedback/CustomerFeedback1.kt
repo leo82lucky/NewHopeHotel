@@ -10,7 +10,7 @@ import com.example.newhopehotel.databinding.ActivityCustomerFeedback1Binding
 
 class CustomerFeedback1 : AppCompatActivity() {
 
-    var binding: ActivityCustomerFeedback1Binding? = null
+    //var binding: ActivityCustomerFeedback1Binding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +19,8 @@ class CustomerFeedback1 : AppCompatActivity() {
             this,
             R.layout.activity_customer_feedback1
         )
+
+        setSupportActionBar(binding.customerFeedback)
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {

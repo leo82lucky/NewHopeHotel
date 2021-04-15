@@ -4,49 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".customerFeedback.FeedbackScene1">
 
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.example.newhopehotel.data.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="25dp">
-
-        <!--    <data>-->
-
-        <!--        <variable-->
-        <!--            android:name="myFeedbackSceneViewModel"-->
-        <!--            android:type="com.example.newhopehotel.customerFeedback.FeedbackSceneViewModel" />-->
-        <!--    </data>-->
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeedbackList"
-            android:layout_width="410dp"
-            android:layout_height="599dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:isScrollContainer="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLayout"
             app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/fbButton"
-            android:layout_width="198dp"
-            android:layout_height="47dp"
-            android:text="Feedback"
-            app:layout_constraintEnd_toStartOf="@+id/viewedFbButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/viewedFbButton"
-            android:layout_width="199dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="8dp"
-            android:text="Viewed Feedback"
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fbButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/fbButton"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:text="Feedback"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/viewedFbButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/viewedFbButton"
+                android:layout_width="203dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:text="Viewed Feedback"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/fbButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>
