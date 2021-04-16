@@ -136,6 +136,14 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().deleteFeedback(feedbackList) }
     }
 
+    fun getSelectedFeedbacks(str: String): LiveData<List<FeedbackEntity>>{
+        return hotelDatabase.feedbackListDao().getSelectedFeedbacks(str)
+    }
+
+    fun getSelectedViewedFeedbacks(str: String): LiveData<List<FeedbackEntity>>{
+        return hotelDatabase.feedbackListDao().getSelectedViewedFeedbacks(str)
+    }
+
     companion object {
 
         private var sInstance: HotelRepository? = null

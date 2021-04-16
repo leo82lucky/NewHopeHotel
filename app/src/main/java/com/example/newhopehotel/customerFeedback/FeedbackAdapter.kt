@@ -12,7 +12,7 @@ class FeedbackAdapter(
     private val mListener: FeedbackScene1
     ) : RecyclerView.Adapter<FeedbackAdapter.FeedbackListViewHolder>() {
 
-    var feedbackList: List<FeedbackEntity>? = null
+     var feedbackList: List<FeedbackEntity>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -28,12 +28,10 @@ class FeedbackAdapter(
 
     class FeedbackListViewHolder(private val binding: FeedbacksBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(currentFeedbackList: FeedbackEntity?, clickListener: FeedbackAdapter.FeedbackEditClickListener) {
+
             binding.feedbackListItem = currentFeedbackList
             binding.fbEditItemClick = clickListener
-            //binding.cleaningListItem = currentCleaningList
-            //binding.cleaningListItemClick = clickListener
             binding.executePendingBindings()
-
         }
 
         companion object {
