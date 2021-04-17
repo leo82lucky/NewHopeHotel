@@ -160,6 +160,11 @@ interface FeedbackDao{
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateFeedback(feedback: FeedbackEntity)
 
+    @Query("SELECT * FROM Feedback_Table WHERE answer == :str")
+    fun getSelectedFeedbacks(str: String): LiveData<List<FeedbackEntity>>
+
+    @Query("SELECT * FROM Feedback_Table WHERE answer != :str")
+    fun getSelectedViewedFeedbacks(str: String): LiveData<List<FeedbackEntity>>
 
 }
 
