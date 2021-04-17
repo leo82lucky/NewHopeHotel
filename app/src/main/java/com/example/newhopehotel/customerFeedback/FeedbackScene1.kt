@@ -46,6 +46,9 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
     private var mFeedbackList: List<FeedbackEntity>? = null
     private var mViewedFeedbackList: List<FeedbackEntity>? = null
 
+    private var fb: Boolean = false
+    private var vFb: Boolean = false
+
     init {
         retainInstance = true
     }
@@ -102,15 +105,20 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             )
         }
 
+        fb= true;
         binding.rvFeedbackList.adapter = mAdapter
         binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
 
         binding.fbButton.setOnClickListener{
+            fb=true
+            vFb=false
             binding.rvFeedbackList.adapter = mAdapter
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
         }
 
         binding.viewedFbButton.setOnClickListener{
+            fb=false
+            vFb=true
             binding.rvFeedbackList.adapter = viewedAdapter
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
         }
@@ -128,37 +136,17 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
 
-                val feedbackListToErase = mFeedbackList!![position]
+                if(fb) {
+                    val feedbackListToErase = mFeedbackList!![position]
+                    feedbackListViewModel.deleteFeedbackList(feedbackListToErase)
+                    feedbackListViewModel.updateFeedbackList(feedbackListToErase)
+                }
 
-                feedbackListViewModel.deleteFeedbackList(feedbackListToErase)
-                feedbackListViewModel.updateFeedbackList(feedbackListToErase)
-
-//                coordinator?.longSnackbar("One task completed", "UNDO") {
-//                    feedbackListViewModel.insertCleaningList(cleaningListToErase)
-//                }
-            }
-        }).attachToRecyclerView(binding.rvFeedbackList)
-
-        ItemTouchHelper(object :
-            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-
-                val viewedFeedbackListToErase = mViewedFeedbackList!![position]
-
-                viewedFeedbackListViewModel.deleteFeedbackList(viewedFeedbackListToErase)
-                viewedFeedbackListViewModel.updateFeedbackList(viewedFeedbackListToErase)
-//                coordinator?.longSnackbar("One task completed", "UNDO") {
-//                    feedbackListViewModel.insertCleaningList(cleaningListToErase)
-//                }
+                if(vFb) {
+                    val viewedFeedbackListToErase = mViewedFeedbackList!![position]
+                    viewedFeedbackListViewModel.deleteFeedbackList(viewedFeedbackListToErase)
+                    viewedFeedbackListViewModel.updateFeedbackList(viewedFeedbackListToErase)
+                }
             }
         }).attachToRecyclerView(binding.rvFeedbackList)
 
