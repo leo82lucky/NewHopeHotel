@@ -5,19 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.FeedbackEntity
 import com.example.newhopehotel.databinding.FragmentCustomerFeedback1Binding
 import com.example.newhopehotel.housekeeping.CHOSEN_WORKER
 import com.example.newhopehotel.housekeeping.RoomsToCleanFragment
+import org.jetbrains.anko.design.longSnackbar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,11 +62,45 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
 
         mAdapter = FeedbackAdapter(this)
         viewedAdapter = ViewedFeedbackAdapter(this)
-        
-        feedbackListViewModel.insertFeedbackList(FeedbackEntity(1,"Jonhny","10/11/2021","Hi","Hello"))
-        feedbackListViewModel.insertFeedbackList(FeedbackEntity(2,"Johnson","10/11/2021","Testing 2",""))
-        feedbackListViewModel.insertFeedbackList(FeedbackEntity(3,"John","11/11/2021","Testing 3",""))
-        feedbackListViewModel.insertFeedbackList(FeedbackEntity(4,"Johnii","11/11/2021","Testing 3","Hi"))
+
+        if(feedbackListViewModel.feedbackList == null) {
+            feedbackListViewModel.insertFeedbackList(
+                FeedbackEntity(
+                    1,
+                    "Jonhny",
+                    "10/11/2021",
+                    "Hi",
+                    "Hello"
+                )
+            )
+            feedbackListViewModel.insertFeedbackList(
+                FeedbackEntity(
+                    2,
+                    "Johnson",
+                    "10/11/2021",
+                    "Testing 2",
+                    ""
+                )
+            )
+            feedbackListViewModel.insertFeedbackList(
+                FeedbackEntity(
+                    3,
+                    "John",
+                    "11/11/2021",
+                    "Testing 3",
+                    ""
+                )
+            )
+            feedbackListViewModel.insertFeedbackList(
+                FeedbackEntity(
+                    4,
+                    "Johnii",
+                    "11/11/2021",
+                    "Testing 3",
+                    "Hi"
+                )
+            )
+        }
 
         binding.rvFeedbackList.adapter = mAdapter
         binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
@@ -76,6 +114,53 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             binding.rvFeedbackList.adapter = viewedAdapter
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
         }
+
+        ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+
+                val feedbackListToErase = mFeedbackList!![position]
+
+                feedbackListViewModel.deleteFeedbackList(feedbackListToErase)
+                feedbackListViewModel.updateFeedbackList(feedbackListToErase)
+
+//                coordinator?.longSnackbar("One task completed", "UNDO") {
+//                    feedbackListViewModel.insertCleaningList(cleaningListToErase)
+//                }
+            }
+        }).attachToRecyclerView(binding.rvFeedbackList)
+
+        ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+
+                val viewedFeedbackListToErase = mViewedFeedbackList!![position]
+
+                viewedFeedbackListViewModel.deleteFeedbackList(viewedFeedbackListToErase)
+                viewedFeedbackListViewModel.updateFeedbackList(viewedFeedbackListToErase)
+//                coordinator?.longSnackbar("One task completed", "UNDO") {
+//                    feedbackListViewModel.insertCleaningList(cleaningListToErase)
+//                }
+            }
+        }).attachToRecyclerView(binding.rvFeedbackList)
 
         return binding.root
     }
@@ -135,24 +220,7 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         }
     }
 
-//    private fun openWorkerFrag(frag: WorkerFragment) {
-//        fragmentManager?.transaction {
-//            replace(R.id.main_container, frag)
-//            addToBackStack(null)
-//        }
-//    }
 
-//    private fun arrangeCleaningListByTest(test: LiveData<List<CleaningListEntity>>?) {
-//        test?.observe(viewLifecycleOwner, { cleaningListByTest ->
-//            if (cleaningListByTest.isNullOrEmpty()) {
-//                cleaningListViewModel.uiState.set(UIState.EMPTY)
-//            } else {
-//                cleaningListViewModel.uiState.set(UIState.HAS_DATA)
-//                mAdapter.cleaningList = cleaningListByTest
-//                mCleaningList = cleaningListByTest
-//            }
-//        })
-//    }
 
 
 }

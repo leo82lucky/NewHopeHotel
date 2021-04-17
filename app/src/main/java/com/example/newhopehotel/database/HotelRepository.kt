@@ -161,7 +161,7 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.selectedWorkerDao().deleteAllSelectedWorker() }
     }
 
-    fun getFeedbackListByUserID(feedbackID: Int): LiveData<List<FeedbackEntity>>{
+    fun getFeedbackListByUserID(feedbackID: Int): LiveData<FeedbackEntity>{
         return hotelDatabase.feedbackListDao().getChosenFeedback(feedbackID)
     }
 
@@ -171,6 +171,10 @@ class HotelRepository private constructor(
 
     fun deleteFeedbackList(feedbackList: FeedbackEntity) {
         mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().deleteFeedback(feedbackList) }
+    }
+
+    fun updateFeedbackList(feedbackList: FeedbackEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().updateFeedback(feedbackList) }
     }
 
     fun getSelectedFeedbacks(str: String): LiveData<List<FeedbackEntity>>{

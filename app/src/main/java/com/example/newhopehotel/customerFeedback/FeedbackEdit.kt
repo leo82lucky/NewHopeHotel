@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
@@ -35,12 +36,14 @@ class FeedbackEdit : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feedback_edit, container, false)
 
-        fbEditViewModel = ViewModelProvider(this).get(FeedbackEditViewModel::class.java)
+        binding.button.setOnClickListener{
+            val frag = FeedbackScene1()
 
-        binding.answerFeedback.setText(mFeedbackList?.answer)
-        binding.date.text = mFeedbackList?.date
-        binding.question.text = mFeedbackList?.question
-        binding.username.text = mFeedbackList?.username
+            onFeedbackPostClicked()
+            openFeedbackList(frag)
+        }
+
+        fbEditViewModel = ViewModelProvider(this).get(FeedbackEditViewModel::class.java)
 
         return binding.root
     }
@@ -52,16 +55,46 @@ class FeedbackEdit : Fragment() {
 
         binding.uiState = fbEditViewModel.uiState
 
-        var temp: LiveData<FeedbackEntity>? = arguments?.getParcelable(CHOSEN_FEEDBACK)
+        mFeedbackList = arguments?.getParcelable(CHOSEN_FEEDBACK)
+
+        var temp: LiveData<FeedbackEntity>? = fbEditViewModel.getFeedbackListByUserID(mFeedbackList!!.feedbackId)
         temp?.observe(viewLifecycleOwner, { temp2 ->
             if (temp2 == null) {
                 fbEditViewModel.uiState.set(UIState.EMPTY)
             } else {
                 fbEditViewModel.uiState.set(UIState.HAS_DATA)
                 mFeedbackList = temp2
-                Toast.makeText(context,mFeedbackList.toString(),Toast.LENGTH_SHORT).show()
             }
         })
+
+        displayDetails()
+    }
+
+    private fun displayDetails(){
+        binding.answerFeedback.setText(mFeedbackList?.answer)
+        binding.date.text = mFeedbackList?.date
+        binding.question.text = mFeedbackList?.question
+        binding.username.text = mFeedbackList?.username
+    }
+
+    private fun onFeedbackPostClicked() {
+
+
+//        val args = Bundle()
+//        args.putParcelable(CHOSEN_FEEDBACK, chosenToy)
+//        val frag = FeedbackEdit()
+//        frag.arguments = args
+//        openFeedbackEdit(frag)
+        mFeedbackList?.answer = binding.answerFeedback.text.toString()
+
+        fbEditViewModel.updateFeedbackList(mFeedbackList!!)
+    }
+
+    private fun openFeedbackList(frag: FeedbackScene1) {
+        fragmentManager?.transaction {
+            replace(R.id.feedback_container, frag)
+            addToBackStack(null)
+        }
     }
 
 

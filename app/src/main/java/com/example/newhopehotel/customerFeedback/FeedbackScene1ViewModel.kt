@@ -23,12 +23,7 @@ class FeedbackScene1ViewModel(application: Application) :
             return field ?: mRepo.feedbackList.also { field = it }
         }
 
-    var feedbackListOfUserID: LiveData<List<FeedbackEntity>>? = null
-        get() {
-            return field ?: mRepo.getFeedbackListByUserID(1).also { field = it }
-        }
-
-    fun getFeedbackListByUserID(feedbackID: Int): LiveData<List<FeedbackEntity>> {
+    fun getFeedbackListByUserID(feedbackID: Int): LiveData<FeedbackEntity> {
         return mRepo.getFeedbackListByUserID(feedbackID)
     }
 
@@ -46,6 +41,10 @@ class FeedbackScene1ViewModel(application: Application) :
 
     fun selectViewedFeedback(str: String): LiveData<List<FeedbackEntity>>{
         return mRepo.getSelectedViewedFeedbacks(str)
+    }
+
+    fun updateFeedbackList(feedbackList: FeedbackEntity){
+        mRepo.updateFeedbackList(feedbackList)
     }
 
 }
