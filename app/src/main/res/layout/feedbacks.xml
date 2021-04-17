@@ -18,79 +18,78 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/feedbackItems"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/bg_feedback"
-            android:layout_width="390dp"
-            android:layout_height="165dp"
-            android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@color/mantis_green" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/mantis_green">
 
         <TextView
             android:id="@+id/question"
-            android:layout_width="371dp"
-            android:layout_height="66dp"
-            android:layout_marginTop="22dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="#FFFFFF"
             android:text="@{feedbackListItem.question.toString()}"
-            app:layout_constraintEnd_toEndOf="@+id/bg_feedback"
-            app:layout_constraintStart_toStartOf="@+id/bg_feedback"
-            app:layout_constraintTop_toTopOf="@+id/bg_feedback" />
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionText"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Question"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:text="@{feedbackListItem.username.toString()}"
-            app:layout_constraintEnd_toEndOf="@+id/bg_feedback"
-            app:layout_constraintHorizontal_bias="0.08"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@{feedbackListItem.username.toString()}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.052"
-            app:layout_constraintStart_toStartOf="@+id/bg_feedback"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question" />
 
         <ImageButton
-            android:id="@+id/deleteButton"
-            android:layout_width="37dp"
-            android:layout_height="36dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.398"
-            app:layout_constraintStart_toStartOf="@+id/bg_feedback"
-            app:layout_constraintTop_toBottomOf="@+id/date"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
-
-        <ImageButton
             android:id="@+id/editButton"
-            android:layout_width="37dp"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="@{() ->  fbEditItemClick.onFeedbackEditClicked(feedbackListItem)}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/bg_feedback"
-            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@android:drawable/ic_menu_edit"
-            android:onClick="@{() ->  fbEditItemClick.onFeedbackEditClicked(feedbackListItem)}"/>
+            app:srcCompat="@android:drawable/ic_menu_edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
