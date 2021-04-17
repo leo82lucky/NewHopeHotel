@@ -1,5 +1,6 @@
 package com.example.newhopehotel.housekeeping
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CleaningListEntity
+import com.example.newhopehotel.database.RoomToCleanEntity
 import com.example.newhopehotel.databinding.FragmentCleaningListBinding
 import kotlinx.android.synthetic.main.fragment_cleaning_list.*
 import org.jetbrains.anko.design.longSnackbar
@@ -110,10 +112,32 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
     }
 
     private fun openWorkerFrag(frag: WorkerFragment) {
+        WorkerFragment.selectedWorkerId = -1
+
         fragmentManager?.transaction {
             replace(R.id.main_container, frag)
             addToBackStack(null)
         }
+
+
+        // test data
+        cleaningListViewModel.deleteAllRoomToClean()
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R001))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R002))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R003))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R004))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R005))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R006))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R007))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R008))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R009))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R010))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R011))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R012))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R013))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R014))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R015))
+        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R016))
     }
 }
 

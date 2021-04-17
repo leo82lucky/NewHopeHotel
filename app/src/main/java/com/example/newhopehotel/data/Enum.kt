@@ -17,7 +17,13 @@ enum class RoomID {
     R007,
     R008,
     R009,
-    R010
+    R010,
+    R011,
+    R012,
+    R013,
+    R014,
+    R015,
+    R016
 }
 
 enum class RoomType {

@@ -8,7 +8,6 @@ import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.ActivityHousekeepingBinding
 import kotlinx.android.synthetic.main.activity_housekeeping.*
 
-
 class Housekeeping : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

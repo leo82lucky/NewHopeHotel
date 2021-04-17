@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
@@ -13,9 +14,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
+import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.RegisterEntity
+import com.example.newhopehotel.database.RoomToCleanEntity
+import com.example.newhopehotel.database.SelectedWorkerEntity
 import com.example.newhopehotel.databinding.FragmentWorkerBinding
 import kotlinx.android.synthetic.main.fragment_worker.*
 
@@ -74,10 +78,13 @@ class WorkerFragment : Fragment(), WorkerAdapter.WorkerClickListener {
     }
 
     override fun onWorkerClicked(chosenToy: RegisterEntity) {
+        selectedWorkerId = chosenToy.userId
+
         val args = Bundle()
         args.putParcelable(CHOSEN_WORKER, chosenToy)
         val frag = RoomsToCleanFragment()
         frag.arguments = args
+
         openRoomsToCleanFrag(frag)
     }
 
@@ -91,7 +98,10 @@ class WorkerFragment : Fragment(), WorkerAdapter.WorkerClickListener {
     private fun openRoomsToCleanFrag(frag: RoomsToCleanFragment) {
         fragmentManager?.transaction {
             replace(R.id.main_container, frag)
-            addToBackStack(null)
         }
+    }
+
+    companion object {
+        var selectedWorkerId = -1
     }
 }

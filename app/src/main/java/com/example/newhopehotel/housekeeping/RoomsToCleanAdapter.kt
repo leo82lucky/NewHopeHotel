@@ -3,42 +3,53 @@ package com.example.newhopehotel.housekeeping
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newhopehotel.R
+import com.example.newhopehotel.database.RoomToCleanEntity
+import com.example.newhopehotel.databinding.ItemRoomsToCleanBinding
 import kotlinx.android.synthetic.main.item_rooms_to_clean.view.*
 
 class RoomsToCleanAdapter(
-    var roomsToCleans: List<RoomsToClean>
+    private val mListener: RoomToCleanClickListener
 ) : RecyclerView.Adapter<RoomsToCleanAdapter.RoomsToCleanViewHolder>() {
 
-    inner class RoomsToCleanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    var roomToCleanList: List<RoomToCleanEntity>? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsToCleanViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rooms_to_clean, parent, false)
-        return RoomsToCleanViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsToCleanViewHolder = RoomsToCleanViewHolder.from(parent)
 
     override fun getItemCount(): Int {
-        return roomsToCleans.size
+        return roomToCleanList?.size ?: 0
     }
 
-    override fun onBindViewHolder(holder: RoomsToCleanViewHolder, position: Int) {
-        holder.itemView.apply {
-            tvRoomName.text = roomsToCleans[position].roomName
+    override fun onBindViewHolder(holder: RoomsToCleanViewHolder, position: Int) = holder.bind(roomToCleanList?.get(position), mListener)
 
-            if (roomsToCleans[position].isSelected)
-                borderRoomName.setBackgroundColor(resources.getColor(R.color.green_pigment))
-            else
-                roomsToCleans[position].isSelected = false
+    class RoomsToCleanViewHolder(private val binding: ItemRoomsToCleanBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(currentRoomToClean: RoomToCleanEntity?, clickListener: RoomToCleanClickListener) {
+            binding.roomToCleanItem = currentRoomToClean
+            binding.roomToCleanItemClick = clickListener
+            binding.executePendingBindings()
+        }
 
-            borderRoomName.setOnClickListener {
-                roomsToCleans[position].isSelected = !roomsToCleans[position].isSelected
-
-                if (roomsToCleans[position].isSelected)
-                    borderRoomName.setBackgroundColor(resources.getColor(R.color.green_pigment))
-                else
-                    borderRoomName.setBackgroundColor(resources.getColor(R.color.tea_green))
+        companion object {
+            fun from(parent: ViewGroup): RoomsToCleanViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = DataBindingUtil.inflate<ItemRoomsToCleanBinding>(
+                    layoutInflater,
+                    R.layout.item_rooms_to_clean,
+                    parent,
+                    false
+                )
+                return RoomsToCleanViewHolder(binding)
             }
         }
+    }
+
+    interface RoomToCleanClickListener {
+        fun onRoomToCleanClicked(chosenToy: RoomToCleanEntity)
     }
 }
