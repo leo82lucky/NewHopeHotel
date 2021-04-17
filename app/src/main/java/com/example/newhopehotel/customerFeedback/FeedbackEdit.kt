@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.FeedbackEntity
@@ -32,11 +33,9 @@ class FeedbackEdit : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mFeedbackList = arguments?.getParcelable(CHOSEN_FEEDBACK)
-
-        Toast.makeText(context, mFeedbackList?.question,Toast.LENGTH_SHORT).show()
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feedback_edit, container, false)
+
+        fbEditViewModel = ViewModelProvider(this).get(FeedbackEditViewModel::class.java)
 
         binding.answerFeedback.setText(mFeedbackList?.answer)
         binding.date.text = mFeedbackList?.date
@@ -46,24 +45,24 @@ class FeedbackEdit : Fragment() {
         return binding.root
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//
-//        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-//
-//        binding.uiState = fbEditViewModel.uiState
-//
-//        var temp: LiveData<List<FeedbackEntity>>? = feedbackListViewModel.selectFeedback("")
-//        temp?.observe(viewLifecycleOwner, { temp2 ->
-//            if (temp2.isNullOrEmpty()) {
-//                feedbackListViewModel.uiState.set(UIState.EMPTY)
-//            } else {
-//                feedbackListViewModel.uiState.set(UIState.HAS_DATA)
-//                mAdapter.feedbackList = temp2
-//                mFeedbackList = temp2
-//            }
-//        })
-//    }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
+        binding.uiState = fbEditViewModel.uiState
+
+        var temp: LiveData<FeedbackEntity>? = arguments?.getParcelable(CHOSEN_FEEDBACK)
+        temp?.observe(viewLifecycleOwner, { temp2 ->
+            if (temp2 == null) {
+                fbEditViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                fbEditViewModel.uiState.set(UIState.HAS_DATA)
+                mFeedbackList = temp2
+                Toast.makeText(context,mFeedbackList.toString(),Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
 
 }

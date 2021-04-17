@@ -14,12 +14,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class FeedbackEditViewModel(repository: HotelRepository, application: Application) :
+class FeedbackEditViewModel(application: Application) :
     AndroidViewModel(application) {
 
     private val mRepo: HotelRepository = provideRepository(application)
 
     val uiState = ObservableField(UIState.LOADING)
+
 
 
 
