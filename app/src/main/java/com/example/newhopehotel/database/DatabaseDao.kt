@@ -2,6 +2,7 @@ package com.example.newhopehotel.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 
 @Dao
@@ -159,4 +160,40 @@ interface FeedbackDao{
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateFeedback(feedback: FeedbackEntity)
 
+}
+
+@Dao
+interface RoomToCleanDatabaseDao{
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRoomToClean(roomToCleanEntity: RoomToCleanEntity)
+
+    @get:Query("SELECT * FROM Room_To_Clean_Table")
+    val allRoomToClean: LiveData<List<RoomToCleanEntity>>
+
+    @Delete
+    fun deleteRoomToClean(roomToClean: RoomToCleanEntity)
+
+    @Query("DELETE FROM Room_To_Clean_Table")
+    fun deleteAllRoomToClean(): Int
+
+    @Query("SELECT * FROM Room_To_Clean_Table WHERE cleaningTime = :cleaningTime")
+    fun getRoomToCleanByTime(cleaningTime: String): LiveData<List<RoomToCleanEntity>>
+
+    @Query("UPDATE room_to_clean_table SET border_color = :new WHERE roomID = :roomID")
+    fun changeRoomToCleanBorderColor(roomID: RoomID, new: Int)
+
+    @Update/*(onConflict = OnConflictStrategy.REPLACE)*/
+    fun updateRoomToClean(roomToClean: RoomToCleanEntity)
+}
+
+@Dao
+interface SelectedWorkerDatabaseDao {
+    @Insert
+    fun insertSelectedWorker(selectedWorker: SelectedWorkerEntity)
+
+    @get:Query("SELECT * FROM Selected_Worker_Table")
+    val allSelectedWorker: List<SelectedWorkerEntity>
+
+    @Query("DELETE FROM Selected_Worker_Table")
+    fun deleteAllSelectedWorker(): Int
 }

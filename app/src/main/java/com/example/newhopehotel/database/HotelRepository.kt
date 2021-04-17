@@ -3,6 +3,7 @@ package com.example.newhopehotel.database
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.utils.AppExecutors
 
@@ -18,8 +19,6 @@ class HotelRepository private constructor(
 
     val cicos: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico
-    val cleaningLists: LiveData<List<CleaningListEntity>>
-        get() = hotelDatabase.cleaningListDao().allCleaningList
     val morningCalls: LiveData<List<MorningCallEntity>>
         get() = hotelDatabase.morningCallDao().allMorningCall
     val roomServices: LiveData<List<RoomServiceEntity>>
@@ -122,6 +121,44 @@ class HotelRepository private constructor(
 
     fun getCleaningListByUserID(userID: Int): LiveData<List<CleaningListEntity>> {
         return hotelDatabase.cleaningListDao().findCleaningList(userID)
+    }
+
+    val roomToCleanList: LiveData<List<RoomToCleanEntity>>
+        get() = hotelDatabase.roomToCleanDao().allRoomToClean
+
+    fun insertRoomToClean(roomToClean: RoomToCleanEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().insertRoomToClean(roomToClean) }
+    }
+
+    fun deleteRoomToClean(roomToClean: RoomToCleanEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().deleteRoomToClean(roomToClean) }
+    }
+
+    fun deleteAllRoomToClean() {
+        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().deleteAllRoomToClean() }
+    }
+
+    fun changeRoomToCleanBorderColor(roomID: RoomID, new: Int) {
+        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().changeRoomToCleanBorderColor(roomID, new) }
+    }
+
+    fun updateRoomToClean(roomToClean: RoomToCleanEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().updateRoomToClean(roomToClean) }
+    }
+
+    fun getRoomToCleanByTime(cleaningTime: String): LiveData<List<RoomToCleanEntity>> {
+        return hotelDatabase.roomToCleanDao().getRoomToCleanByTime(cleaningTime)
+    }
+
+    val selectedWorkerList: List<SelectedWorkerEntity>
+        get() = hotelDatabase.selectedWorkerDao().allSelectedWorker
+
+    fun insertSelectedWorker(selectedWorker: SelectedWorkerEntity) {
+        mExecutors.diskIO().execute { hotelDatabase.selectedWorkerDao().insertSelectedWorker(selectedWorker) }
+    }
+
+    fun deleteAllSelectedWorker() {
+        mExecutors.diskIO().execute { hotelDatabase.selectedWorkerDao().deleteAllSelectedWorker() }
     }
 
     fun getFeedbackListByUserID(feedbackID: Int): LiveData<List<FeedbackEntity>>{

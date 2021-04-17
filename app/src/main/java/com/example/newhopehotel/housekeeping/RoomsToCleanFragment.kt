@@ -1,158 +1,127 @@
 package com.example.newhopehotel.housekeeping
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.transaction
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.room.Room
 import com.example.newhopehotel.R
-import kotlinx.android.synthetic.main.fragment_rooms_to_clean.*
+import com.example.newhopehotel.data.RoomID
+import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.CleaningListEntity
+import com.example.newhopehotel.database.RoomToCleanEntity
+import com.example.newhopehotel.database.SelectedWorkerEntity
+import com.example.newhopehotel.databinding.FragmentRoomsToCleanBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+const val CHOSEN_ROOM_TO_CLEAN = "chosenRoomToClean"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RoomsToCleanFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class RoomsToCleanFragment : Fragment(R.layout.fragment_rooms_to_clean) {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var roomsToCleanViewModel: RoomsToCleanViewModel
+
+    private lateinit var mAdapter: RoomsToCleanAdapter
+    private lateinit var binding: FragmentRoomsToCleanBinding
+    private var mRoomToCleanList: List<RoomToCleanEntity>? = null
+
+    private var roomIdList = mutableListOf<RoomID>()
+    private var roomCleaningTimeList = mutableListOf<String>()
+
+    init {
+        retainInstance = true
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rooms_to_clean, container, false)
 
-        // get data from database
-        var roomsToCleanList = listOf(
-            mutableListOf(
-                RoomsToClean("A 101", false),
-                RoomsToClean("A 102", false),
-                RoomsToClean("A 103", false),
-                RoomsToClean("A 104", false),
-                RoomsToClean("A 105", false),
-                RoomsToClean("A 106", false),
-                RoomsToClean("A 107", false),
-                RoomsToClean("A 108", false),
-                RoomsToClean("A 109", false),
-                RoomsToClean("A 110", false),
-                RoomsToClean("A 111", false),
-                RoomsToClean("A 112", false),
-                RoomsToClean("A 113", false),
-                RoomsToClean("A 114", false)
-            ),
-            mutableListOf(
-                RoomsToClean("B 101", false),
-                RoomsToClean("B 102", false),
-                RoomsToClean("B 103", false),
-                RoomsToClean("B 104", false),
-                RoomsToClean("B 105", false),
-                RoomsToClean("B 106", false),
-                RoomsToClean("B 107", false),
-                RoomsToClean("B 108", false),
-                RoomsToClean("B 109", false),
-                RoomsToClean("B 110", false),
-                RoomsToClean("B 111", false),
-                RoomsToClean("B 112", false),
-                RoomsToClean("B 113", false),
-                RoomsToClean("B 114", false)
-            ),
-            mutableListOf(
-                RoomsToClean("C 101", false),
-                RoomsToClean("C 102", false),
-                RoomsToClean("C 103", false),
-                RoomsToClean("C 104", false),
-                RoomsToClean("C 105", false),
-                RoomsToClean("C 106", false),
-                RoomsToClean("C 107", false),
-                RoomsToClean("C 108", false),
-                RoomsToClean("C 109", false),
-                RoomsToClean("C 110", false),
-                RoomsToClean("C 111", false),
-                RoomsToClean("C 112", false),
-                RoomsToClean("C 113", false),
-                RoomsToClean("C 114", false)
-            ),
-            mutableListOf(
-                RoomsToClean("D 101", false),
-                RoomsToClean("D 102", false),
-                RoomsToClean("D 103", false),
-                RoomsToClean("D 104", false),
-                RoomsToClean("D 105", false),
-                RoomsToClean("D 106", false),
-                RoomsToClean("D 107", false),
-                RoomsToClean("D 108", false),
-                RoomsToClean("D 109", false),
-                RoomsToClean("D 110", false),
-                RoomsToClean("D 111", false),
-                RoomsToClean("D 112", false),
-                RoomsToClean("D 113", false),
-                RoomsToClean("D 114", false)
-            )
-        )
+        roomsToCleanViewModel = ViewModelProvider(this).get(RoomsToCleanViewModel::class.java)
 
-        val adapter = RoomsToCleanAdapter(roomsToCleanList[0])
-        rv_morning_call_list.adapter = adapter
-        rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
+        mAdapter = RoomsToCleanAdapter(this)
 
-        btn_8am.setOnClickListener {
-            val adapter = RoomsToCleanAdapter(roomsToCleanList[0])
-            rv_morning_call_list.adapter = adapter
-            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
-        }
+        binding.rvRoomsToClean.adapter = mAdapter
+        binding.rvRoomsToClean.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
 
-        btn_9am.setOnClickListener {
-            val adapter = RoomsToCleanAdapter(roomsToCleanList[1])
-            rv_morning_call_list.adapter = adapter
-            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
-        }
-
-        btn_10am.setOnClickListener {
-            val adapter = RoomsToCleanAdapter(roomsToCleanList[2])
-            rv_morning_call_list.adapter = adapter
-            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
-        }
-
-        btn_11am.setOnClickListener {
-            val adapter = RoomsToCleanAdapter(roomsToCleanList[3])
-            rv_morning_call_list.adapter = adapter
-            rv_morning_call_list.layoutManager = GridLayoutManager(this.context, 4, GridLayoutManager.VERTICAL, false)
-        }
-
-        btnAssign.setOnClickListener {
-            // update database
-            // remove selected rooms
-            // go back to WorkerFragment
-        }
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RoomsToCleanFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RoomsToCleanFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
+        binding.uiState = roomsToCleanViewModel.uiState
+
+        arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
+
+        //selectedWorker = roomsToCleanViewModel.selectedWorkerList[0]
+        //Toast.makeText(this.context, "size : " + roomsToCleanViewModel.selectedWorkerList.size, Toast.LENGTH_SHORT).show()
+
+        binding.btn8am.setOnClickListener {
+            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
+        }
+
+        binding.btn12pm.setOnClickListener {
+            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean12pm)
+        }
+
+        binding.btn4pm.setOnClickListener {
+            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean4pm)
+        }
+
+        binding.btn8pm.setOnClickListener {
+            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8pm)
+        }
+
+        binding.btnAssign.setOnClickListener {
+            roomIdList.zip(roomCleaningTimeList).forEach { pair ->
+                roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, pair.component1(), pair.component2()))
             }
+
+            openWorkerFrag(WorkerFragment())
+        }
+    }
+
+    override fun onRoomToCleanClicked(chosenToy: RoomToCleanEntity) {
+        if (chosenToy.borderColor == Color.parseColor("#D4ECB8")) {
+            roomsToCleanViewModel.changeRoomToCleanBorderColor(chosenToy.roomID, Color.parseColor("#52A651"))
+            roomIdList.add(chosenToy.roomID)
+            roomCleaningTimeList.add(chosenToy.cleaningTime)
+        }
+        else {
+            roomsToCleanViewModel.changeRoomToCleanBorderColor(chosenToy.roomID, Color.parseColor("#D4ECB8"))
+            var temp = roomIdList.indexOf(chosenToy.roomID)
+            roomIdList.removeAt(temp)
+            roomCleaningTimeList.removeAt(temp)
+        }
+    }
+
+    private fun openWorkerFrag(frag: WorkerFragment) {
+        fragmentManager?.transaction {
+            replace(R.id.main_container, frag)
+        }
+    }
+
+    private fun arrangeRoomToCleanListByTime(time: LiveData<List<RoomToCleanEntity>>?) {
+        time?.observe(viewLifecycleOwner, { listByTime ->
+            if (listByTime.isNullOrEmpty()) {
+                roomsToCleanViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                roomsToCleanViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.roomToCleanList = listByTime
+                mRoomToCleanList = listByTime
+            }
+        })
     }
 }

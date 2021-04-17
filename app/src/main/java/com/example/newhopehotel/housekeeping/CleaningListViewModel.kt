@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.HotelRepository
+import com.example.newhopehotel.database.RoomToCleanEntity
 import com.example.newhopehotel.utils.provideRepository
 
 class CleaningListViewModel(application: Application) : AndroidViewModel(application) {
@@ -34,5 +35,13 @@ class CleaningListViewModel(application: Application) : AndroidViewModel(applica
 
     fun deleteCleaningList(cleaningList: CleaningListEntity) {
         mRepo.deleteCleaningList(cleaningList)
+    }
+
+    fun insertRoomToClean(roomToClean: RoomToCleanEntity) {
+        mRepo.insertRoomToClean(roomToClean)
+    }
+
+    fun deleteAllRoomToClean() {
+        mRepo.deleteAllRoomToClean()
     }
 }
