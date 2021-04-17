@@ -40,4 +40,12 @@ class FeedbackScene1ViewModel(application: Application) :
         mRepo.deleteFeedbackList(feedbackList)
     }
 
+    fun selectFeedback(str: String): LiveData<List<FeedbackEntity>>{
+        return mRepo.getSelectedFeedbacks(str)
+    }
+
+    fun selectViewedFeedback(str: String): LiveData<List<FeedbackEntity>>{
+        return mRepo.getSelectedViewedFeedbacks(str)
+    }
+
 }

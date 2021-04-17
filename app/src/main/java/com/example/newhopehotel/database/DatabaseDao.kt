@@ -160,6 +160,7 @@ interface FeedbackDao{
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateFeedback(feedback: FeedbackEntity)
 
+
 }
 
 @Dao
@@ -196,4 +197,12 @@ interface SelectedWorkerDatabaseDao {
 
     @Query("DELETE FROM Selected_Worker_Table")
     fun deleteAllSelectedWorker(): Int
+
+    @Query("SELECT * FROM Feedback_Table WHERE answer == :str")
+    fun getSelectedFeedbacks(str: String): LiveData<List<FeedbackEntity>>
+
+    @Query("SELECT * FROM Feedback_Table WHERE answer != :str")
+    fun getSelectedViewedFeedbacks(str: String): LiveData<List<FeedbackEntity>>
+
+
 }

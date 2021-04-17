@@ -3,16 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewedFeedbackListItem"
+            type="com.example.newhopehotel.database.FeedbackEntity" />
+
+        <variable
+            name="fbEditItemClick"
+            type="com.example.newhopehotel.customerFeedback.ViewedFeedbackAdapter.ViewedFeedbackEditClickListener" />
+
+        <import type="com.example.newhopehotel.utils.BindingUtils" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <!--    <data>-->
-
-        <!--        <variable-->
-        <!--            android:name="myViewedFeedbackViewModel"-->
-        <!--            android:type="com.example.newhopehotel.customerFeedback.ViewedFeedbackViewModel" />-->
-        <!--    </data>-->
 
         <ImageView
             android:id="@+id/bg_feedback"
@@ -32,7 +38,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="323dp"
             android:background="#FFFFFF"
-            android:text="Question"
+            android:text="@{viewedFeedbackListItem.question.toString()}"
             app:layout_constraintBottom_toTopOf="@+id/date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -48,7 +54,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="323dp"
             android:background="#FFFFFF"
-            android:text="Answer"
+            android:text="@{viewedFeedbackListItem.answer.toString()}"
             app:layout_constraintBottom_toTopOf="@+id/date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.003"
@@ -60,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="318dp"
-            android:text="Username"
+            android:text="@{viewedFeedbackListItem.username.toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -87,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="352dp"
-            android:text="Date"
+            android:text="@{viewedFeedbackListItem.date.toString()}"
             app:layout_constraintBottom_toTopOf="@+id/editButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -106,7 +112,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question"
             app:layout_constraintVertical_bias="0.84"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            android:onClick="@{() ->  fbEditItemClick.onViewedFeedbackEditClicked(viewedFeedbackListItem)}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
