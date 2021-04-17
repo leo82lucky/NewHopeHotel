@@ -2,7 +2,6 @@
 package com.example.newhopehotel.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +31,6 @@ class LoginFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
-//
-//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
         val factory = LoginViewModelFactory(provideRepository(requireContext()), application)
 
         loginViewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
@@ -48,8 +42,7 @@ class LoginFragment : Fragment() {
 
         loginViewModel.navigatetoRegister.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
-                Log.i("MYTAG", "insidi observe")
-                displayUsersList()
+                navigateRegister()
                 loginViewModel.doneNavigatingRegister()
             }
         })
@@ -81,44 +74,42 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.navigatetoUserDetails.observe(viewLifecycleOwner, { hasFinished ->
-            if (hasFinished == true) {
-                Log.i("MYTAG", "navigate user details")
-                Toast.makeText(requireContext(), "To The User Details", Toast.LENGTH_SHORT).show()
-                navigateUserDetails()
-                loginViewModel.doneNavigatingUserDetails()
-            }
-        })
-
         loginViewModel.navigateToHomePage.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
-                Log.i("MYTAG", "navigate to home page")
                 Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT).show()
                 navigateHomePage()
                 loginViewModel.doneNavigatingHomePage()
             }
         })
 
+        loginViewModel.navigatetoHomePageOnlyHousekeeping.observe(
+            viewLifecycleOwner,
+            { hasFinished ->
+                if (hasFinished == true) {
+                    Toast.makeText(requireContext(), "Login Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    navigateHomePageOnlyHousekeeping()
+                    loginViewModel.doneNavigatingHomePageOnlyHousekeeping()
+                }
+            })
+
         return binding.root
     }
 
 
-    private fun displayUsersList() {
-        Log.i("MYTAG", "insidisplayUsersList")
+    private fun navigateRegister() {
         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
         NavHostFragment.findNavController(this).navigate(action)
 
     }
 
-    private fun navigateUserDetails() {
-        Log.i("MYTAG", "insidisplayUsersDetails")
-        val action = LoginFragmentDirections.actionLoginFragmentToUserDetailsFragment()
+    private fun navigateHomePage() {
+        val action = LoginFragmentDirections.actionLoginFragmentToHomePageFragment()
         NavHostFragment.findNavController(this).navigate(action)
     }
 
-    private fun navigateHomePage() {
-        Log.i("MYTAG", "insidisplayHomePage")
-        val action = LoginFragmentDirections.actionLoginFragmentToHomePageFragment()
+    private fun navigateHomePageOnlyHousekeeping() {
+        val action = LoginFragmentDirections.actionLoginFragmentToHomePageOnlyHousekeepingFragment()
         NavHostFragment.findNavController(this).navigate(action)
     }
 }

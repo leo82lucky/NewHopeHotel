@@ -33,11 +33,6 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
     val navigatetoRegister: LiveData<Boolean>
         get() = _navigatetoRegister
 
-    private val _navigatetoUserDetails = MutableLiveData<Boolean>()
-
-    val navigatetoUserDetails: LiveData<Boolean>
-        get() = _navigatetoUserDetails
-
     private val _errorToast = MutableLiveData<Boolean>()
 
     val errotoast: LiveData<Boolean>
@@ -57,12 +52,12 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
     val navigateToHomePage: LiveData<Boolean>
         get() = _navigatetoHomePage
 
+    private val _navigatetoHomePageOnlyHousekeeping = MutableLiveData<Boolean>()
+    val navigatetoHomePageOnlyHousekeeping: LiveData<Boolean>
+        get() = _navigatetoHomePageOnlyHousekeeping
+
     fun signUP() {
         _navigatetoRegister.value = true
-    }
-
-    fun userDetailsButton() {
-        _navigatetoUserDetails.value = true
     }
 
     fun loginButton() {
@@ -71,8 +66,8 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
         } else {
             uiScope.launch {
                 val usersNames = repository.getUserName(inputUsername.value!!)
-                if (usersNames != null) {
-                    if (usersNames.passwrd == inputPassword.value) {
+                if (inputUsername.value == "admin") {
+                    if (inputPassword.value == "admin123") {
                         inputUsername.value = null
                         inputPassword.value = null
                         _navigatetoHomePage.value = true
@@ -80,7 +75,17 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
                         _errorToastInvalidPassword.value = true
                     }
                 } else {
-                    _errorToastUsername.value = true
+                    if (usersNames != null) {
+                        if (usersNames.passwrd == inputPassword.value) {
+                            inputUsername.value = null
+                            inputPassword.value = null
+                            _navigatetoHomePageOnlyHousekeeping.value = true
+                        } else {
+                            _errorToastInvalidPassword.value = true
+                        }
+                    } else {
+                        _errorToastUsername.value = true
+                    }
                 }
             }
         }
@@ -91,28 +96,25 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
         _navigatetoRegister.value = false
     }
 
-    fun doneNavigatingUserDetails() {
-        _navigatetoUserDetails.value = false
-    }
-
     fun doneNavigatingHomePage() {
         _navigatetoHomePage.value = false
     }
 
+    fun doneNavigatingHomePageOnlyHousekeeping() {
+        _navigatetoHomePageOnlyHousekeeping.value = false
+    }
+
     fun donetoast() {
         _errorToast.value = false
-        Log.i("MYTAG", "login button ")
     }
 
 
     fun donetoastErrorUsername() {
         _errorToastUsername.value = false
-        Log.i("MYTAG", "error Username ")
     }
 
     fun donetoastInvalidPassword() {
         _errorToastInvalidPassword.value = false
-        Log.i("MYTAG", "error password ")
     }
 
 

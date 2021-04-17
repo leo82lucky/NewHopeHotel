@@ -47,7 +47,7 @@ class UserDetailsFragment : Fragment() {
         userDetailsViewModel.navigateto.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
                 val action =
-                    UserDetailsFragmentDirections.actionUserDetailsFragmentToLoginFragment()
+                    UserDetailsFragmentDirections.actionUserDetailsFragmentToHomePageFragment()
                 NavHostFragment.findNavController(this).navigate(action)
                 userDetailsViewModel.doneNavigating()
             }

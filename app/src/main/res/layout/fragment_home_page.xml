@@ -234,7 +234,14 @@
 
         </GridLayout>
 
-
+        <Button
+            android:id="@+id/UserDetailsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{()->myHomePageViewModel.userDetailsButton()}"
+            android:text="@string/userDetails"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </layout>

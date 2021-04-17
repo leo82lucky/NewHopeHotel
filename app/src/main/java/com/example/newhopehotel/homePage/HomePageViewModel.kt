@@ -15,6 +15,18 @@ class HomePageViewModel(repository: HotelRepository, application: Application) :
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val _navigatetoUserDetails = MutableLiveData<Boolean>()
+
+    val navigatetoUserDetails: LiveData<Boolean>
+        get() = _navigatetoUserDetails
+
+    fun userDetailsButton() {
+        _navigatetoUserDetails.value = true
+    }
+
+    fun doneNavigatingUserDetails() {
+        _navigatetoUserDetails.value = false
+    }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 
