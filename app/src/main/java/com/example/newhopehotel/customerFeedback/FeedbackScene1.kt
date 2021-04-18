@@ -136,6 +136,7 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         }).attachToRecyclerView(binding.rvFeedbackList)
 
         return binding.root
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -158,7 +159,6 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                 mAdapter.feedbackList = temp2
                 mFeedbackList = temp2
                 fbEmpty = true
-
                 if(fbEmpty && vFbEmpty) {
                     insertTestData()
                 }

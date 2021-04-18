@@ -43,8 +43,28 @@
             android:gravity="center"
             android:onClick="@{()->userDetailsLayout.backButtonclicked()}"
             android:text="@string/backButton" />
-
-
+        <TextView
+            android:id="@+id/textView_users"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/small_padding"
+            android:text="@string/List_of_Users_text"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="32dp"
+            tools:layout_conversion_absoluteWidth="379dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -52,24 +72,7 @@
             android:background="@android:color/background_light"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_users"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingTop="@dimen/small_padding"
-                android:text="@string/List_of_Users_text"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_conversion_absoluteHeight="32dp"
-                tools:layout_conversion_absoluteWidth="379dp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/usersRecyclerView"
@@ -84,6 +87,7 @@
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
-
+    </ScrollView>
     </LinearLayout>
+
 </layout>
