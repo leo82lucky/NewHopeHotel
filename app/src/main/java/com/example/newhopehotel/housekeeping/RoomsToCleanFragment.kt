@@ -34,6 +34,7 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
 
     private var roomIdList = mutableListOf<RoomID>()
     private var roomCleaningTimeList = mutableListOf<String>()
+    private lateinit var roomCleaningTime: String
 
     init {
         retainInstance = true
@@ -63,27 +64,43 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
 
         binding.uiState = roomsToCleanViewModel.uiState
 
-        arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
+        arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToCleanList)
 
-        binding.btn8am.setOnClickListener {
-            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
+/*        binding.btn8am.setOnClickListener {
+            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
+            roomCleaningTime = "8am"
+            it.setBackgroundColor(Color.parseColor("#52A651"))
         }
 
         binding.btn12pm.setOnClickListener {
-            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean12pm)
+            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean12pm)
+            roomCleaningTime = "12pm"
+            it.setBackgroundColor(Color.parseColor("#52A651"))
         }
 
         binding.btn4pm.setOnClickListener {
-            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean4pm)
+            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean4pm)
+            roomCleaningTime = "4pm"
+            it.setBackgroundColor(Color.parseColor("#52A651"))
         }
 
         binding.btn8pm.setOnClickListener {
-            arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8pm)
-        }
+            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8pm)
+            roomCleaningTime = "8pm"
+            it.setBackgroundColor(Color.parseColor("#52A651"))
+        }*/
 
         binding.btnAssign.setOnClickListener {
-            roomIdList.zip(roomCleaningTimeList).forEach { pair ->
+            /*roomIdList.zip(roomCleaningTimeList).forEach { pair ->
                 roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, pair.component1(), pair.component2()))
+            }*/
+
+            roomIdList.forEach {
+                roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, it, roomCleaningTime))
+            }
+
+            for (roomID in roomIdList) {
+                roomsToCleanViewModel.deleteRoomToClean(roomID)
             }
 
             openWorkerFrag(WorkerFragment())
@@ -94,13 +111,13 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
         if (chosenToy.borderColor == Color.parseColor("#D4ECB8")) {
             roomsToCleanViewModel.changeRoomToCleanBorderColor(chosenToy.roomID, Color.parseColor("#52A651"))
             roomIdList.add(chosenToy.roomID)
-            roomCleaningTimeList.add(chosenToy.cleaningTime)
+            //roomCleaningTimeList.add(chosenToy.cleaningTime)
         }
         else {
             roomsToCleanViewModel.changeRoomToCleanBorderColor(chosenToy.roomID, Color.parseColor("#D4ECB8"))
             var temp = roomIdList.indexOf(chosenToy.roomID)
             roomIdList.removeAt(temp)
-            roomCleaningTimeList.removeAt(temp)
+            //roomCleaningTimeList.removeAt(temp)
         }
     }
 

@@ -19,71 +19,15 @@
         android:layout_height="match_parent"
         android:background="@color/yellow_green_crayola">
 
-        <Button
-            android:id="@+id/btn_8am"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/green_pigment"
-            android:text="@string/_8am"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/btn_12pm"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_12pm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/green_pigment"
-            android:text="@string/_12pm"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/btn_4pm"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_8am"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_4pm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/green_pigment"
-            android:text="@string/_4pm"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/btn_8pm"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_12pm"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_8pm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/green_pigment"
-            android:text="@string/_8pm"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_4pm"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRoomsToClean"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/btnAssign"
-            app:layout_constraintTop_toBottomOf="@+id/btn_8am"
-            app:visible="@{uiState == UIState.HAS_DATA}" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{uiState == UIState.HAS_DATA}"
+            tools:layout_editor_absoluteX="0dp" />
 
         <Button
             android:id="@+id/btnAssign"

@@ -1,5 +1,6 @@
 package com.example.newhopehotel.customerFeedback
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,8 @@ import com.example.newhopehotel.database.FeedbackEntity
 import com.example.newhopehotel.databinding.FragmentCustomerFeedback1Binding
 import com.example.newhopehotel.housekeeping.CHOSEN_WORKER
 import com.example.newhopehotel.housekeeping.RoomsToCleanFragment
+import kotlinx.android.synthetic.main.fragment_customer_feedback1.*
+import kotlinx.android.synthetic.main.fragment_morning_call_list.*
 import org.jetbrains.anko.design.longSnackbar
 
 const val CHOSEN_FEEDBACK = "chosenFeedback"
@@ -56,7 +59,9 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         mAdapter = FeedbackAdapter(this)
         viewedAdapter = ViewedFeedbackAdapter(this)
 
+
        if(feedbackListViewModel.feedbackList == null) {
+
             feedbackListViewModel.insertFeedbackList(
                 FeedbackEntity(
                     1,
@@ -149,17 +154,21 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                )
            )
 
-        }
+      }
 
         fb= true;
         binding.rvFeedbackList.adapter = mAdapter
         binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
-
+        binding.fbButton.setTextColor(Color.parseColor("#ffffff"))
+        binding.viewedFbButton.setTextColor(Color.parseColor("#C0C0C0"))
         binding.fbButton.setOnClickListener{
             fb=true
             vFb=false
             binding.rvFeedbackList.adapter = mAdapter
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
+            fbButton.setTextColor(Color.parseColor("#ffffff"))
+            viewedFbButton.setTextColor(Color.parseColor("#C0C0C0"))
+
         }
 
         binding.viewedFbButton.setOnClickListener{
@@ -167,6 +176,8 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             vFb=true
             binding.rvFeedbackList.adapter = viewedAdapter
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
+            fbButton.setTextColor(Color.parseColor("#C0C0C0"))
+            viewedFbButton.setTextColor(Color.parseColor("#ffffff"))
         }
 
         ItemTouchHelper(object :
@@ -209,8 +220,12 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         var temp: LiveData<List<FeedbackEntity>>? = feedbackListViewModel.selectFeedback("")
         temp?.observe(viewLifecycleOwner, { temp2 ->
             if (temp2.isNullOrEmpty()) {
+                empty_imageview_feedback!!.visibility = View.VISIBLE
+                no_data_feedback!!.visibility = View.VISIBLE
                 feedbackListViewModel.uiState.set(UIState.EMPTY)
             } else {
+                empty_imageview_feedback!!.visibility =  View.GONE
+                no_data_feedback!!.visibility = View.GONE
                 feedbackListViewModel.uiState.set(UIState.HAS_DATA)
                 mAdapter.feedbackList = temp2
                 mFeedbackList = temp2
@@ -220,11 +235,16 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         var temp3: LiveData<List<FeedbackEntity>>? = viewedFeedbackListViewModel.selectViewedFeedback("")
         temp3?.observe(viewLifecycleOwner, { temp4 ->
             if (temp4.isNullOrEmpty()) {
+                empty_imageview_feedback!!.visibility = View.VISIBLE
+                no_data_feedback!!.visibility = View.VISIBLE
                 viewedFeedbackListViewModel.uiState.set(UIState.EMPTY)
             } else {
+                empty_imageview_feedback!!.visibility =  View.GONE
+                no_data_feedback!!.visibility = View.GONE
                 viewedFeedbackListViewModel.uiState.set(UIState.HAS_DATA)
                 viewedAdapter.viewedFeedbackList = temp4
                 mViewedFeedbackList = temp4
+
             }
         })
 
