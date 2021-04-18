@@ -59,8 +59,7 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         mAdapter = FeedbackAdapter(this)
         viewedAdapter = ViewedFeedbackAdapter(this)
 
-
-       if(feedbackListViewModel.feedbackList == null) {
+        if(feedbackListViewModel.feedbackList == null && viewedFeedbackListViewModel.feedbackList == null) {
 
             feedbackListViewModel.insertFeedbackList(
                 FeedbackEntity(
@@ -154,13 +153,14 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                )
            )
 
-      }
+        }
 
         fb= true;
         binding.rvFeedbackList.adapter = mAdapter
         binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
         binding.fbButton.setTextColor(Color.parseColor("#ffffff"))
         binding.viewedFbButton.setTextColor(Color.parseColor("#C0C0C0"))
+
         binding.fbButton.setOnClickListener{
             fb=true
             vFb=false
@@ -201,6 +201,7 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
 
                 if(vFb) {
                     val viewedFeedbackListToErase = mViewedFeedbackList!![position]
+
                     viewedFeedbackListViewModel.deleteFeedbackList(viewedFeedbackListToErase)
                     viewedFeedbackListViewModel.updateFeedbackList(viewedFeedbackListToErase)
                 }
