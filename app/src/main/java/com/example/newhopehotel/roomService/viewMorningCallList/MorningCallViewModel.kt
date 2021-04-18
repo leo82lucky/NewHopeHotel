@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.HotelRepository
-import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.utils.provideRepository
 
 class MorningCallViewModel(application: Application) : AndroidViewModel(application) {

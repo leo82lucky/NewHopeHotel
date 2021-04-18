@@ -1,32 +1,22 @@
 package com.example.newhopehotel.roomService.viewRoomServiceList
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
-import com.example.newhopehotel.customerFeedback.CustomerFeedback1
 import com.example.newhopehotel.data.UIState
-import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.FragmentRoomServiceListBinding
-import com.example.newhopehotel.roomService.RoomServiceMain
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_room_service.*
-import kotlinx.android.synthetic.main.fragment_morning_call_list.*
 import kotlinx.android.synthetic.main.fragment_room_service_list.*
-import org.jetbrains.anko.design.longSnackbar
 
 const val CHOSEN_RS = "chosenRS"
 

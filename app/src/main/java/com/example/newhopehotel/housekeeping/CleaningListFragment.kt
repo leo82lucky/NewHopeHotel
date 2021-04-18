@@ -46,7 +46,8 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cleaning_list, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_cleaning_list, container, false)
 
         cleaningListViewModel = ViewModelProvider(this).get(CleaningListViewModel::class.java)
 
@@ -77,7 +78,13 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
                 val cleaningListToErase = mCleaningList!![position]
 
                 cleaningListViewModel.deleteCleaningList(cleaningListToErase)
-                cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", cleaningListToErase.roomID))
+                cleaningListViewModel.insertRoomToClean(
+                    RoomToCleanEntity(
+                        Color.parseColor("#D4ECB8"),
+                        "8am",
+                        cleaningListToErase.roomID
+                    )
+                )
 
                 coordinator?.longSnackbar("One task completed", "UNDO") {
                     cleaningListViewModel.insertCleaningList(cleaningListToErase)
@@ -112,7 +119,10 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             if (list.isNullOrEmpty()) {
                 cleaningListViewModel.updateRoomsAssignedByUserID(LoginViewModel.currentUserID, 0)
             } else {
-                cleaningListViewModel.updateRoomsAssignedByUserID(LoginViewModel.currentUserID, list.size)
+                cleaningListViewModel.updateRoomsAssignedByUserID(
+                    LoginViewModel.currentUserID,
+                    list.size
+                )
             }
         })
     }
@@ -131,10 +141,16 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             }
         })
 
-        cleaningListViewModel.deleteAllRoomToClean()
         mRoomsToClean?.forEach {
-            cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", it.roomID))
+            cleaningListViewModel.insertRoomToClean(
+                RoomToCleanEntity(
+                    Color.parseColor("#D4ECB8"),
+                    "8am",
+                    it.roomID
+                )
+            )
         }
+
 
         val cleaningList: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
         cleaningList?.observe(viewLifecycleOwner, { list ->
@@ -147,6 +163,8 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             replace(R.id.main_container, frag)
             addToBackStack(null)
         }
+
+
     }
 }
 

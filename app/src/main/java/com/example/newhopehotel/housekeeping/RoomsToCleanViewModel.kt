@@ -20,26 +20,6 @@ class RoomsToCleanViewModel(application: Application) : AndroidViewModel(applica
             return field ?: mRepo.roomToCleanList.also { field = it }
         }
 
-    var roomToClean8am: LiveData<List<RoomToCleanEntity>>? = null
-        get() {
-            return field ?: mRepo.getRoomToCleanByTime("8am").also { field = it }
-        }
-
-    var roomToClean12pm: LiveData<List<RoomToCleanEntity>>? = null
-        get() {
-            return field ?: mRepo.getRoomToCleanByTime("12pm").also { field = it }
-        }
-
-    var roomToClean4pm: LiveData<List<RoomToCleanEntity>>? = null
-        get() {
-            return field ?: mRepo.getRoomToCleanByTime("4pm").also { field = it }
-        }
-
-    var roomToClean8pm: LiveData<List<RoomToCleanEntity>>? = null
-        get() {
-            return field ?: mRepo.getRoomToCleanByTime("8pm").also { field = it }
-        }
-
     fun deleteRoomToClean(roomID: RoomID) {
         mRepo.deleteRoomToClean(roomID)
     }

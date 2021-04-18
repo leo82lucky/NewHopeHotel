@@ -77,31 +77,6 @@ interface CleaningListDatabaseDao {
 }
 
 @Dao
-interface MorningCallDatabaseDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMorningCall(morningCall: MorningCallEntity)
-
-    @get:Query("SELECT * FROM Morning_Call_Table")
-    val allMorningCall: LiveData<List< MorningCallEntity>>
-
-    @Query("SELECT * FROM Morning_Call_Table WHERE mcId = :id")
-    fun getChosenMorningCall(id: Int): LiveData<MorningCallEntity>
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateMorningCall(morningCall: MorningCallEntity)
-
-    @Query("DELETE FROM Morning_Call_Table")
-    fun deleteAllMorningCall(): Int
-
-    @Delete
-    fun deleteMorningCall(checkIn: MorningCallEntity)
-
-    @Query("SELECT * FROM Morning_Call_Table WHERE custName LIKE :customerName")
-    fun getCustomerName(customerName: String): MorningCallEntity?
-}
-
-
-@Dao
 interface RoomServiceDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRoomService(roomService: RoomServiceEntity)
@@ -177,23 +152,4 @@ interface RoomToCleanDatabaseDao{
 
     @Update
     fun updateRoomToClean(roomToClean: RoomToCleanEntity)
-}
-
-@Dao
-interface SelectedWorkerDatabaseDao {
-    @Insert
-    fun insertSelectedWorker(selectedWorker: SelectedWorkerEntity)
-
-    @get:Query("SELECT * FROM Selected_Worker_Table")
-    val allSelectedWorker: List<SelectedWorkerEntity>
-
-    @Query("DELETE FROM Selected_Worker_Table")
-    fun deleteAllSelectedWorker(): Int
-
-    @Query("SELECT * FROM Feedback_Table WHERE answer == :str")
-    fun getSelectedFeedbacks(str: String): LiveData<List<FeedbackEntity>>
-
-    @Query("SELECT * FROM Feedback_Table WHERE answer != :str")
-    fun getSelectedViewedFeedbacks(str: String): LiveData<List<FeedbackEntity>>
-
 }

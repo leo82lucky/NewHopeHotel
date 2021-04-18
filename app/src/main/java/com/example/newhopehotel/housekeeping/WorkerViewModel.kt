@@ -18,11 +18,4 @@ class WorkerViewModel(application: Application) : AndroidViewModel(application) 
             return field ?: mRepo.users.also { field = it }
         }
 
-    fun deleteAllSelectedWorker() {
-        mRepo.deleteAllSelectedWorker()
-    }
-
-    fun insertSelectedWorker(selectedWorker: SelectedWorkerEntity) {
-        mRepo.insertSelectedWorker(selectedWorker)
-    }
 }

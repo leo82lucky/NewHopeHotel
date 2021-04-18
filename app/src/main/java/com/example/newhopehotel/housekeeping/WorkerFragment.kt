@@ -7,21 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newhopehotel.R
-import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.UIState
-import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.RegisterEntity
-import com.example.newhopehotel.database.RoomToCleanEntity
-import com.example.newhopehotel.database.SelectedWorkerEntity
 import com.example.newhopehotel.databinding.FragmentWorkerBinding
-import kotlinx.android.synthetic.main.fragment_worker.*
 
 const val CHOSEN_WORKER = "chosenWorker"
 
@@ -75,6 +69,7 @@ class WorkerFragment : Fragment(), WorkerAdapter.WorkerClickListener {
                 mWorkerList = temp2
             }
         })
+
     }
 
     override fun onWorkerClicked(chosenToy: RegisterEntity) {

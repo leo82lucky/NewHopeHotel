@@ -1,7 +1,5 @@
 package com.example.newhopehotel.roomService.viewRoomServiceList
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -9,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,19 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.newhopehotel.R
 import com.example.newhopehotel.checkInCheckOut.CICOViewModel
-import com.example.newhopehotel.checkInCheckOut.CicoAdapter
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CheckInCheckOutEntity
-import com.example.newhopehotel.database.MorningCallEntity
 import com.example.newhopehotel.database.RoomServiceEntity
 import com.example.newhopehotel.databinding.AddRoomServiceBinding
-import com.example.newhopehotel.databinding.FragmentCicoListBinding
 import com.example.newhopehotel.utils.provideRepository
-import kotlinx.android.synthetic.main.activity_morning_call.*
-import kotlinx.android.synthetic.main.activity_room_service.*
 import kotlinx.android.synthetic.main.add_room_service_fragment.*
 import org.jetbrains.anko.toast
-import java.util.*
 
 class AddRoomServiceFragment : Fragment() {
 

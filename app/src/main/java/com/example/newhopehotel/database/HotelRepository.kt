@@ -15,13 +15,6 @@ class HotelRepository private constructor(
     val users: LiveData<List<RegisterEntity>>
         get() = hotelDatabase.registerDao().allUsers
 
-    val cicos: LiveData<List<CheckInCheckOutEntity>>
-        get() = hotelDatabase.cicoDao().allCico
-    val morningCalls: LiveData<List<MorningCallEntity>>
-        get() = hotelDatabase.morningCallDao().allMorningCall
-    val roomServices: LiveData<List<RoomServiceEntity>>
-        get() = hotelDatabase.roomServiceDao().allRoomService
-
     val feedbackList: LiveData<List<FeedbackEntity>>
         get() = hotelDatabase.feedbackListDao().allFeedback
 
@@ -30,13 +23,9 @@ class HotelRepository private constructor(
     }
 
     suspend fun getUserName(userName: String): RegisterEntity? {
-        Log.i("MYTAG", "inside Repository GetUsers fun ")
         return hotelDatabase.registerDao().getUsername(userName)
     }
 
-    suspend fun getUserID(userName: String): RegisterEntity? {
-        return hotelDatabase.registerDao().getUserID(userName)
-    }
 
     fun updateRoomsAssignedByUserID(userID: Int, roomsAssigned: Int) {
         mExecutors.diskIO().execute { hotelDatabase.registerDao().updateRoomsAssignedByUserID(userID, roomsAssigned) }
@@ -110,20 +99,6 @@ class HotelRepository private constructor(
 
     fun changeRoomToCleanBorderColor(roomID: RoomID, new: Int) {
         mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().changeRoomToCleanBorderColor(roomID, new) }
-    }
-
-
-    fun getRoomToCleanByTime(cleaningTime: String): LiveData<List<RoomToCleanEntity>> {
-        return hotelDatabase.roomToCleanDao().getRoomToCleanByTime(cleaningTime)
-    }
-
-
-    fun insertSelectedWorker(selectedWorker: SelectedWorkerEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.selectedWorkerDao().insertSelectedWorker(selectedWorker) }
-    }
-
-    fun deleteAllSelectedWorker() {
-        mExecutors.diskIO().execute { hotelDatabase.selectedWorkerDao().deleteAllSelectedWorker() }
     }
 
     fun getFeedbackListByUserID(feedbackID: Int): LiveData<FeedbackEntity>{

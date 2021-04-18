@@ -13,16 +13,12 @@ import androidx.fragment.app.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.room.Room
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.RoomToCleanEntity
-import com.example.newhopehotel.database.SelectedWorkerEntity
 import com.example.newhopehotel.databinding.FragmentRoomsToCleanBinding
-
-const val CHOSEN_ROOM_TO_CLEAN = "chosenRoomToClean"
 
 class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickListener {
 
@@ -33,8 +29,6 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
     private var mRoomToCleanList: List<RoomToCleanEntity>? = null
 
     private var roomIdList = mutableListOf<RoomID>()
-    private var roomCleaningTimeList = mutableListOf<String>()
-    private lateinit var roomCleaningTime: String
 
     init {
         retainInstance = true
@@ -66,34 +60,7 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
 
         arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToCleanList)
 
-/*        binding.btn8am.setOnClickListener {
-            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
-            roomCleaningTime = "8am"
-            it.setBackgroundColor(Color.parseColor("#52A651"))
-        }
-
-        binding.btn12pm.setOnClickListener {
-            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean12pm)
-            roomCleaningTime = "12pm"
-            it.setBackgroundColor(Color.parseColor("#52A651"))
-        }
-
-        binding.btn4pm.setOnClickListener {
-            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean4pm)
-            roomCleaningTime = "4pm"
-            it.setBackgroundColor(Color.parseColor("#52A651"))
-        }
-
-        binding.btn8pm.setOnClickListener {
-            //arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8pm)
-            roomCleaningTime = "8pm"
-            it.setBackgroundColor(Color.parseColor("#52A651"))
-        }*/
-
         binding.btnAssign.setOnClickListener {
-            /*roomIdList.zip(roomCleaningTimeList).forEach { pair ->
-                roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, pair.component1(), pair.component2()))
-            }*/
 
             roomIdList.forEach {
                 roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, it, "8am"))
@@ -116,7 +83,6 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
                 Color.parseColor("#52A651")
             )
             roomIdList.add(chosenToy.roomID)
-            //roomCleaningTimeList.add(chosenToy.cleaningTime)
         } else if (!roomIdList.isNullOrEmpty()) {
             roomsToCleanViewModel.changeRoomToCleanBorderColor(
                 chosenToy.roomID,
@@ -124,13 +90,13 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
             )
             var temp = roomIdList.indexOf(chosenToy.roomID)
             roomIdList.removeAt(temp)
-            //roomCleaningTimeList.removeAt(temp)
         }
     }
 
     private fun openWorkerFrag(frag: WorkerFragment) {
         fragmentManager?.transaction {
             replace(R.id.main_container, frag)
+            addToBackStack(null)
         }
     }
 

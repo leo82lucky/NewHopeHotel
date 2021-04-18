@@ -71,9 +71,7 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
                         inputUsername.value = null
                         inputPassword.value = null
                         _navigatetoHomePage.value = true
-                        if (usersNames != null) {
-                            currentUserID = usersNames.userId
-                        }
+                        currentUserID = -1
                     } else {
                         _errorToastInvalidPassword.value = true
                     }
@@ -86,6 +84,7 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
                             if (usersNames != null) {
                                 currentUserID = usersNames.userId
                             }
+
                         } else {
                             _errorToastInvalidPassword.value = true
                         }
