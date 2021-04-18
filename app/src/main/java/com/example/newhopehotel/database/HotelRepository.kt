@@ -38,6 +38,10 @@ class HotelRepository private constructor(
         return hotelDatabase.registerDao().getUserID(userName)
     }
 
+    fun updateRoomsAssignedByUserID(userID: Int, roomsAssigned: Int) {
+        mExecutors.diskIO().execute { hotelDatabase.registerDao().updateRoomsAssignedByUserID(userID, roomsAssigned) }
+    }
+
     val roomServiceList: LiveData<List<RoomServiceEntity>>
         get() = hotelDatabase.roomServiceDao().allRoomService
 

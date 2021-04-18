@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import com.example.newhopehotel.database.RegisterEntity
 import com.example.newhopehotel.database.HotelRepository
 import kotlinx.coroutines.*
+import java.util.regex.Pattern
 
 
 class RegisterViewModel(private val repository: HotelRepository, application: Application) :
@@ -53,22 +54,34 @@ class RegisterViewModel(private val repository: HotelRepository, application: Ap
     val errotoastUsername: LiveData<Boolean>
         get() = _errorToastUsername
 
+    private val _errorToastFormatUsername = MutableLiveData<Boolean>()
+
+    val errotoastFormatUsername: LiveData<Boolean>
+        get() = _errorToastFormatUsername
+
+    private val _errorToastFormatPassword = MutableLiveData<Boolean>()
+
+    val errotoastFormatPassword: LiveData<Boolean>
+        get() = _errorToastFormatPassword
 
     fun sumbitButton() {
         if (inputFirstName.value == null || inputLastName.value == null || inputUsername.value == null || inputPassword.value == null) {
             _errorToast.value = true
+        } else if (!inputUsername.value!!.isUsernameValid()) {
+            _errorToastFormatUsername.value = true
+        } else if (!inputPassword.value!!.isPasswordValid()) {
+            _errorToastFormatPassword.value = true
         } else {
             uiScope.launch {
-//            withContext(Dispatchers.IO) {
                 val usersNames = repository.getUserName(inputUsername.value!!)
                 if (usersNames != null) {
                     _errorToastUsername.value = true
                 } else {
                     val firstName = inputFirstName.value!!
                     val lastName = inputLastName.value!!
-                    val email = inputUsername.value!!
+                    val username = inputUsername.value!!
                     val password = inputPassword.value!!
-                    insert(RegisterEntity(0, firstName, lastName, email, password, 0))
+                    insert(RegisterEntity(0, firstName, lastName, username, password, 0))
                     inputFirstName.value = null
                     inputLastName.value = null
                     inputUsername.value = null
@@ -86,22 +99,37 @@ class RegisterViewModel(private val repository: HotelRepository, application: Ap
 
     fun doneNavigating() {
         _navigateto.value = false
-        Log.i("MYTAG", "Done navigating ")
     }
 
     fun donetoast() {
         _errorToast.value = false
-        Log.i("MYTAG", "Done taoasting ")
     }
 
     fun donetoastUserName() {
         _errorToast.value = false
-        Log.i("MYTAG", "Done toasting username")
+    }
+
+    fun donetoastFormatUserName() {
+        _errorToastFormatUsername.value = false
+    }
+
+    fun donetoastFormatPassword() {
+        _errorToastFormatPassword.value = false
     }
 
     private fun insert(user: RegisterEntity): Job = viewModelScope.launch {
         repository.insert(user)
     }
+
+    private var PASSWORD_PATTERN: Pattern =
+        Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=]).{4,}\$")
+
+    private fun CharSequence.isPasswordValid(): Boolean = PASSWORD_PATTERN.matcher(this).find()
+
+    private var USERNAME_PATTERN: Pattern =
+        Pattern.compile("^[a-z0-9_-]{3,16}\$")
+
+    private fun CharSequence.isUsernameValid(): Boolean = USERNAME_PATTERN.matcher(this).find()
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 

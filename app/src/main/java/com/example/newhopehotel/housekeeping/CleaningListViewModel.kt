@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.UIState
 import com.example.newhopehotel.database.CheckInCheckOutEntity
@@ -47,6 +48,10 @@ class CleaningListViewModel(application: Application) : AndroidViewModel(applica
 
     fun deleteAllRoomToClean() {
         mRepo.deleteAllRoomToClean()
+    }
+
+    fun deleteRoomToClean(roomID: RoomID) {
+        mRepo.deleteRoomToClean(roomID)
     }
 
     var cicoStatusAvailable: LiveData<List<CheckInCheckOutEntity>>? = null
