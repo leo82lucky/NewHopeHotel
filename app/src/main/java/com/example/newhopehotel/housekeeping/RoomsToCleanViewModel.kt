@@ -40,6 +40,10 @@ class RoomsToCleanViewModel(application: Application) : AndroidViewModel(applica
             return field ?: mRepo.getRoomToCleanByTime("8pm").also { field = it }
         }
 
+    fun deleteRoomToClean(roomID: RoomID) {
+        mRepo.deleteRoomToClean(roomID)
+    }
+
     fun changeRoomToCleanBorderColor(roomID: RoomID, new: Int) {
         mRepo.changeRoomToCleanBorderColor(roomID, new)
     }
