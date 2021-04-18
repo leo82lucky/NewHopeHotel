@@ -71,6 +71,9 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
                         inputUsername.value = null
                         inputPassword.value = null
                         _navigatetoHomePage.value = true
+                        if (usersNames != null) {
+                            currentUserID = usersNames.userId
+                        }
                     } else {
                         _errorToastInvalidPassword.value = true
                     }
@@ -80,6 +83,9 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
                             inputUsername.value = null
                             inputPassword.value = null
                             _navigatetoHomePageOnlyHousekeeping.value = true
+                            if (usersNames != null) {
+                                currentUserID = usersNames.userId
+                            }
                         } else {
                             _errorToastInvalidPassword.value = true
                         }
@@ -122,6 +128,10 @@ class LoginViewModel(private val repository: HotelRepository, application: Appli
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+    }
+
+    companion object {
+        var currentUserID = -1
     }
 
 

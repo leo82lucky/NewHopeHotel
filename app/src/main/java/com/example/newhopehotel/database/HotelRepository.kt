@@ -34,6 +34,10 @@ class HotelRepository private constructor(
         return hotelDatabase.registerDao().getUsername(userName)
     }
 
+    suspend fun getUserID(userName: String): RegisterEntity? {
+        return hotelDatabase.registerDao().getUserID(userName)
+    }
+
     val roomServiceList: LiveData<List<RoomServiceEntity>>
         get() = hotelDatabase.roomServiceDao().allRoomService
 
@@ -90,6 +94,10 @@ class HotelRepository private constructor(
 
     fun insertRoomToClean(roomToClean: RoomToCleanEntity) {
         mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().insertRoomToClean(roomToClean) }
+    }
+
+    fun deleteRoomToClean(roomID: RoomID) {
+        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().deleteRoomToClean(roomID) }
     }
 
     fun deleteAllRoomToClean() {
