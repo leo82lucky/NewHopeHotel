@@ -51,4 +51,8 @@ class RoomsToCleanViewModel(application: Application) : AndroidViewModel(applica
     fun insertCleaningList(cleaningList: CleaningListEntity) {
         mRepo.insertCleaningList(cleaningList)
     }
+
+    fun updateRoomsAssignedByUserID(userID: Int, roomsAssigned: Int) {
+        mRepo.updateRoomsAssignedByUserID(userID, roomsAssigned)
+    }
 }

@@ -96,12 +96,10 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
             }*/
 
             roomIdList.forEach {
-                roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, it, roomCleaningTime))
+                roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, it, "8am"))
             }
 
-            for (roomID in roomIdList) {
-                roomsToCleanViewModel.deleteRoomToClean(roomID)
-            }
+            roomsToCleanViewModel.updateRoomsAssignedByUserID(WorkerFragment.selectedWorkerId, roomIdList.size)
 
             openWorkerFrag(WorkerFragment())
         }

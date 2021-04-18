@@ -24,6 +24,9 @@ interface RegisterDatabaseDao {
     @Query("SELECT * FROM Register_users_table WHERE user_name = :userName")
     suspend fun getUserID(userName: String): RegisterEntity?
 
+    @Query("UPDATE REGISTER_USERS_TABLE SET rooms_assigned = :roomsAssigned WHERE userId = :userID")
+    fun updateRoomsAssignedByUserID(userID: Int, roomsAssigned: Int)
+
 }
 
 @Dao
