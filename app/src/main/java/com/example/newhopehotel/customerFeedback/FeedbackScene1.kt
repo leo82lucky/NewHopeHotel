@@ -68,8 +68,6 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         binding.fbButton.setTextColor(Color.parseColor("#ffffff"))
         binding.viewedFbButton.setTextColor(Color.parseColor("#C0C0C0"))
 
-
-
         binding.fbButton.setOnClickListener{
             fb=true
             vFb=false
@@ -84,8 +82,10 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                 empty_imageview_feedback!!.visibility =  View.VISIBLE
                 no_data_feedback!!.visibility = View.VISIBLE
             }
+            else{
+                feedbackListViewModel.uiState.set(UIState.HAS_DATA)
+            }
             currentLocation = 1
-
         }
 
         binding.viewedFbButton.setOnClickListener{
@@ -101,6 +101,9 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             if (mViewedFeedbackList.isNullOrEmpty()) {
                 empty_imageview_feedback!!.visibility =  View.VISIBLE
                 no_data_feedback!!.visibility = View.VISIBLE
+            }
+            else{
+                viewedFeedbackListViewModel.uiState.set(UIState.HAS_DATA)
             }
             currentLocation = 2
         }
@@ -120,15 +123,14 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
 
                 if(fb) {
                     val feedbackListToErase = mFeedbackList!![position]
-                    feedbackListViewModel.deleteFeedbackList(feedbackListToErase)
-                    feedbackListViewModel.updateFeedbackList(feedbackListToErase)
+                    feedbackListViewModel.deleteFeedbackList(feedbackListToErase.feedbackId)
+                    //feedbackListViewModel.updateFeedbackList(feedbackListToErase)
                 }
 
                 if(vFb) {
                     val viewedFeedbackListToErase = mViewedFeedbackList!![position]
-
-                    viewedFeedbackListViewModel.deleteFeedbackList(viewedFeedbackListToErase)
-                    viewedFeedbackListViewModel.updateFeedbackList(viewedFeedbackListToErase)
+                    viewedFeedbackListViewModel.deleteFeedbackList(viewedFeedbackListToErase.feedbackId)
+                    //viewedFeedbackListViewModel.updateFeedbackList(viewedFeedbackListToErase)
                 }
             }
         }).attachToRecyclerView(binding.rvFeedbackList)
@@ -137,6 +139,7 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+
         super.onActivityCreated(savedInstanceState)
 
         (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
@@ -149,8 +152,9 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                 if (currentLocation == 1) {
                     empty_imageview_feedback!!.visibility =  View.VISIBLE
                     no_data_feedback!!.visibility = View.VISIBLE
+                    feedbackListViewModel.uiState.set(UIState.EMPTY)
                 }
-                feedbackListViewModel.uiState.set(UIState.EMPTY)
+
                 mAdapter.feedbackList = temp2
                 mFeedbackList = temp2
                 fbEmpty = true
@@ -159,6 +163,10 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                     insertTestData()
                 }
             } else {
+                if(currentLocation == 1){
+                    empty_imageview_feedback!!.visibility =  View.GONE
+                    no_data_feedback!!.visibility = View.GONE
+                }
                 feedbackListViewModel.uiState.set(UIState.HAS_DATA)
                 mAdapter.feedbackList = temp2
                 mFeedbackList = temp2
@@ -172,8 +180,8 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                 if (currentLocation == 2) {
                     empty_imageview_feedback!!.visibility =  View.VISIBLE
                     no_data_feedback!!.visibility = View.VISIBLE
+                    viewedFeedbackListViewModel.uiState.set(UIState.EMPTY)
                 }
-                viewedFeedbackListViewModel.uiState.set(UIState.EMPTY)
                 viewedAdapter.viewedFeedbackList = temp4
                 mViewedFeedbackList = temp4
                 vFbEmpty = true
@@ -182,6 +190,11 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
                     insertTestData()
                 }
             } else {
+                if(currentLocation == 2){
+                    empty_imageview_feedback!!.visibility =  View.GONE
+                    no_data_feedback!!.visibility = View.GONE
+                }
+
                 viewedFeedbackListViewModel.uiState.set(UIState.HAS_DATA)
                 viewedAdapter.viewedFeedbackList = temp4
                 mViewedFeedbackList = temp4

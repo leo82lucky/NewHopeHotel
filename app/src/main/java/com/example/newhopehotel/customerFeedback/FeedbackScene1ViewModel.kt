@@ -31,8 +31,8 @@ class FeedbackScene1ViewModel(application: Application) :
         mRepo.insertFeedbackList(feedbackList)
     }
 
-    fun deleteFeedbackList(feedbackList: FeedbackEntity) {
-        mRepo.deleteFeedbackList(feedbackList)
+    fun deleteFeedbackList(id: Int) {
+        mRepo.deleteFeedbackList(id)
     }
 
     fun selectFeedback(str: String): LiveData<List<FeedbackEntity>>{

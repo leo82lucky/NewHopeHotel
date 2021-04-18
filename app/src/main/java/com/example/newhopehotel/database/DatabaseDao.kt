@@ -139,8 +139,8 @@ interface FeedbackDao{
     @Query("DELETE FROM Feedback_Table")
     fun deleteAllFeedback(): Int
 
-    @Delete
-    fun deleteFeedback(feedback: FeedbackEntity)
+    @Query("DELETE FROM Feedback_Table WHERE feedbackID = :id")
+    fun deleteFeedback(id: Int)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateFeedback(feedback: FeedbackEntity)

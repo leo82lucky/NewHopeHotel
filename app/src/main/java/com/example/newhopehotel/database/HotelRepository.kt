@@ -134,8 +134,8 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().insertFeedback(feedbackList) }
     }
 
-    fun deleteFeedbackList(feedbackList: FeedbackEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().deleteFeedback(feedbackList) }
+    fun deleteFeedbackList(id: Int) {
+        mExecutors.diskIO().execute { hotelDatabase.feedbackListDao().deleteFeedback(id) }
     }
 
     fun updateFeedbackList(feedbackList: FeedbackEntity) {
