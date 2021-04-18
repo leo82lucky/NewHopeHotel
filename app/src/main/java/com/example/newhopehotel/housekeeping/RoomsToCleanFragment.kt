@@ -86,6 +86,10 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
                 roomsToCleanViewModel.insertCleaningList(CleaningListEntity(WorkerFragment.selectedWorkerId, pair.component1(), pair.component2()))
             }
 
+            for (roomID in roomIdList) {
+                roomsToCleanViewModel.deleteRoomToClean(roomID)
+            }
+
             openWorkerFrag(WorkerFragment())
         }
     }

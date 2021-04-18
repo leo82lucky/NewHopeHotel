@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.*
 import com.example.newhopehotel.R
 import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.RoomToCleanEntity
 import com.example.newhopehotel.databinding.FragmentCleaningListBinding
@@ -32,6 +33,7 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
     private lateinit var mAdapter: CleaningListAdapter
     private lateinit var binding: FragmentCleaningListBinding
     private var mCleaningList: List<CleaningListEntity>? = null
+    private var mRoomsToClean: List<CheckInCheckOutEntity>? = null
 
     init {
         retainInstance = true
@@ -90,7 +92,7 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
         binding.uiState = cleaningListViewModel.uiState
 
-        var temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
+        var temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningListOfUserID
         temp?.observe(viewLifecycleOwner, { temp2 ->
             if (temp2.isNullOrEmpty()) {
                 cleaningListViewModel.uiState.set(UIState.EMPTY)
@@ -114,25 +116,21 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             addToBackStack(null)
         }
 
+        var tempList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
+        tempList?.observe(viewLifecycleOwner, { list ->
+            if (list.isNullOrEmpty()){
+
+            } else {
+                mRoomsToClean = list
+            }
+
+        })
 
         // test data
         cleaningListViewModel.deleteAllRoomToClean()
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R001))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R002))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R003))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", RoomID.R004))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R005))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R006))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R007))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"12pm", RoomID.R008))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R009))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R010))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R011))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"4pm", RoomID.R012))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R013))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R014))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R015))
-        cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8pm", RoomID.R016))
+        mRoomsToClean?.forEach {
+            cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", it.roomID))
+        }
     }
 }
 

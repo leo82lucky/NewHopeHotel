@@ -4,10 +4,14 @@ import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.UIState
+import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.HotelRepository
 import com.example.newhopehotel.database.RoomToCleanEntity
+import com.example.newhopehotel.login.LoginFragment
+import com.example.newhopehotel.login.LoginViewModel
 import com.example.newhopehotel.utils.provideRepository
 
 class CleaningListViewModel(application: Application) : AndroidViewModel(application) {
@@ -22,7 +26,7 @@ class CleaningListViewModel(application: Application) : AndroidViewModel(applica
 
     var cleaningListOfUserID: LiveData<List<CleaningListEntity>>? = null
         get() {
-            return field ?: mRepo.getCleaningListByUserID(1).also { field = it }
+            return field ?: mRepo.getCleaningListByUserID(LoginViewModel.currentUserID).also { field = it }
         }
 
     fun getCleaningListByUserID(userID: Int): LiveData<List<CleaningListEntity>> {
@@ -44,4 +48,9 @@ class CleaningListViewModel(application: Application) : AndroidViewModel(applica
     fun deleteAllRoomToClean() {
         mRepo.deleteAllRoomToClean()
     }
+
+    var cicoStatusAvailable: LiveData<List<CheckInCheckOutEntity>>? = null
+        get() {
+            return field ?: mRepo.getCicoByStatus(RoomStatus.Available).also { field = it }
+        }
 }

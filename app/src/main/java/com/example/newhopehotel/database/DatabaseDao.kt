@@ -21,6 +21,9 @@ interface RegisterDatabaseDao {
     @Query("SELECT * FROM Register_users_table WHERE user_name LIKE :userName")
     suspend fun getUsername(userName: String): RegisterEntity?
 
+    @Query("SELECT * FROM Register_users_table WHERE user_name = :userName")
+    suspend fun getUserID(userName: String): RegisterEntity?
+
 }
 
 @Dao
@@ -155,8 +158,8 @@ interface RoomToCleanDatabaseDao{
     @get:Query("SELECT * FROM Room_To_Clean_Table")
     val allRoomToClean: LiveData<List<RoomToCleanEntity>>
 
-    @Delete
-    fun deleteRoomToClean(roomToClean: RoomToCleanEntity)
+    @Query("DELETE FROM Room_To_Clean_Table WHERE roomID = :roomID")
+    fun deleteRoomToClean(roomID: RoomID)
 
     @Query("DELETE FROM Room_To_Clean_Table")
     fun deleteAllRoomToClean(): Int
