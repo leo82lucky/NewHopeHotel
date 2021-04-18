@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -30,7 +31,7 @@
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/cleaner_name"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_name"
             app:layout_constraintStart_toStartOf="parent" />
@@ -65,15 +66,26 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
         <TextView
+            android:id="@+id/textView_roomAssigned"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/room_to_clean"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+        <TextView
             android:id="@+id/tv_room_assigned"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_marginTop="13dp"
             android:gravity="center"
             android:text="@{Integer.toString(workerItem.roomsAssigned)}"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_roomAssigned" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

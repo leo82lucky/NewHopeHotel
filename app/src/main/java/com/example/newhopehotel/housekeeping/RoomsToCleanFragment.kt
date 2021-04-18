@@ -111,12 +111,17 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
 
     override fun onRoomToCleanClicked(chosenToy: RoomToCleanEntity) {
         if (chosenToy.borderColor == Color.parseColor("#D4ECB8")) {
-            roomsToCleanViewModel.changeRoomToCleanBorderColor(chosenToy.roomID, Color.parseColor("#52A651"))
+            roomsToCleanViewModel.changeRoomToCleanBorderColor(
+                chosenToy.roomID,
+                Color.parseColor("#52A651")
+            )
             roomIdList.add(chosenToy.roomID)
             //roomCleaningTimeList.add(chosenToy.cleaningTime)
-        }
-        else {
-            roomsToCleanViewModel.changeRoomToCleanBorderColor(chosenToy.roomID, Color.parseColor("#D4ECB8"))
+        } else if (!roomIdList.isNullOrEmpty()) {
+            roomsToCleanViewModel.changeRoomToCleanBorderColor(
+                chosenToy.roomID,
+                Color.parseColor("#D4ECB8")
+            )
             var temp = roomIdList.indexOf(chosenToy.roomID)
             roomIdList.removeAt(temp)
             //roomCleaningTimeList.removeAt(temp)

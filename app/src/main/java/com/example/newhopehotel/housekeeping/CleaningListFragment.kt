@@ -95,7 +95,7 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
         binding.uiState = cleaningListViewModel.uiState
 
-        var temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningListOfUserID
+        val temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningListOfUserID
         temp?.observe(viewLifecycleOwner, { list ->
             if (list.isNullOrEmpty()) {
                 cleaningListViewModel.uiState.set(UIState.EMPTY)
@@ -106,7 +106,8 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             }
         })
 
-        var temp2: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.getCleaningListByUserID(LoginViewModel.currentUserID)
+        val temp2: LiveData<List<CleaningListEntity>>? =
+            cleaningListViewModel.getCleaningListByUserID(LoginViewModel.currentUserID)
         temp2?.observe(viewLifecycleOwner, { list ->
             if (list.isNullOrEmpty()) {
                 cleaningListViewModel.updateRoomsAssignedByUserID(LoginViewModel.currentUserID, 0)
@@ -122,14 +123,12 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
     private fun openWorkerFrag(frag: WorkerFragment) {
         WorkerFragment.selectedWorkerId = -1
-        var roomsToCleanList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
+        val roomsToCleanList: LiveData<List<CheckInCheckOutEntity>>? =
+            cleaningListViewModel.cicoStatusAvailable
         roomsToCleanList?.observe(viewLifecycleOwner, { list ->
-            if (list.isNullOrEmpty()){
-
-            } else {
+            if (!list.isNullOrEmpty()) {
                 mRoomsToClean = list
             }
-
         })
 
         cleaningListViewModel.deleteAllRoomToClean()
@@ -137,7 +136,7 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", it.roomID))
         }
 
-        var cleaningList: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
+        val cleaningList: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
         cleaningList?.observe(viewLifecycleOwner, { list ->
             list?.forEach {
                 cleaningListViewModel.deleteRoomToClean(it.roomID)
