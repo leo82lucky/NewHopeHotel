@@ -58,4 +58,8 @@ class CleaningListViewModel(application: Application) : AndroidViewModel(applica
         get() {
             return field ?: mRepo.getCicoByStatus(RoomStatus.Available).also { field = it }
         }
+
+    fun updateRoomsAssignedByUserID(userID: Int, roomsAssigned: Int) {
+        mRepo.updateRoomsAssignedByUserID(userID, roomsAssigned)
+    }
 }
