@@ -110,8 +110,8 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
     private fun openWorkerFrag(frag: WorkerFragment) {
         WorkerFragment.selectedWorkerId = -1
-        var tempList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
-        tempList?.observe(viewLifecycleOwner, { list ->
+        var roomsToCleanList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
+        roomsToCleanList?.observe(viewLifecycleOwner, { list ->
             if (list.isNullOrEmpty()){
 
             } else {
@@ -120,11 +120,17 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
         })
 
-        // test data
         cleaningListViewModel.deleteAllRoomToClean()
         mRoomsToClean?.forEach {
             cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", it.roomID))
         }
+
+        var cleaningList: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
+        cleaningList?.observe(viewLifecycleOwner, { list ->
+            list?.forEach {
+                cleaningListViewModel.deleteRoomToClean(it.roomID)
+            }
+        })
 
         fragmentManager?.transaction {
             replace(R.id.main_container, frag)
