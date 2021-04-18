@@ -41,6 +41,9 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
 
     private var fb: Boolean = false
     private var vFb: Boolean = false
+    private var currentLocation: Int = 1
+    private var fbEmpty: Boolean = false
+    private var vFbEmpty: Boolean = false
 
     init {
         retainInstance = true
@@ -59,107 +62,13 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         mAdapter = FeedbackAdapter(this)
         viewedAdapter = ViewedFeedbackAdapter(this)
 
-        if(feedbackListViewModel.feedbackList == null && viewedFeedbackListViewModel.feedbackList == null) {
-
-            feedbackListViewModel.insertFeedbackList(
-                FeedbackEntity(
-                    1,
-                    "Jonhny",
-                    "10/11/2021",
-                    "Where is New Hope Hotel?",
-                    "New Hope Hotel is located at 8 Gat Lebuh Gereja\n" +
-                            "10300, Penang, Malaysia."
-                )
-            )
-            feedbackListViewModel.insertFeedbackList(
-                FeedbackEntity(
-                    2,
-                    "Lebron",
-                    "10/11/2021",
-                    "How much does a Deluxe Room Cost per night?",
-                    "It is RM 900 per night for a Deluxe Hotel Room"
-                )
-            )
-            feedbackListViewModel.insertFeedbackList(
-                FeedbackEntity(
-                    3,
-                    "Jones Bong",
-                    "11/11/2021",
-                    "What sort of room service are there?",
-                    "We provide all sorts of room service, from food delivery to room maintainence."
-                )
-            )
-            feedbackListViewModel.insertFeedbackList(
-                FeedbackEntity(
-                    4,
-                    "Oly Keng Tan",
-                    "11/11/2021",
-                    "Where can I book a room?",
-                    "You may book a room from our official website at www.NewHopeHotel.com"
-                )
-            )
-            feedbackListViewModel.insertFeedbackList(
-                FeedbackEntity(
-                    5,
-                    "Mark Job",
-                    "5/11/2021",
-                    "Are breakfast and dinner provided?",
-                    "Yes we do provide breakfast and dinner."
-                )
-            )
-           feedbackListViewModel.insertFeedbackList(
-               FeedbackEntity(
-                   6,
-                   "Collin Jr",
-                   "6/11/2021",
-                   "What are the tourist attractions close to this Hotel?",
-                   "The Penang Bridge and Penang Beach"
-               )
-           )
-           feedbackListViewModel.insertFeedbackList(
-               FeedbackEntity(
-                   7,
-                   "Ip Mao",
-                   "3/11/2021",
-                   "Are there any Kung fu centers nearby the hotel?",
-                   "No but we do have Gym Facilities"
-               )
-           )
-           feedbackListViewModel.insertFeedbackList(
-               FeedbackEntity(
-                   8,
-                   "Razore",
-                   "4/11/2021",
-                   "Are there any place where I can go scuba diving nearby the hotel ?",
-                   ""
-               )
-           )
-           feedbackListViewModel.insertFeedbackList(
-               FeedbackEntity(
-                   9,
-                   "Alakazam",
-                   "9/11/2021",
-                   "Does The Hotel Have Any Magic Shows ?",
-                   ""
-               )
-           )
-           feedbackListViewModel.insertFeedbackList(
-               FeedbackEntity(
-                   10,
-                   "Patrick Lau",
-                   "12/11/2021",
-                   "Are Swimsuits sold at the hotel?",
-                   ""
-               )
-           )
-
-        }
-
         fb= true;
         binding.rvFeedbackList.adapter = mAdapter
         binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
         binding.fbButton.setTextColor(Color.parseColor("#ffffff"))
         binding.viewedFbButton.setTextColor(Color.parseColor("#C0C0C0"))
+
+
 
         binding.fbButton.setOnClickListener{
             fb=true
@@ -168,6 +77,14 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
             fbButton.setTextColor(Color.parseColor("#ffffff"))
             viewedFbButton.setTextColor(Color.parseColor("#C0C0C0"))
+
+            empty_imageview_feedback!!.visibility =  View.GONE
+            no_data_feedback!!.visibility = View.GONE
+            if (mFeedbackList.isNullOrEmpty()) {
+                empty_imageview_feedback!!.visibility =  View.VISIBLE
+                no_data_feedback!!.visibility = View.VISIBLE
+            }
+            currentLocation = 1
 
         }
 
@@ -178,6 +95,14 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             binding.rvFeedbackList.layoutManager = LinearLayoutManager(this.context)
             fbButton.setTextColor(Color.parseColor("#C0C0C0"))
             viewedFbButton.setTextColor(Color.parseColor("#ffffff"))
+
+            empty_imageview_feedback!!.visibility =  View.GONE
+            no_data_feedback!!.visibility = View.GONE
+            if (mViewedFeedbackList.isNullOrEmpty()) {
+                empty_imageview_feedback!!.visibility =  View.VISIBLE
+                no_data_feedback!!.visibility = View.VISIBLE
+            }
+            currentLocation = 2
         }
 
         ItemTouchHelper(object :
@@ -221,34 +146,143 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         var temp: LiveData<List<FeedbackEntity>>? = feedbackListViewModel.selectFeedback("")
         temp?.observe(viewLifecycleOwner, { temp2 ->
             if (temp2.isNullOrEmpty()) {
-                empty_imageview_feedback!!.visibility = View.VISIBLE
-                no_data_feedback!!.visibility = View.VISIBLE
+                if (currentLocation == 1) {
+                    empty_imageview_feedback!!.visibility =  View.VISIBLE
+                    no_data_feedback!!.visibility = View.VISIBLE
+                }
                 feedbackListViewModel.uiState.set(UIState.EMPTY)
+                mAdapter.feedbackList = temp2
+                mFeedbackList = temp2
+                fbEmpty = true
+
+                if(fbEmpty && vFbEmpty) {
+                    insertTestData()
+                }
             } else {
-                empty_imageview_feedback!!.visibility =  View.GONE
-                no_data_feedback!!.visibility = View.GONE
                 feedbackListViewModel.uiState.set(UIState.HAS_DATA)
                 mAdapter.feedbackList = temp2
                 mFeedbackList = temp2
+                fbEmpty = false
             }
         })
 
         var temp3: LiveData<List<FeedbackEntity>>? = viewedFeedbackListViewModel.selectViewedFeedback("")
         temp3?.observe(viewLifecycleOwner, { temp4 ->
             if (temp4.isNullOrEmpty()) {
-                empty_imageview_feedback!!.visibility = View.VISIBLE
-                no_data_feedback!!.visibility = View.VISIBLE
+                if (currentLocation == 2) {
+                    empty_imageview_feedback!!.visibility =  View.VISIBLE
+                    no_data_feedback!!.visibility = View.VISIBLE
+                }
                 viewedFeedbackListViewModel.uiState.set(UIState.EMPTY)
+                viewedAdapter.viewedFeedbackList = temp4
+                mViewedFeedbackList = temp4
+                vFbEmpty = true
+
+                if(fbEmpty && vFbEmpty) {
+                    insertTestData()
+                }
             } else {
-                empty_imageview_feedback!!.visibility =  View.GONE
-                no_data_feedback!!.visibility = View.GONE
                 viewedFeedbackListViewModel.uiState.set(UIState.HAS_DATA)
                 viewedAdapter.viewedFeedbackList = temp4
                 mViewedFeedbackList = temp4
-
+                vFbEmpty = false
             }
         })
 
+    }
+
+    fun insertTestData() {
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                1,
+                "Jonhny",
+                "10/11/2021",
+                "Where is New Hope Hotel?",
+                "New Hope Hotel is located at 8 Gat Lebuh Gereja\n" +
+                        "10300, Penang, Malaysia."
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                2,
+                "Lebron",
+                "10/11/2021",
+                "How much does a Deluxe Room Cost per night?",
+                "It is RM 900 per night for a Deluxe Hotel Room"
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                3,
+                "Jones Bong",
+                "11/11/2021",
+                "What sort of room service are there?",
+                "We provide all sorts of room service, from food delivery to room maintainence."
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                4,
+                "Oly Keng Tan",
+                "11/11/2021",
+                "Where can I book a room?",
+                "You may book a room from our official website at www.NewHopeHotel.com"
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                5,
+                "Mark Job",
+                "5/11/2021",
+                "Are breakfast and dinner provided?",
+                "Yes we do provide breakfast and dinner."
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                6,
+                "Collin Jr",
+                "6/11/2021",
+                "What are the tourist attractions close to this Hotel?",
+                "The Penang Bridge and Penang Beach"
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                7,
+                "Ip Mao",
+                "3/11/2021",
+                "Are there any Kung fu centers nearby the hotel?",
+                "No but we do have Gym Facilities"
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                8,
+                "Razore",
+                "4/11/2021",
+                "Are there any place where I can go scuba diving nearby the hotel ?",
+                ""
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                9,
+                "Alakazam",
+                "9/11/2021",
+                "Does The Hotel Have Any Magic Shows ?",
+                ""
+            )
+        )
+        feedbackListViewModel.insertFeedbackList(
+            FeedbackEntity(
+                10,
+                "Patrick Lau",
+                "12/11/2021",
+                "Are Swimsuits sold at the hotel?",
+                ""
+            )
+        )
     }
 
     override fun onFeedbackEditClicked(chosenToy: FeedbackEntity) {
