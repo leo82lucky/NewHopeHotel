@@ -13,6 +13,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.newhopehotel.R
 import com.example.newhopehotel.databinding.FragmentRegisterBinding
 import com.example.newhopehotel.utils.provideRepository
+import org.jetbrains.anko.toast
+import java.util.regex.Pattern
 
 class RegisterFragment : Fragment() {
 
@@ -39,14 +41,12 @@ class RegisterFragment : Fragment() {
 
         registerViewModel.navigateto.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished == true) {
-                Log.i("MYTAG", "insidi observe")
-                displayUsersList()
+                navigateLogin()
                 registerViewModel.doneNavigating()
             }
         })
 
         registerViewModel.userDetailsLiveData.observe(viewLifecycleOwner, {
-            Log.i("MYTAG", it.toString() + "000000000000000000000000")
         })
 
 
@@ -60,17 +60,33 @@ class RegisterFragment : Fragment() {
 
         registerViewModel.errotoastUsername.observe(viewLifecycleOwner, { hasError ->
             if (hasError == true) {
-                Toast.makeText(requireContext(), "UserName Already taken", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Username Already taken", Toast.LENGTH_SHORT)
                     .show()
                 registerViewModel.donetoastUserName()
+            }
+        })
+
+        registerViewModel.errotoastFormatUsername.observe(viewLifecycleOwner, { hasError ->
+            if (hasError == true) {
+                Toast.makeText(requireContext(), R.string.usernameError, Toast.LENGTH_SHORT)
+                    .show()
+                registerViewModel.donetoastFormatUserName()
+                binding.userNameTextView.error = getString(R.string.usernameError)
+            }
+        })
+        registerViewModel.errotoastFormatPassword.observe(viewLifecycleOwner, { hasError ->
+            if (hasError == true) {
+                Toast.makeText(requireContext(), R.string.passwordFormatError, Toast.LENGTH_SHORT)
+                    .show()
+                registerViewModel.donetoastFormatPassword()
+                binding.passwordTextView.error = getString(R.string.passwordFormatError)
             }
         })
 
         return binding.root
     }
 
-    private fun displayUsersList() {
-        Log.i("MYTAG", "insidisplayUsersList")
+    private fun navigateLogin() {
         val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
         NavHostFragment.findNavController(this).navigate(action)
 

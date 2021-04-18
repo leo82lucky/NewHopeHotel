@@ -85,14 +85,14 @@
     <string name="ten_am">10 AM</string>
     <string name="eleven_am">11 AM</string>
     <string name="save">Save</string>
-    <string name="contactNoError">eg: 012-123 1234</string>
-    <string name="icError">eg: 123456-12-1234</string>
+    <string name="contactNoError">eg: 012–123 1234</string>
+    <string name="icError">eg: 123456–12–1234</string>
     <string name="add_a_new_record">Add a new record</string>
     <string name="contact_toast_error">Wrong Contact No</string>
     <string name="ic_toast_error">Wrong IC No</string>
     <string name="assign">Assign</string>
     <string name="request_underline"><u>Request</u></string>
     <string name="all">All</string>
-
-
+    <string name="usernameError">Username Wrong Format, eg: example123</string>
+    <string name="passwordFormatError">Password Wrong Format, eg: Example$123</string>
 </resources>
