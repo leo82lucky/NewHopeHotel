@@ -66,43 +66,99 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
         mAdapter = FeedbackAdapter(this)
         viewedAdapter = ViewedFeedbackAdapter(this)
 
-        if(feedbackListViewModel.feedbackList == null) {
+       if(feedbackListViewModel.feedbackList == null) {
             feedbackListViewModel.insertFeedbackList(
                 FeedbackEntity(
                     1,
                     "Jonhny",
                     "10/11/2021",
-                    "Hi",
-                    "Hello"
+                    "Where is New Hope Hotel?",
+                    "New Hope Hotel is located at 8 Gat Lebuh Gereja\n" +
+                            "10300, Penang, Malaysia."
                 )
             )
             feedbackListViewModel.insertFeedbackList(
                 FeedbackEntity(
                     2,
-                    "Johnson",
+                    "Lebron",
                     "10/11/2021",
-                    "Testing 2",
-                    ""
+                    "How much does a Deluxe Room Cost per night?",
+                    "It is RM 900 per night for a Deluxe Hotel Room"
                 )
             )
             feedbackListViewModel.insertFeedbackList(
                 FeedbackEntity(
                     3,
-                    "John",
+                    "Jones Bong",
                     "11/11/2021",
-                    "Testing 3",
-                    ""
+                    "What sort of room service are there?",
+                    "We provide all sorts of room service, from food delivery to room maintainence."
                 )
             )
             feedbackListViewModel.insertFeedbackList(
                 FeedbackEntity(
                     4,
-                    "Johnii",
+                    "Oly Keng Tan",
                     "11/11/2021",
-                    "Testing 3",
-                    "Hi"
+                    "Where can I book a room?",
+                    "You may book a room from our official website at www.NewHopeHotel.com"
                 )
             )
+            feedbackListViewModel.insertFeedbackList(
+                FeedbackEntity(
+                    5,
+                    "Mark Job",
+                    "5/11/2021",
+                    "Are breakfast and dinner provided?",
+                    "Yes we do provide breakfast and dinner."
+                )
+            )
+           feedbackListViewModel.insertFeedbackList(
+               FeedbackEntity(
+                   6,
+                   "Collin Jr",
+                   "6/11/2021",
+                   "What are the tourist attractions close to this Hotel?",
+                   "The Penang Bridge and Penang Beach"
+               )
+           )
+           feedbackListViewModel.insertFeedbackList(
+               FeedbackEntity(
+                   7,
+                   "Ip Mao",
+                   "3/11/2021",
+                   "Are there any Kung fu centers nearby the hotel?",
+                   "No but we do have Gym Facilities"
+               )
+           )
+           feedbackListViewModel.insertFeedbackList(
+               FeedbackEntity(
+                   8,
+                   "Razore",
+                   "4/11/2021",
+                   "Are there any place where I can go scuba diving nearby the hotel ?",
+                   ""
+               )
+           )
+           feedbackListViewModel.insertFeedbackList(
+               FeedbackEntity(
+                   9,
+                   "Alakazam",
+                   "9/11/2021",
+                   "Does The Hotel Have Any Magic Shows ?",
+                   ""
+               )
+           )
+           feedbackListViewModel.insertFeedbackList(
+               FeedbackEntity(
+                   10,
+                   "Patrick Lau",
+                   "12/11/2021",
+                   "Are Swimsuits sold at the hotel?",
+                   ""
+               )
+           )
+
         }
 
         fb= true;
