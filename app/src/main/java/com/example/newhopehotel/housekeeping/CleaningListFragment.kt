@@ -110,7 +110,6 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
     private fun openWorkerFrag(frag: WorkerFragment) {
         WorkerFragment.selectedWorkerId = -1
-
         var tempList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
         tempList?.observe(viewLifecycleOwner, { list ->
             if (list.isNullOrEmpty()){
