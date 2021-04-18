@@ -15,7 +15,6 @@ class AddRoomServiceViewModel(
 
     init {
         if (chosenRoomService!= null) {
-            //This is edit case
             roomServiceBeingModified =chosenRoomService.copy()
             mIsEdit = true
         } else {
@@ -42,10 +41,6 @@ class AddRoomServiceViewModel(
 
     private val emptyRoomService: RoomServiceEntity
         get() {
-//            val categories = mutableMapOf(
-//                WOODEN to false, ELECTRONIC to false,
-//                PLASTIC to false, PLUSH to false, MUSICAL to false, EDUCATIVE to false
-//            )
             return RoomServiceEntity(
                 custName = "",
                 request = "",

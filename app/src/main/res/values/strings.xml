@@ -23,29 +23,17 @@
     <string name="customer_feedback">Customer Feedback</string>
     <string name="View_Room_Service_List">View Room Service List</string>
     <string name="View_Morning_Call_List">View Morning Call List</string>
-    <string name="Room_Service_List">Room Service List</string>
-    <string name="Morning_Call_List">Morning Call List</string>
-    <string name="room_cleaning_time">Room Cleaning Time</string>
     <string name="_8am">8am</string>
     <string name="_12pm">12pm</string>
     <string name="_8pm">8pm</string>
     <string name="_4pm">4pm</string>
-    <string name="check_in">Check In</string>
-    <string name="check_out">Check Out</string>
     <string name="name">Name</string>
     <string name="i_c">I/C</string>
     <string name="contact_no">Contact No.</string>
     <string name="room_id">Room ID</string>
     <string name="room_type">Room Type</string>
     <string name="status">Status</string>
-    <string name="card_no">Card No.</string>
-    <string name="time">Time</string>
-    <string name="select_time">Select Time</string>
-    <string name="date">Date</string>
-    <string name="select_date">Select Date</string>
     <string name="morning_call">Morning Call</string>
-    <string name="confirm">Confirm</string>
-    <string name="cancel">Cancel</string>
     <string name="cleaning_list">Cleaning List</string>
     <string name="assign_work">Assign Work</string>
     <string name="cico_empty_warning">Customer name cannot be empty</string>
@@ -54,18 +42,11 @@
     <string name="yes">Yes</string>
     <string name="available">Available</string>
     <string name="unavailable">Unavailable</string>
-    <string name="reserved">Reserved</string>
     <string name="undo">UNDO</string>
     <string name="record_is_deleted">One record is deleted</string>
-    <string name="morning_call_date">Date</string>
-    <string name="morning_call_time">Time</string>
-    <string name="morning_call_title">Morning Call</string>
-    <string name="morning_call_snack">One Morning Call Deleted</string>
     <string name="room_service_title">Room Service</string>
     <string name="room_service_snack">One Room Service Deleted</string>
-    <string name="request">request</string>
     <string name="error_no_request">Request Field Cannot Be Empty</string>
-    <string name="please_select_customer">Please Select a Customer</string>
     //RoomID String Array
     <string-array name="roomid_array">
         <item>R001</item>
@@ -86,11 +67,6 @@
         <item>Luxury</item>
     </string-array>
     //RoomStatus String Array
-    <string-array name="roomstatus_array">
-        <item>Reserved</item>
-        <item>Available</item>
-        <item>Unavailable</item>
-    </string-array>
     //MorningCall String Array
     <string-array name="morningcall_array">
         <item>None</item>
@@ -103,12 +79,8 @@
     <string name="check_in_time">Check In Time</string>
     <string name="check_in_date">Check In Date</string>
     <string name="add_room_service">Add Room Service</string>
-    <string name="total_no">Total No</string>
     <string name="checkout_date">Checkout Date</string>
     <string name="checkout_time">Checkout Time</string>
-    <string name="customer_information">Customer Information</string>
-    <string name="optional">Optional</string>
-    <string name="eight_am">8 AM</string>
     <string name="nine_am">9 AM</string>
     <string name="ten_am">10 AM</string>
     <string name="eleven_am">11 AM</string>
@@ -118,11 +90,9 @@
     <string name="add_a_new_record">Add a new record</string>
     <string name="contact_toast_error">Wrong Contact No</string>
     <string name="ic_toast_error">Wrong IC No</string>
-    <string name="mark_as_done">MARK AS DONE</string>
     <string name="assign">Assign</string>
     <string name="request_underline"><u>Request</u></string>
     <string name="all">All</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

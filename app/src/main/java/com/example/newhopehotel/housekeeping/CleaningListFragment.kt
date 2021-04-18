@@ -55,11 +55,6 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             openWorkerFrag(WorkerFragment())
         }
 
-        // test data
-        /*cleaningListViewModel.insertCleaningList(CleaningListEntity(1, RoomID.R001, "8am"))
-        cleaningListViewModel.insertCleaningList(CleaningListEntity(2, RoomID.R002, "12pm"))
-        cleaningListViewModel.insertCleaningList(CleaningListEntity(3, RoomID.R003, "4pm"))
-        Toast.makeText(this.context, "Count : " + mAdapter.itemCount, Toast.LENGTH_SHORT).show()*/
 
         val coordinator: FrameLayout? = activity?.findViewById(R.id.main_container)
         ItemTouchHelper(object :

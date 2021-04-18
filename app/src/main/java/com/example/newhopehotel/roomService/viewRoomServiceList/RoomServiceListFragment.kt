@@ -38,9 +38,6 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
     private lateinit var binding: FragmentRoomServiceListBinding
     private var mRoomServiceList: List<RoomServiceEntity>? = null
 
-
-
-
     init {
         retainInstance = true
     }
@@ -66,7 +63,6 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
             adapter = mAdapter
         }
 
-        //When fab clicked, open AddToyFragment
         binding.fab.setOnClickListener { openAddToyFrag(AddRoomServiceFragment()) }
 
         return binding.root
@@ -81,10 +77,7 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
         (activity as RoomService).activateRoomServiceTitle()
 
 
-        //Get the view model instance and pass it to the binding implementation
         binding.uiState = roomServiceActivityViewModel.uiState
-
-        //Claim list of toys from view model
 
         roomServiceActivityViewModel.roomServiceList?.observe(viewLifecycleOwner, { roomServiceEntries ->
             if (roomServiceEntries.isNullOrEmpty()) {
@@ -100,7 +93,6 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
             }
         })
 
-        //Attach an ItemTouchHelper for swipe-to-delete functionality
         val coordinator: FrameLayout? = activity?.findViewById(R.id.main_container)
         ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -115,11 +107,8 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
 
-                //First take a backup of the toy to erase
-                //If user is swiping an item, we can assume that list is not null
                 val roomServiceToErase = mRoomServiceList!![position]
 
-                //Then delete the toy
                 roomServiceActivityViewModel.deleteRoomService(roomServiceToErase)
 
                 Snackbar.make(viewHolder.itemView, R.string.room_service_snack, Snackbar.LENGTH_LONG).setAction(R.string.undo) {
@@ -146,13 +135,11 @@ class RoomServiceListFragment : Fragment(), RoomServiceAdapter.RoomServiceClickL
 
 
     override fun onRoomServiceClicked(chosenToy: RoomServiceEntity) {
-        //Pass chosen toy id to the AddToyFragment
         val args = Bundle()
         args.putParcelable(CHOSEN_RS, chosenToy)
         val frag = AddRoomServiceFragment()
         frag.arguments = args
         (activity as RoomService).editMode=true
-        //Open AddToyFragment in edit form
         openAddToyFrag(frag)
     }
 

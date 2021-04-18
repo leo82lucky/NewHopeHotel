@@ -9,12 +9,6 @@ import com.example.newhopehotel.data.RoomID
 import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.data.RoomType
 
-//fun attachMorningCall(morningCall: Map<String, Boolean>): String? {
-//    return morningCall.filter { it.value }
-//        .keys
-//        .joinToString(separator = ", ")
-//}
-
 fun setToText(anyNotString: Any?): String {
     return anyNotString.toString()
 }

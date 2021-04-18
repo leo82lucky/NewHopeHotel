@@ -30,10 +30,6 @@ class CICOViewModel(application: Application) : AndroidViewModel(application) {
             return field ?: mRepo.getCicoByStatus(RoomStatus.Unavailable).also { field = it }
         }
 
-    fun getCicoByStatus(roomStatus: RoomStatus) {
-        mRepo.getCicoByStatus(roomStatus)
-    }
-
     fun insertCico(cico: CheckInCheckOutEntity) {
         mRepo.insertCico(cico)
     }

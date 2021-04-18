@@ -24,7 +24,6 @@ class CicoAdapter(private val mListener: CicoClickListener) :
         holder.bind(cicoList?.get(position), mListener)
 
     override fun getItemCount(): Int {
-        //If list is null, return 0, otherwise return the size of the list
         return cicoList?.size ?: 0
     }
 

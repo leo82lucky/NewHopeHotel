@@ -22,7 +22,6 @@ class RoomServiceAdapter(private val mListener: RoomServiceClickListener) :
 
 
     override fun getItemCount(): Int {
-        //If list is null, return 0, otherwise return the size of the list
         return roomServiceList?.size ?: 0
     }
 
@@ -74,9 +73,6 @@ class RoomServiceAdapter(private val mListener: RoomServiceClickListener) :
         fun onRoomServiceClicked(chosenToy: RoomServiceEntity)
 
     }
-
-
-
 
     override fun onBindViewHolder(holder: RoomServiceAdapter.RoomServiceViewHolder, position: Int) {
         holder.bind(roomServiceList?.get(position), mListener)

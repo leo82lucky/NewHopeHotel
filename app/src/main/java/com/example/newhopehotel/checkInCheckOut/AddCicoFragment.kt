@@ -118,15 +118,13 @@ class AddCicoFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //If up button is clicked, check for changes before popping the fragment off
         if (item.itemId == android.R.id.home) {
             onBackClicked()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    /*This can be triggered either by up or both buttons. In both cases,
-    we first need to check whether there are unsaved changes and warn the user if necessary*/
+
     fun onBackClicked() {
         if (viewModel.isChanged) {
             openAlertDialog()
@@ -139,13 +137,10 @@ class AddCicoFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.unsaved_changes_warning_title))
             .setMessage(getString(R.string.unsaved_changes_warning_message))
-            // Specifying a listener allows you to take an action before dismissing the dialog.
-            // The dialog is automatically dismissed when a dialog button is clicked.
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 // Continue with back operation
                 fragmentManager?.popBackStack()
             }
-            // A null listener allows the button to dismiss the dialog and take no further action.
             .setNegativeButton(android.R.string.no, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
@@ -187,9 +182,6 @@ class AddCicoFragment : Fragment() {
         (formattedDate).also {
             textViewDate.text = it
         }
-//        ("${pickedDate.get(Calendar.DAY_OF_MONTH)}/" +
-//                "${pickedDate.get(Calendar.MONTH)}/" +
-//                "${pickedDate.get(Calendar.YEAR)}").also { binding.dateTextView.text = it }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -199,8 +191,6 @@ class AddCicoFragment : Fragment() {
         (formattedTime).also {
             textViewTime.text = it
         }
-//        ("${pickedTime.get(Calendar.HOUR_OF_DAY)}:" +
-//                "${pickedTime.get(Calendar.MINUTE)}").also { binding.timeTextView.text = it }
     }
 
     private var CONTACT_NO_PATTERN: Pattern = Pattern.compile("^(\\d{3}[- .]?){2}\\d{4}$")

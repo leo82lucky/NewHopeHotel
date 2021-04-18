@@ -43,9 +43,4 @@ enum class MorningCall(val time: String) {
     NineAM("9 AM"),
     TenAM("10 AM"),
     ElevenAM("11 AM")
-//    NONE,
-//    EightAM,
-//    NineAM,
-//    TenAM,
-//    ElevenAM
 }

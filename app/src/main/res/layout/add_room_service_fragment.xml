@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="AddRoomServiceBinding">
 
@@ -11,6 +10,7 @@
 
         <import type="com.example.newhopehotel.utils.BindingUtils" />
     </data>
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.custName}"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/tv_name"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@={myAddRoomServiceViewModel.roomServiceBeingModified.roomNo}"
-            android:textSize="24dp"
+            android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/tv_room_no"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 

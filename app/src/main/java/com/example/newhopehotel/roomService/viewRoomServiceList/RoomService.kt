@@ -42,8 +42,6 @@ class RoomService : AppCompatActivity() {
         tv_add_room_service_title!!.visibility = View.GONE
     }
     override fun onBackPressed() {
-        /*//If back is clicked when AddToyFragment is on the screen,
-        check whether there are unsaved changes*/
         val currentFrag = supportFragmentManager.findFragmentById(R.id.main_container)
         if (currentFrag is AddRoomServiceFragment) {
             currentFrag.onBackClicked()

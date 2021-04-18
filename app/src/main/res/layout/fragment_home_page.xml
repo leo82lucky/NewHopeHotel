@@ -146,10 +146,6 @@
 
             </androidx.cardview.widget.CardView>
 
-
-            <!-- ROW 2  -->
-            <!-- COLUMN 1  -->
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/roomServiceButton"
                 android:layout_width="0dp"
@@ -189,8 +185,6 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <!-- COLUMN 2  -->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/custFeedbackButton"

@@ -65,9 +65,6 @@ class RoomsToCleanFragment : Fragment(), RoomsToCleanAdapter.RoomToCleanClickLis
 
         arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
 
-        //selectedWorker = roomsToCleanViewModel.selectedWorkerList[0]
-        //Toast.makeText(this.context, "size : " + roomsToCleanViewModel.selectedWorkerList.size, Toast.LENGTH_SHORT).show()
-
         binding.btn8am.setOnClickListener {
             arrangeRoomToCleanListByTime(roomsToCleanViewModel.roomToClean8am)
         }

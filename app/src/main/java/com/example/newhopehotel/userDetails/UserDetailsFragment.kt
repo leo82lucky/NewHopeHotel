@@ -30,11 +30,6 @@ class UserDetailsFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
-//
-//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
         val factory = UserDetailsFactory(provideRepository(requireContext()), application)
 
         userDetailsViewModel =
@@ -67,7 +62,6 @@ class UserDetailsFragment : Fragment() {
 
 
     private fun displayUsersList() {
-        Log.i("MYTAG", "Inside ...UserDetails..Fragment")
         userDetailsViewModel.users.observe(viewLifecycleOwner, {
             binding.usersRecyclerView.adapter = MyRecycleViewAdapter(it)
         })
