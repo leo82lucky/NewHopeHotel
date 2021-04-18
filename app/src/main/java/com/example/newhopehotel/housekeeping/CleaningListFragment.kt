@@ -111,11 +111,6 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
     private fun openWorkerFrag(frag: WorkerFragment) {
         WorkerFragment.selectedWorkerId = -1
 
-        fragmentManager?.transaction {
-            replace(R.id.main_container, frag)
-            addToBackStack(null)
-        }
-
         var tempList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
         tempList?.observe(viewLifecycleOwner, { list ->
             if (list.isNullOrEmpty()){
@@ -130,6 +125,11 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
         cleaningListViewModel.deleteAllRoomToClean()
         mRoomsToClean?.forEach {
             cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", it.roomID))
+        }
+
+        fragmentManager?.transaction {
+            replace(R.id.main_container, frag)
+            addToBackStack(null)
         }
     }
 }
