@@ -69,16 +69,13 @@ class AddRoomServiceFragment : Fragment() {
         (activity as RoomService).activateAddRoomServiceTitle()
         tv_name_data!!.visibility = View.GONE
         sp_name!!.visibility = View.VISIBLE
-        //If there is no id specified in the arguments, then it should be a new toy
         val chosenRoom: RoomServiceEntity? = arguments?.getParcelable(CHOSEN_RS)
 
-        //Get the view model instance and pass it to the binding implementation
         val factory = AddRoomServiceViewModelFactory(provideRepository(requireContext()), chosenRoom)
         viewModel = ViewModelProvider(this, factory).get(AddRoomServiceViewModel::class.java)
 
         binding.myAddRoomServiceViewModel= viewModel
 
-        //Claim list of cico from view model
         cicoActivityViewModel.cicoList?.observe(viewLifecycleOwner, { cicoEntries ->
             if (cicoEntries.isNullOrEmpty()) {
                 cicoActivityViewModel.uiState.set(UIState.EMPTY)
@@ -110,8 +107,6 @@ class AddRoomServiceFragment : Fragment() {
                 {
                     tv_name_data!!.visibility = View.VISIBLE
                     sp_name!!.visibility = View.GONE
-                    //tv_name_data.setText(customerNameList[position])
-                    //tv_room_no_data.setText(roomNoList[position])
                     (activity as RoomService).editMode=false
                 }
                 else if(spinCount>0)
@@ -140,23 +135,17 @@ class AddRoomServiceFragment : Fragment() {
 
 
         }
-        btn_add_room_service.setOnClickListener({
+        btn_add_room_service.setOnClickListener {
 
             if (viewModel.isChanged) {
                 saveToy()
-            }
-            else
-            {
+            } else {
                 fragmentManager?.popBackStack()
             }
 
-            })
+        }
 
-        btn_cancel.setOnClickListener({
-
-            onBackClicked()
-            })
-
+        btn_cancel.setOnClickListener { onBackClicked() }
 
 
     }
@@ -174,7 +163,6 @@ class AddRoomServiceFragment : Fragment() {
         }
     }
     private fun saveToy() {
-        // Check if toy name is not empty
         if (viewModel.roomServiceBeingModified.custName.isBlank()||viewModel.roomServiceBeingModified.custName.equals("Please Select a Customer")) {
             context?.toast(R.string.cico_empty_warning)
             return
@@ -190,15 +178,12 @@ class AddRoomServiceFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //If up button is clicked, check for changes before popping the fragment off
         if (item.itemId == android.R.id.home) {
             onBackClicked()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    /*This can be triggered either by up or both buttons. In both cases,
-    we first need to check whether there are unsaved changes and warn the user if necessary*/
     fun onBackClicked() {
         if (viewModel.isChanged) {
             openAlertDialog()
@@ -212,13 +197,9 @@ class AddRoomServiceFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.unsaved_changes_warning_title))
             .setMessage(getString(R.string.unsaved_changes_warning_message))
-            // Specifying a listener allows you to take an action before dismissing the dialog.
-            // The dialog is automatically dismissed when a dialog button is clicked.
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                // Continue with back operation
                 fragmentManager?.popBackStack()
             }
-            // A null listener allows the button to dismiss the dialog and take no further action.
             .setNegativeButton(android.R.string.no, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()

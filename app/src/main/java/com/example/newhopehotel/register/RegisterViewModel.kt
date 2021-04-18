@@ -55,25 +55,19 @@ class RegisterViewModel(private val repository: HotelRepository, application: Ap
 
 
     fun sumbitButton() {
-        Log.i("MYTAG", "Inside SUBMIT BUTTON")
         if (inputFirstName.value == null || inputLastName.value == null || inputUsername.value == null || inputPassword.value == null) {
             _errorToast.value = true
         } else {
             uiScope.launch {
 //            withContext(Dispatchers.IO) {
                 val usersNames = repository.getUserName(inputUsername.value!!)
-                Log.i("MYTAG", usersNames.toString() + "------------------")
                 if (usersNames != null) {
                     _errorToastUsername.value = true
-                    Log.i("MYTAG", "Inside if Not null")
                 } else {
-                    Log.i("MYTAG", userDetailsLiveData.value.toString() + "ASDFASDFASDFASDF")
-                    Log.i("MYTAG", "OK im in")
                     val firstName = inputFirstName.value!!
                     val lastName = inputLastName.value!!
                     val email = inputUsername.value!!
                     val password = inputPassword.value!!
-                    Log.i("MYTAG", "insidi Sumbit")
                     insert(RegisterEntity(0, firstName, lastName, email, password, 0))
                     inputFirstName.value = null
                     inputLastName.value = null
@@ -108,10 +102,6 @@ class RegisterViewModel(private val repository: HotelRepository, application: Ap
     private fun insert(user: RegisterEntity): Job = viewModelScope.launch {
         repository.insert(user)
     }
-
-//    fun clearALl():Job = viewModelScope.launch {
-//        repository.deleteAll()
-//    }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 

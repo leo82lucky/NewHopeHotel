@@ -8,8 +8,6 @@ import com.example.newhopehotel.data.RoomStatus
 import com.example.newhopehotel.utils.AppExecutors
 
 class HotelRepository private constructor(
-//    private val registerDatabaseDao: RegisterDatabaseDao,
-//    private val checkInCheckOutDatabaseDao: CheckInCheckOutDatabaseDao,
     private val hotelDatabase: HotelDatabase,
     private val mExecutors: AppExecutors
 ) {
@@ -26,12 +24,7 @@ class HotelRepository private constructor(
 
     val feedbackList: LiveData<List<FeedbackEntity>>
         get() = hotelDatabase.feedbackListDao().allFeedback
-    //    val users = registerDatabaseDao.getAllUsers()
-//    val customers = checkInCheckOutDatabaseDao.allCustomers
-//    suspend fun insert(user: RegisterEntity) {
-//        return hotelDatabase.registerDao().insert(user)
-////        return registerDatabaseDao.insert(user)
-//    }
+
     fun insert(user: RegisterEntity) {
         mExecutors.diskIO().execute { hotelDatabase.registerDao().insert(user) }
     }
@@ -39,34 +32,10 @@ class HotelRepository private constructor(
     suspend fun getUserName(userName: String): RegisterEntity? {
         Log.i("MYTAG", "inside Repository GetUsers fun ")
         return hotelDatabase.registerDao().getUsername(userName)
-//        return registerDatabaseDao.getUsername(userName)
-    }
-
-    val morningCallList: LiveData<List<MorningCallEntity>>
-        get() = hotelDatabase.morningCallDao().allMorningCall
-
-    fun getChosenMorningCall(mcId: Int): LiveData<MorningCallEntity> {
-        return hotelDatabase.morningCallDao().getChosenMorningCall(mcId)
-    }
-
-    fun insertMorningCall(morningCall:MorningCallEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.morningCallDao().insertMorningCall(morningCall) }
-    }
-
-    fun updateMorningCall(morningCall: MorningCallEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.morningCallDao().updateMorningCall(morningCall) }
-    }
-
-    fun deleteMorningCall(morningCall: MorningCallEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.morningCallDao().deleteMorningCall(morningCall) }
     }
 
     val roomServiceList: LiveData<List<RoomServiceEntity>>
         get() = hotelDatabase.roomServiceDao().allRoomService
-
-    fun getChosenRoomService(custId: Int): LiveData<RoomServiceEntity> {
-        return hotelDatabase.roomServiceDao().getChosenRoomService(custId)
-    }
 
     fun insertRoomService(roomService: RoomServiceEntity) {
         mExecutors.diskIO().execute { hotelDatabase.roomServiceDao().insertRoomService(roomService) }
@@ -84,9 +53,6 @@ class HotelRepository private constructor(
     val cicoList: LiveData<List<CheckInCheckOutEntity>>
         get() = hotelDatabase.cicoDao().allCico
 
-    fun getChosenCico(custId: Int): LiveData<CheckInCheckOutEntity> {
-        return hotelDatabase.cicoDao().getChosenCico(custId)
-    }
 
     fun getCicoByStatus(status: RoomStatus): LiveData<List<CheckInCheckOutEntity>> {
         return hotelDatabase.cicoDao().getCicoByStatus(status)
@@ -111,10 +77,6 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.cleaningListDao().insertCleaningList(cleaningList) }
     }
 
-    fun updateCleaningList(cleaningList: CleaningListEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.cleaningListDao().updateCleaningList(cleaningList) }
-    }
-
     fun deleteCleaningList(cleaningList: CleaningListEntity) {
         mExecutors.diskIO().execute { hotelDatabase.cleaningListDao().deleteCleaningList(cleaningList) }
     }
@@ -130,10 +92,6 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().insertRoomToClean(roomToClean) }
     }
 
-    fun deleteRoomToClean(roomToClean: RoomToCleanEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().deleteRoomToClean(roomToClean) }
-    }
-
     fun deleteAllRoomToClean() {
         mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().deleteAllRoomToClean() }
     }
@@ -142,16 +100,11 @@ class HotelRepository private constructor(
         mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().changeRoomToCleanBorderColor(roomID, new) }
     }
 
-    fun updateRoomToClean(roomToClean: RoomToCleanEntity) {
-        mExecutors.diskIO().execute { hotelDatabase.roomToCleanDao().updateRoomToClean(roomToClean) }
-    }
 
     fun getRoomToCleanByTime(cleaningTime: String): LiveData<List<RoomToCleanEntity>> {
         return hotelDatabase.roomToCleanDao().getRoomToCleanByTime(cleaningTime)
     }
 
-    val selectedWorkerList: List<SelectedWorkerEntity>
-        get() = hotelDatabase.selectedWorkerDao().allSelectedWorker
 
     fun insertSelectedWorker(selectedWorker: SelectedWorkerEntity) {
         mExecutors.diskIO().execute { hotelDatabase.selectedWorkerDao().insertSelectedWorker(selectedWorker) }

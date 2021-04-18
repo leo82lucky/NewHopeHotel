@@ -55,10 +55,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- ROW 1  -->
-        <!-- COLUMN 1  -->
-
-
     </LinearLayout>
 
 

@@ -173,7 +173,8 @@
             app:layout_constraintStart_toEndOf="@+id/item_checkin_time"
             app:layout_constraintTop_toTopOf="parent"
             app:statusBackgroundColor="@{cicoItem.roomStatus}"
-            tools:srcCompat="@drawable/status_available" />
+            tools:srcCompat="@drawable/status_available"
+            android:contentDescription="@string/status" />
 
         <TextView
             android:id="@+id/item_room_type"
@@ -212,7 +213,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_room_ID"
-            app:srcCompat="@drawable/ic_baseline_customer" />
+            app:srcCompat="@drawable/ic_baseline_customer"
+            android:contentDescription="@string/name" />
 
         <ImageView
             android:id="@+id/imageViewContactIcon"
@@ -222,7 +224,8 @@
             app:layout_constraintEnd_toStartOf="@+id/item_cust_name"
             app:layout_constraintStart_toStartOf="@+id/imageViewCustomerIcon"
             app:layout_constraintTop_toBottomOf="@+id/imageViewCustomerIcon"
-            app:srcCompat="@drawable/ic_baseline_contact_phone_24" />
+            app:srcCompat="@drawable/ic_baseline_contact_phone_24"
+            android:contentDescription="@string/contact_no" />
 
         <ImageView
             android:id="@+id/imageViewMorningCallIcon"
@@ -234,7 +237,8 @@
             app:layout_constraintEnd_toEndOf="@+id/imageViewContactIcon"
             app:layout_constraintStart_toStartOf="@+id/imageViewContactIcon"
             app:layout_constraintTop_toBottomOf="@+id/imageViewContactIcon"
-            app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
+            app:srcCompat="@drawable/ic_baseline_notifications_active_24"
+            android:contentDescription="@string/morning_call" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,16 +23,6 @@ import com.example.newhopehotel.housekeeping.CHOSEN_WORKER
 import com.example.newhopehotel.housekeeping.RoomsToCleanFragment
 import org.jetbrains.anko.design.longSnackbar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FeedbackEdit.newInstance] factory method to
- * create an instance of this fragment.
- */
 const val CHOSEN_FEEDBACK = "chosenFeedback"
 
 class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, ViewedFeedbackAdapter.ViewedFeedbackEditClickListener {
@@ -182,7 +172,6 @@ class FeedbackScene1 : Fragment(), FeedbackAdapter.FeedbackEditClickListener, Vi
             }
         })
 
-        //arrangeCleaningListByTest(cleaningListViewModel.cleaningList)
     }
 
     override fun onFeedbackEditClicked(chosenToy: FeedbackEntity) {

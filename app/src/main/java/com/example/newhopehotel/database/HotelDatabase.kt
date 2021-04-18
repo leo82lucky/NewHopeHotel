@@ -15,8 +15,6 @@ import com.example.newhopehotel.data.RoomConverter
 @TypeConverters(RoomConverter::class)
 abstract class HotelDatabase : RoomDatabase() {
 
-    //    abstract val registerDatabaseDao: RegisterDatabaseDao
-//    abstract val checkInCheckOutDatabaseDao: CheckInCheckOutDatabaseDao
     abstract fun cicoDao(): CheckInCheckOutDatabaseDao
     abstract fun registerDao(): RegisterDatabaseDao
     abstract fun morningCallDao():MorningCallDatabaseDao

@@ -15,9 +15,6 @@ class RoomServiceMain : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_service_main)
-        // set toolbar as support action bar
-        //setSupportActionBar(toolbar)
-
        buttonViewRoomServiceList.setOnClickListener {
             val intent = Intent(buttonViewRoomServiceList.context, RoomService::class.java)
            buttonViewRoomServiceList.context.startActivity(intent)

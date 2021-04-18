@@ -13,7 +13,7 @@
         android:background="@color/yellow_green_crayola">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/yellow_green_crayola"
         android:orientation="vertical"
         android:weightSum="10">
@@ -125,10 +125,6 @@
 
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- ROW 1  -->
-        <!-- COLUMN 1  -->
-
 
     </LinearLayout>
     </ScrollView>

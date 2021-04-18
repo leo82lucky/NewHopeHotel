@@ -50,7 +50,6 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
             adapter = mAdapter
         }
 
-        //When fab clicked, open AddCicoFragment
         binding.fab.setOnClickListener { openAddCicoFrag(AddCicoFragment()) }
 
         return binding.root
@@ -61,19 +60,8 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
 
         (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
-        //Get the view model instance and pass it to the binding implementation
         binding.uiState = cicoActivityViewModel.uiState
 
-        //Claim list of cico from view model
-//        cicoActivityViewModel.cicoList?.observe(viewLifecycleOwner, { cicoEntries ->
-//            if (cicoEntries.isNullOrEmpty()) {
-//                cicoActivityViewModel.uiState.set(UIState.EMPTY)
-//            } else {
-//                cicoActivityViewModel.uiState.set(UIState.HAS_DATA)
-//                mAdapter.cicoList = cicoEntries
-//                mCicoList = cicoEntries
-//            }
-//        })
         arrangeCicoListByStatus(cicoActivityViewModel.cicoList)
 
         binding.buttonAllStatus.setOnClickListener {
@@ -97,7 +85,6 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
             arrangeCicoListByStatus(cicoActivityViewModel.cicoStatusUnavailable)
         }
 
-        //Attach an ItemTouchHelper for swipe-to-delete functionality
         val coordinator: FrameLayout? = activity?.findViewById(R.id.main_container)
         ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -112,13 +99,10 @@ class CicoListFragment : Fragment(), CicoAdapter.CicoClickListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
 
-                //First take a backup of the cico to erase
-                //If user is swiping an item, we can assume that list is not null
                 val cicoToErase = mCicoList!![position]
 
                 cicoActivityViewModel.deleteCico(cicoToErase)
 
-                //Show a snack bar for undoing delete
                 coordinator?.longSnackbar(R.string.record_is_deleted, R.string.undo) {
                     cicoActivityViewModel.insertCico(cicoToErase)
                 }

@@ -29,11 +29,6 @@ class RegisterFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-//        val registerDao = HotelDatabase.getInstance(application).registerDatabaseDao
-//        val checkInCheckoutDao = HotelDatabase.getInstance(application).checkInCheckOutDatabaseDao
-//
-//        val repository = HotelRepository(registerDao, checkInCheckoutDao)
-
         val factory = RegisterViewModelFactory(provideRepository(requireContext()), application)
 
         registerViewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java)

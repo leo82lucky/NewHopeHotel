@@ -33,7 +33,6 @@ class FeedbackEdit : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feedback_edit, container, false)
 
         binding.button.setOnClickListener{
@@ -79,12 +78,6 @@ class FeedbackEdit : Fragment() {
 
     private fun onFeedbackPostClicked() {
 
-
-//        val args = Bundle()
-//        args.putParcelable(CHOSEN_FEEDBACK, chosenToy)
-//        val frag = FeedbackEdit()
-//        frag.arguments = args
-//        openFeedbackEdit(frag)
         mFeedbackList?.answer = binding.answerFeedback.text.toString()
 
         fbEditViewModel.updateFeedbackList(mFeedbackList!!)

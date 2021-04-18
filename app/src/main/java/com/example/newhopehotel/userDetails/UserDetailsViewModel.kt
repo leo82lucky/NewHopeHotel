@@ -14,11 +14,6 @@ class UserDetailsViewModel(
 
     val users = repository.users
 
-    init {
-        Log.i("MYTAG", "inside_users_Lisrt_init")
-    }
-
-
     private val _navigateto = MutableLiveData<Boolean>()
 
     val navigateto: LiveData<Boolean>

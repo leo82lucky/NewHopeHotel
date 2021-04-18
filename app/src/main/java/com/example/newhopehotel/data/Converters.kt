@@ -48,15 +48,4 @@ class RoomConverter {
         return MorningCall.values()[position]
     }
 
-//    @TypeConverter
-//    fun convertMapToJson(morningCall: Map<String, Boolean>): String {
-//        val categoryMap = object : TypeToken<Map<String, Boolean>>() {}.type
-//        return Gson().toJson(morningCall, categoryMap)
-//    }
-//
-//    @TypeConverter
-//    fun convertJsonToMap(jsonToConvert: String): Map<String, Boolean> {
-//        val morningCallMap = object : TypeToken<Map<String, Boolean>>() {}.type
-//        return Gson().fromJson(jsonToConvert, morningCallMap)
-//    }
 }

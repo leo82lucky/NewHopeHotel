@@ -16,10 +16,13 @@ import com.example.newhopehotel.databinding.MorningCallListItemBinding
 import kotlinx.android.synthetic.main.morning_call_list_item.*
 
 
-class MorningCallAdapter(private val mListener: MorningCallClickListener, activityContext: Context) :
+class MorningCallAdapter(
+    private val mListener: MorningCallClickListener,
+    activityContext: Context
+) :
     RecyclerView.Adapter<MorningCallAdapter.MorningCallViewHolder>() {
 
-    val activityContextThis=activityContext
+    val activityContextThis = activityContext
 
     var morningCallList: List<CheckInCheckOutEntity>? = null
         set(value) {
@@ -28,7 +31,7 @@ class MorningCallAdapter(private val mListener: MorningCallClickListener, activi
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MorningCallViewHolder {
-        val activityContext=activityContextThis
+        val activityContext = activityContextThis
         return MorningCallViewHolder.from(parent, activityContext)
     }
 
@@ -36,7 +39,6 @@ class MorningCallAdapter(private val mListener: MorningCallClickListener, activi
         holder.bind(morningCallList?.get(position), mListener)
 
     override fun getItemCount(): Int {
-        //If list is null, return 0, otherwise return the size of the list
         return morningCallList?.size ?: 0
     }
 
@@ -45,8 +47,8 @@ class MorningCallAdapter(private val mListener: MorningCallClickListener, activi
         activityContext: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        var callBtn:Button= itemView.findViewById(R.id.btn_call)
-        var activtyContextThis=activityContext
+        var callBtn: Button = itemView.findViewById(R.id.btn_call)
+        var activtyContextThis = activityContext
         fun bind(
             currentMorningCall: CheckInCheckOutEntity?,
             clickListener: MorningCallClickListener
@@ -54,14 +56,21 @@ class MorningCallAdapter(private val mListener: MorningCallClickListener, activi
         ) {
 
             binding.morningCallItem = currentMorningCall
-            binding.morningCallItemClick= clickListener
+            binding.morningCallItemClick = clickListener
             binding.executePendingBindings()
-            callBtn.setOnClickListener({
+            callBtn.setOnClickListener {
 
-                val intent= Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ Uri.encode( binding.morningCallItem!!.contactNo.toString().trim())))
+                val intent = Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse(
+                        "tel:" + Uri.encode(
+                            binding.morningCallItem!!.contactNo.toString().trim()
+                        )
+                    )
+                )
                 activtyContextThis.startActivity(intent)
 
-            })
+            }
         }
 
         companion object {

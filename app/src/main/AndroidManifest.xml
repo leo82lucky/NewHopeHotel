@@ -13,9 +13,6 @@
         <activity android:name=".roomService.RoomServiceMain"
             android:parentActivityName=".homePage.HomePageFragment"/>
 
-
-
-
         <activity android:name=".roomService.viewMorningCallList.MorningCall"
             android:parentActivityName=".roomService.RoomServiceMain"/>
         <activity android:name=".roomService.viewRoomServiceList.RoomService"

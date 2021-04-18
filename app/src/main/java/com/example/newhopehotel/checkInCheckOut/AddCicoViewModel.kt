@@ -40,10 +40,6 @@ class AddCicoViewModel(
 
     private val emptyCico: CheckInCheckOutEntity
         get() {
-//            val morningCall = mutableMapOf(
-//                EIGHT_AM to false, NINE_AM to false,
-//                TEN_AM to false, ELEVEN_AM to false
-//            )
             return CheckInCheckOutEntity(
                 custName = "",
                 icNo = "",
@@ -59,13 +55,5 @@ class AddCicoViewModel(
     val isChanged: Boolean
         get() = if (mIsEdit) cicoBeingModified != chosenCico
         else cicoBeingModified != emptyCico
-//        private set
-
-//    companion object {
-//        const val EIGHT_AM = "8 AM"
-//        const val NINE_AM = "9 AM"
-//        const val TEN_AM = "10 AM"
-//        const val ELEVEN_AM = "11 AM"
-//    }
 
 }

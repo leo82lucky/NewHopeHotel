@@ -10,7 +10,6 @@ import com.example.newhopehotel.databinding.ActivityCustomerFeedback1Binding
 
 class CustomerFeedback1 : AppCompatActivity() {
 
-    //var binding: ActivityCustomerFeedback1Binding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
