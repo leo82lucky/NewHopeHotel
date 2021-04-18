@@ -21,7 +21,9 @@ import com.example.newhopehotel.database.CheckInCheckOutEntity
 import com.example.newhopehotel.database.CleaningListEntity
 import com.example.newhopehotel.database.RoomToCleanEntity
 import com.example.newhopehotel.databinding.FragmentCleaningListBinding
+import com.example.newhopehotel.login.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_cleaning_list.*
+import kotlinx.android.synthetic.main.item_cleaning_list.view.*
 import org.jetbrains.anko.design.longSnackbar
 
 const val CHOSEN_CLEANING_LIST = "chosenCleaningList"
@@ -75,6 +77,7 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
                 val cleaningListToErase = mCleaningList!![position]
 
                 cleaningListViewModel.deleteCleaningList(cleaningListToErase)
+                cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", cleaningListToErase.roomID))
 
                 coordinator?.longSnackbar("One task completed", "UNDO") {
                     cleaningListViewModel.insertCleaningList(cleaningListToErase)
@@ -92,14 +95,24 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
         binding.uiState = cleaningListViewModel.uiState
 
-        var temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningListOfUserID
-        temp?.observe(viewLifecycleOwner, { temp2 ->
-            if (temp2.isNullOrEmpty()) {
+        val temp: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningListOfUserID
+        temp?.observe(viewLifecycleOwner, { list ->
+            if (list.isNullOrEmpty()) {
                 cleaningListViewModel.uiState.set(UIState.EMPTY)
             } else {
                 cleaningListViewModel.uiState.set(UIState.HAS_DATA)
-                mAdapter.cleaningList = temp2
-                mCleaningList = temp2
+                mAdapter.cleaningList = list
+                mCleaningList = list
+            }
+        })
+
+        val temp2: LiveData<List<CleaningListEntity>>? =
+            cleaningListViewModel.getCleaningListByUserID(LoginViewModel.currentUserID)
+        temp2?.observe(viewLifecycleOwner, { list ->
+            if (list.isNullOrEmpty()) {
+                cleaningListViewModel.updateRoomsAssignedByUserID(LoginViewModel.currentUserID, 0)
+            } else {
+                cleaningListViewModel.updateRoomsAssignedByUserID(LoginViewModel.currentUserID, list.size)
             }
         })
     }
@@ -110,14 +123,12 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
 
     private fun openWorkerFrag(frag: WorkerFragment) {
         WorkerFragment.selectedWorkerId = -1
-        var roomsToCleanList: LiveData<List<CheckInCheckOutEntity>>? = cleaningListViewModel.cicoStatusAvailable
+        val roomsToCleanList: LiveData<List<CheckInCheckOutEntity>>? =
+            cleaningListViewModel.cicoStatusAvailable
         roomsToCleanList?.observe(viewLifecycleOwner, { list ->
-            if (list.isNullOrEmpty()){
-
-            } else {
+            if (!list.isNullOrEmpty()) {
                 mRoomsToClean = list
             }
-
         })
 
         cleaningListViewModel.deleteAllRoomToClean()
@@ -125,7 +136,7 @@ class CleaningListFragment : Fragment(), CleaningListAdapter.CleaningListClickLi
             cleaningListViewModel.insertRoomToClean(RoomToCleanEntity(Color.parseColor("#D4ECB8"),"8am", it.roomID))
         }
 
-        var cleaningList: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
+        val cleaningList: LiveData<List<CleaningListEntity>>? = cleaningListViewModel.cleaningList
         cleaningList?.observe(viewLifecycleOwner, { list ->
             list?.forEach {
                 cleaningListViewModel.deleteRoomToClean(it.roomID)

@@ -95,4 +95,6 @@
     <string name="all">All</string>
     <string name="usernameError">Username Wrong Format, eg: example123</string>
     <string name="passwordFormatError">Password Wrong Format, eg: Example$123</string>
+    <string name="cleaner_name">Cleaner Name</string>
+    <string name="room_to_clean">Room To Clean:</string>
 </resources>
